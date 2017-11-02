@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.w3.org/2001/XMLSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="sensori" type="xs:sensoriType"/>
+  <xs:complexType name="sensoriType">
+    <xs:sequence>
+      <xs:element type="xs:sensoreType" name="sensore" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="sensoreType">
+    <xs:sequence>
+      <xs:element type="xs:mangoType" name="mango"/>
+      <xs:element type="xs:opemaintType" name="opemaint"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="opemaintType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="relativePath" use="optional"/>
+        <xs:attribute type="xs:string" name="attributeName" use="optional"/>
+        <xs:attribute type="xs:string" name="attributeType" use="optional"/>
+        <xs:attribute type="xs:string" name="operationType" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="mangoType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="relativePath" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+</xs:schema>

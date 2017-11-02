@@ -1,0 +1,974 @@
+<application xmlns="http://wadl.dev.java.net/2009/02" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+             xmlns:prefix1="http://cmdbuild.org/services/rest/v1/">
+    <grammars>
+        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://cmdbuild.org/services/rest/v1/"
+                   attributeFormDefault="unqualified" elementFormDefault="unqualified"
+                   targetNamespace="http://cmdbuild.org/services/rest/v1/">
+            <xs:complexType abstract="true" name="forwardingMap">
+                <xs:complexContent>
+                    <xs:extension base="forwardingObject">
+                        <xs:sequence/>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType abstract="true" name="forwardingObject">
+                <xs:sequence/>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://cmdbuild.org/services/rest/v1/"
+                   attributeFormDefault="unqualified" elementFormDefault="qualified"
+                   targetNamespace="http://cmdbuild.org/services/rest/v1/">
+            <xs:import/>
+            <xs:element name="attachment" type="tns:attachment"/>
+            <xs:element name="attribute" type="tns:attribute"/>
+            <xs:element name="attributeStatus" type="tns:attributeStatus"/>
+            <xs:element name="card" type="tns:card"/>
+            <xs:element name="classPrivilege" type="tns:classPrivilege"/>
+            <xs:element name="classWithBasicDetails" type="tns:classWithBasicDetails"/>
+            <xs:element name="classWithFullDetails" type="tns:classWithFullDetails"/>
+            <xs:element name="detailResponseMetadata" type="tns:detailResponseMetadata"/>
+            <xs:element name="domainWithBasicDetails" type="tns:domainWithBasicDetails"/>
+            <xs:element name="domainWithFullDetails" type="tns:domainWithFullDetails"/>
+            <xs:element name="filter" type="tns:filter"/>
+            <xs:element name="lookupDetail" type="tns:lookupDetail"/>
+            <xs:element name="lookupTypeDetail" type="tns:lookupTypeDetail"/>
+            <xs:element name="menuDetail" type="tns:menuDetail"/>
+            <xs:element name="processActivityWithBasicDetails" type="tns:processActivityWithBasicDetails"/>
+            <xs:element name="processActivityWithFullDetails" type="tns:processActivityWithFullDetails"/>
+            <xs:element name="processInstance" type="tns:processInstance"/>
+            <xs:element name="processInstanceAdvanceable" type="tns:processInstanceAdvanceable"/>
+            <xs:element name="processWithBasicDetails" type="tns:processWithBasicDetails"/>
+            <xs:element name="processWithFullDetails" type="tns:processWithFullDetails"/>
+            <xs:element name="relation" type="tns:relation"/>
+            <xs:element name="responseMultiple" type="tns:responseMultiple"/>
+            <xs:element name="responseSingle" type="tns:responseSingle"/>
+            <xs:element name="session" type="tns:session"/>
+            <xs:element name="values" type="tns:values"/>
+            <xs:element name="widget" type="tns:widget"/>
+            <xs:complexType name="processWithBasicDetails">
+                <xs:complexContent>
+                    <xs:extension base="tns:modelWithStringId">
+                        <xs:sequence/>
+                        <xs:attribute name="description" type="xs:string"/>
+                        <xs:attribute name="name" type="xs:string"/>
+                        <xs:attribute name="parent" type="xs:string"/>
+                        <xs:attribute name="prototype" type="xs:boolean" use="required"/>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType abstract="true" name="modelWithStringId">
+                <xs:complexContent>
+                    <xs:extension base="tns:abstractModel">
+                        <xs:sequence/>
+                        <xs:attribute name="_id" type="xs:string"/>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType abstract="true" name="abstractModel">
+                <xs:sequence/>
+            </xs:complexType>
+            <xs:complexType name="session">
+                <xs:complexContent>
+                    <xs:extension base="tns:modelWithStringId">
+                        <xs:sequence>
+                            <xs:element maxOccurs="unbounded" minOccurs="0" name="availableRoles" type="xs:string"/>
+                            <xs:element minOccurs="0" name="password" type="xs:string"/>
+                            <xs:element minOccurs="0" name="role" type="xs:string"/>
+                            <xs:element minOccurs="0" name="username" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="card">
+                <xs:complexContent>
+                    <xs:extension base="tns:abstractCardModel">
+                        <xs:sequence>
+                            <xs:element name="values">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element maxOccurs="unbounded" minOccurs="0" name="entry">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element minOccurs="0" name="key" type="xs:string"/>
+                                                    <xs:element minOccurs="0" name="value" type="xs:anyType"/>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType abstract="true" name="abstractCardModel">
+                <xs:complexContent>
+                    <xs:extension base="tns:abstractModel">
+                        <xs:sequence/>
+                        <xs:attribute name="_id" type="xs:long"/>
+                        <xs:attribute name="_type" type="xs:string"/>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="classWithFullDetails">
+                <xs:complexContent>
+                    <xs:extension base="tns:classWithBasicDetails">
+                        <xs:sequence/>
+                        <xs:attribute name="description_attribute_name" type="xs:string"/>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="classWithBasicDetails">
+                <xs:complexContent>
+                    <xs:extension base="tns:modelWithStringId">
+                        <xs:sequence/>
+                        <xs:attribute name="description" type="xs:string"/>
+                        <xs:attribute name="name" type="xs:string"/>
+                        <xs:attribute name="parent" type="xs:string"/>
+                        <xs:attribute name="prototype" type="xs:boolean" use="required"/>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="relation">
+                <xs:complexContent>
+                    <xs:extension base="tns:abstractCardModel">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" name="destination" type="tns:values"/>
+                            <xs:element minOccurs="0" name="source" type="tns:values"/>
+                            <xs:element name="values">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element maxOccurs="unbounded" minOccurs="0" name="entry">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element minOccurs="0" name="key" type="xs:string"/>
+                                                    <xs:element minOccurs="0" name="value" type="xs:anyType"/>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="values">
+                <xs:complexContent>
+                    <xs:extension base="forwardingMap">
+                        <xs:sequence/>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="menuDetail">
+                <xs:complexContent>
+                    <xs:extension base="tns:abstractModel">
+                        <xs:sequence>
+                            <xs:element maxOccurs="unbounded" minOccurs="0" name="children" type="tns:menuDetail"/>
+                        </xs:sequence>
+                        <xs:attribute name="index" type="xs:long"/>
+                        <xs:attribute name="menuType" type="xs:string"/>
+                        <xs:attribute name="objectDescription" type="xs:string"/>
+                        <xs:attribute name="objectId" type="xs:long"/>
+                        <xs:attribute name="objectType" type="xs:string"/>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="attribute">
+                <xs:complexContent>
+                    <xs:extension base="tns:modelWithStringId">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" name="filter" nillable="true" type="tns:filter"/>
+                            <xs:element maxOccurs="unbounded" minOccurs="0" name="values" nillable="true"
+                                        type="xs:string"/>
+                        </xs:sequence>
+                        <xs:attribute name="active" type="xs:boolean" use="required"/>
+                        <xs:attribute name="defaultValue" type="xs:string"/>
+                        <xs:attribute name="description" type="xs:string"/>
+                        <xs:attribute name="displayableInList" type="xs:boolean" use="required"/>
+                        <xs:attribute name="domainName" type="xs:string"/>
+                        <xs:attribute name="editorType" type="xs:string"/>
+                        <xs:attribute name="group" type="xs:string"/>
+                        <xs:attribute name="hidden" type="xs:boolean" use="required"/>
+                        <xs:attribute name="index" type="xs:long"/>
+                        <xs:attribute name="inherited" type="xs:boolean" use="required"/>
+                        <xs:attribute name="length" type="xs:long"/>
+                        <xs:attribute name="lookupType" type="xs:string"/>
+                        <xs:attribute name="mandatory" type="xs:boolean" use="required"/>
+                        <xs:attribute name="name" type="xs:string"/>
+                        <xs:attribute name="precision" type="xs:long"/>
+                        <xs:attribute name="scale" type="xs:long"/>
+                        <xs:attribute name="targetClass" type="xs:string"/>
+                        <xs:attribute name="type" type="xs:string"/>
+                        <xs:attribute name="unique" type="xs:boolean" use="required"/>
+                        <xs:attribute name="writable" type="xs:boolean" use="required"/>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="filter">
+                <xs:complexContent>
+                    <xs:extension base="tns:abstractModel">
+                        <xs:sequence>
+                            <xs:element name="params">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element maxOccurs="unbounded" minOccurs="0" name="entry">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element minOccurs="0" name="key" type="xs:string"/>
+                                                    <xs:element minOccurs="0" name="value" type="xs:string"/>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                        <xs:attribute name="text" type="xs:string"/>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="processActivityWithBasicDetails">
+                <xs:complexContent>
+                    <xs:extension base="tns:modelWithStringId">
+                        <xs:sequence/>
+                        <xs:attribute name="description" type="xs:string"/>
+                        <xs:attribute name="writable" type="xs:boolean" use="required"/>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="responseMultiple">
+                <xs:complexContent>
+                    <xs:extension base="tns:abstractModel">
+                        <xs:sequence>
+                            <xs:element maxOccurs="unbounded" minOccurs="0" name="data" type="xs:anyType"/>
+                            <xs:element minOccurs="0" name="meta" type="tns:detailResponseMetadata"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="detailResponseMetadata">
+                <xs:complexContent>
+                    <xs:extension base="tns:abstractModel">
+                        <xs:sequence>
+                            <xs:element name="positions">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element maxOccurs="unbounded" minOccurs="0" name="entry">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element minOccurs="0" name="key" type="xs:long"/>
+                                                    <xs:element minOccurs="0" name="value" type="xs:long"/>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                        <xs:attribute name="total" type="xs:long"/>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="lookupDetail">
+                <xs:complexContent>
+                    <xs:extension base="tns:abstractCardModel">
+                        <xs:sequence/>
+                        <xs:attribute name="active" type="xs:boolean"/>
+                        <xs:attribute name="code" type="xs:string"/>
+                        <xs:attribute name="default" type="xs:boolean"/>
+                        <xs:attribute name="description" type="xs:string"/>
+                        <xs:attribute name="number" type="xs:long"/>
+                        <xs:attribute name="parent_id" type="xs:long"/>
+                        <xs:attribute name="parent_type" type="xs:string"/>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="lookupTypeDetail">
+                <xs:complexContent>
+                    <xs:extension base="tns:modelWithStringId">
+                        <xs:sequence/>
+                        <xs:attribute name="name" type="xs:string"/>
+                        <xs:attribute name="parent" type="xs:string"/>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="processWithFullDetails">
+                <xs:complexContent>
+                    <xs:extension base="tns:processWithBasicDetails">
+                        <xs:sequence/>
+                        <xs:attribute name="defaultStatus" type="xs:long"/>
+                        <xs:attribute name="description_attribute_name" type="xs:string"/>
+                        <xs:attribute name="statuses">
+                            <xs:simpleType>
+                                <xs:list itemType="xs:long"/>
+                            </xs:simpleType>
+                        </xs:attribute>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="classPrivilege">
+                <xs:complexContent>
+                    <xs:extension base="tns:modelWithStringId">
+                        <xs:sequence/>
+                        <xs:attribute name="description" type="xs:string"/>
+                        <xs:attribute name="mode" type="xs:string"/>
+                        <xs:attribute name="name" type="xs:string"/>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="processActivityWithFullDetails">
+                <xs:complexContent>
+                    <xs:extension base="tns:processActivityWithBasicDetails">
+                        <xs:sequence>
+                            <xs:element maxOccurs="unbounded" minOccurs="0" name="attributes"
+                                        type="tns:attributeStatus"/>
+                            <xs:element maxOccurs="unbounded" minOccurs="0" name="widgets" type="tns:widget"/>
+                        </xs:sequence>
+                        <xs:attribute name="instructions" type="xs:string"/>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="attributeStatus">
+                <xs:complexContent>
+                    <xs:extension base="tns:modelWithStringId">
+                        <xs:sequence/>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="widget">
+                <xs:complexContent>
+                    <xs:extension base="tns:modelWithStringId">
+                        <xs:sequence>
+                            <xs:element name="active" type="xs:boolean"/>
+                            <xs:element name="data">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element maxOccurs="unbounded" minOccurs="0" name="entry">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element minOccurs="0" name="key" type="xs:string"/>
+                                                    <xs:element minOccurs="0" name="value" type="xs:anyType"/>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element minOccurs="0" name="label" type="xs:string"/>
+                            <xs:element name="required" type="xs:boolean"/>
+                            <xs:element minOccurs="0" name="type" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="domainWithFullDetails">
+                <xs:complexContent>
+                    <xs:extension base="tns:domainWithBasicDetails">
+                        <xs:sequence/>
+                        <xs:attribute name="cardinality" type="xs:string"/>
+                        <xs:attribute name="descriptionDirect" type="xs:string"/>
+                        <xs:attribute name="descriptionInverse" type="xs:string"/>
+                        <xs:attribute name="descriptionMasterDetail" type="xs:string"/>
+                        <xs:attribute name="destination" type="xs:string"/>
+                        <xs:attribute name="destinationProcess" type="xs:boolean" use="required"/>
+                        <xs:attribute name="source" type="xs:string"/>
+                        <xs:attribute name="sourceProcess" type="xs:boolean" use="required"/>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="domainWithBasicDetails">
+                <xs:complexContent>
+                    <xs:extension base="tns:modelWithStringId">
+                        <xs:sequence/>
+                        <xs:attribute name="description" type="xs:string"/>
+                        <xs:attribute name="name" type="xs:string"/>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="processInstance">
+                <xs:complexContent>
+                    <xs:extension base="tns:abstractCardModel">
+                        <xs:sequence>
+                            <xs:element name="values">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element maxOccurs="unbounded" minOccurs="0" name="entry">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element minOccurs="0" name="key" type="xs:string"/>
+                                                    <xs:element minOccurs="0" name="value" type="xs:anyType"/>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                        <xs:attribute name="name" type="xs:string"/>
+                        <xs:attribute name="status" type="xs:long"/>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="attachment">
+                <xs:complexContent>
+                    <xs:extension base="tns:modelWithStringId">
+                        <xs:sequence>
+                            <xs:element name="metadata">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element maxOccurs="unbounded" minOccurs="0" name="entry">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element minOccurs="0" name="key" type="xs:string"/>
+                                                    <xs:element minOccurs="0" name="value" type="xs:anyType"/>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                        <xs:attribute name="author" type="xs:string"/>
+                        <xs:attribute name="category" type="xs:string"/>
+                        <xs:attribute name="created" type="xs:string"/>
+                        <xs:attribute name="description" type="xs:string"/>
+                        <xs:attribute name="modified" type="xs:string"/>
+                        <xs:attribute name="name" type="xs:string"/>
+                        <xs:attribute name="version" type="xs:string"/>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="responseSingle">
+                <xs:complexContent>
+                    <xs:extension base="tns:abstractModel">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" name="data" type="xs:anyType"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="processInstanceAdvanceable">
+                <xs:complexContent>
+                    <xs:extension base="tns:processInstance">
+                        <xs:sequence/>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+        </xs:schema>
+    </grammars>
+    <resources base="http://storelink.ns0.it:4321/openmaint/services/rest/v1">
+        <resource path="/configuration/attachments/">
+            <resource path="categories/">
+                <method name="GET">
+                    <response>
+                        <representation mediaType="application/json" element="prefix1:responseMultiple"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="categories/{categoryId}/attributes/">
+                <param name="categoryId" style="template" type="xs:string"/>
+                <method name="GET">
+                    <request></request>
+                    <response>
+                        <representation mediaType="application/json" element="prefix1:responseMultiple"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/classes/{classId}/cards/{cardId}/attachments/">
+            <param name="classId" style="template" type="xs:string"/>
+            <param name="cardId" style="template" type="xs:long"/>
+            <method name="GET">
+                <request></request>
+                <response>
+                    <representation mediaType="application/json" element="prefix1:responseMultiple"/>
+                </response>
+            </method>
+            <method name="POST">
+                <request>
+                    <representation mediaType="application/x-www-form-urlencoded"/>
+                </request>
+                <response>
+                    <representation mediaType="application/json" element="prefix1:responseSingle"/>
+                </response>
+            </method>
+            <resource path="{attachmentId}/">
+                <param name="classId" style="template" type="xs:string"/>
+                <param name="cardId" style="template" type="xs:long"/>
+                <param name="attachmentId" style="template" type="xs:string"/>
+                <method name="DELETE">
+                    <request></request>
+                    <response status="204"></response>
+                </method>
+                <method name="GET">
+                    <request></request>
+                    <response>
+                        <representation mediaType="application/json" element="prefix1:responseSingle"/>
+                    </response>
+                </method>
+                <method name="PUT">
+                    <request>
+                        <representation mediaType="application/x-www-form-urlencoded"/>
+                    </request>
+                    <response status="204"></response>
+                </method>
+            </resource>
+            <resource path="{attachmentId}/{file: [^/]+}">
+                <param name="classId" style="template" type="xs:string"/>
+                <param name="cardId" style="template" type="xs:long"/>
+                <param name="attachmentId" style="template" type="xs:string"/>
+                <method name="GET">
+                    <request></request>
+                    <response>
+                        <representation mediaType="application/octet-stream"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/classes/{classId}/cards/">
+            <param name="classId" style="template" type="xs:string"/>
+            <method name="GET">
+                <request>
+                    <param name="filter" style="query" type="xs:string"/>
+                    <param name="sort" style="query" type="xs:string"/>
+                    <param name="limit" style="query" type="xs:int"/>
+                    <param name="start" style="query" type="xs:int"/>
+                    <param name="positionOf" style="query" repeating="true" type="xs:long"/>
+                </request>
+                <response>
+                    <representation mediaType="application/json" element="prefix1:responseMultiple"/>
+                </response>
+            </method>
+            <method name="POST">
+                <request>
+                    <representation mediaType="application/json" element="prefix1:card"/>
+                </request>
+                <response>
+                    <representation mediaType="application/json" element="prefix1:responseSingle"/>
+                </response>
+            </method>
+            <resource path="{cardId}/">
+                <param name="classId" style="template" type="xs:string"/>
+                <param name="cardId" style="template" type="xs:long"/>
+                <method name="DELETE">
+                    <request></request>
+                    <response status="204"></response>
+                </method>
+                <method name="GET">
+                    <request></request>
+                    <response>
+                        <representation mediaType="application/json" element="prefix1:responseSingle"/>
+                    </response>
+                </method>
+                <method name="PUT">
+                    <request>
+                        <representation mediaType="application/json" element="prefix1:card"/>
+                    </request>
+                    <response status="204"></response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/classes/">
+            <method name="GET">
+                <request>
+                    <param name="active" style="query" type="xs:boolean"/>
+                    <param name="limit" style="query" type="xs:int"/>
+                    <param name="start" style="query" type="xs:int"/>
+                </request>
+                <response>
+                    <representation mediaType="application/json" element="prefix1:responseMultiple"/>
+                </response>
+            </method>
+            <resource path="{classId}/">
+                <param name="classId" style="template" type="xs:string"/>
+                <method name="GET">
+                    <request></request>
+                    <response>
+                        <representation mediaType="application/json" element="prefix1:responseSingle"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/classes/{classId}/attributes/">
+            <param name="classId" style="template" type="xs:string"/>
+            <method name="GET">
+                <request>
+                    <param name="active" style="query" type="xs:boolean"/>
+                    <param name="limit" style="query" type="xs:int"/>
+                    <param name="start" style="query" type="xs:int"/>
+                </request>
+                <response>
+                    <representation mediaType="application/json" element="prefix1:responseMultiple"/>
+                </response>
+            </method>
+        </resource>
+        <resource path="/roles/{roleId}/classes_privileges/">
+            <param name="roleId" style="template" type="xs:string"/>
+            <method name="GET">
+                <request></request>
+                <response>
+                    <representation mediaType="application/json" element="prefix1:responseMultiple"/>
+                </response>
+            </method>
+            <resource path="{classId}/">
+                <param name="roleId" style="template" type="xs:string"/>
+                <param name="classId" style="template" type="xs:string"/>
+                <method name="GET">
+                    <request></request>
+                    <response>
+                        <representation mediaType="application/json" element="prefix1:responseSingle"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/domains/">
+            <method name="GET">
+                <request>
+                    <param name="filter" style="query" type="xs:string"/>
+                    <param name="limit" style="query" type="xs:int"/>
+                    <param name="start" style="query" type="xs:int"/>
+                </request>
+                <response>
+                    <representation mediaType="application/json" element="prefix1:responseMultiple"/>
+                </response>
+            </method>
+            <resource path="{domainId}/">
+                <param name="domainId" style="template" type="xs:string"/>
+                <method name="GET">
+                    <request></request>
+                    <response>
+                        <representation mediaType="application/json" element="prefix1:responseSingle"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/domains/{domainId}/attributes/">
+            <param name="domainId" style="template" type="xs:string"/>
+            <method name="GET">
+                <request>
+                    <param name="active" style="query" type="xs:boolean"/>
+                    <param name="limit" style="query" type="xs:int"/>
+                    <param name="start" style="query" type="xs:int"/>
+                </request>
+                <response>
+                    <representation mediaType="application/json" element="prefix1:responseMultiple"/>
+                </response>
+            </method>
+        </resource>
+        <resource path="/domains/{domainId}/relations/">
+            <param name="domainId" style="template" type="xs:string"/>
+            <method name="GET">
+                <request>
+                    <param name="filter" style="query" type="xs:string"/>
+                    <param name="limit" style="query" type="xs:int"/>
+                    <param name="start" style="query" type="xs:int"/>
+                    <param name="detailed" style="query" type="xs:boolean"/>
+                </request>
+                <response>
+                    <representation mediaType="application/json" element="prefix1:responseMultiple"/>
+                </response>
+            </method>
+            <method name="POST">
+                <request>
+                    <representation mediaType="*/*" element="prefix1:relation"/>
+                </request>
+                <response>
+                    <representation mediaType="application/json" element="prefix1:responseSingle"/>
+                </response>
+            </method>
+            <resource path="{relationId}/">
+                <param name="domainId" style="template" type="xs:string"/>
+                <param name="relationId" style="template" type="xs:long"/>
+                <method name="DELETE">
+                    <request></request>
+                    <response status="204"></response>
+                </method>
+                <method name="GET">
+                    <request></request>
+                    <response>
+                        <representation mediaType="application/json" element="prefix1:responseSingle"/>
+                    </response>
+                </method>
+                <method name="PUT">
+                    <request>
+                        <representation mediaType="*/*" element="prefix1:relation"/>
+                    </request>
+                    <response status="204"></response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/sessions/{session}/impersonate/">
+            <param name="session" style="template" type="xs:string"/>
+            <method name="DELETE">
+                <request></request>
+                <response status="204"></response>
+            </method>
+            <resource path="{username}/">
+                <param name="session" style="template" type="xs:string"/>
+                <param name="username" style="template" type="xs:string"/>
+                <method name="PUT">
+                    <request></request>
+                    <response status="204"></response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/lookup_types/">
+            <method name="GET">
+                <request>
+                    <param name="limit" style="query" type="xs:int"/>
+                    <param name="start" style="query" type="xs:int"/>
+                </request>
+                <response>
+                    <representation mediaType="application/json" element="prefix1:responseMultiple"/>
+                </response>
+            </method>
+            <resource path="{lookupTypeId}/">
+                <param name="lookupTypeId" style="template" type="xs:string"/>
+                <method name="GET">
+                    <request></request>
+                    <response>
+                        <representation mediaType="application/json" element="prefix1:responseSingle"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/lookup_types/{lookupTypeId}/values/">
+            <param name="lookupTypeId" style="template" type="xs:string"/>
+            <method name="GET">
+                <request>
+                    <param name="active" style="query" type="xs:boolean"/>
+                    <param name="limit" style="query" type="xs:int"/>
+                    <param name="start" style="query" type="xs:int"/>
+                </request>
+                <response>
+                    <representation mediaType="application/json" element="prefix1:responseMultiple"/>
+                </response>
+            </method>
+            <resource path="{lookupValueId}/">
+                <param name="lookupTypeId" style="template" type="xs:string"/>
+                <param name="lookupValueId" style="template" type="xs:long"/>
+                <method name="GET">
+                    <request></request>
+                    <response>
+                        <representation mediaType="application/json" element="prefix1:responseSingle"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/menu/">
+            <method name="GET">
+                <response>
+                    <representation mediaType="application/json" element="prefix1:responseSingle"/>
+                </response>
+            </method>
+        </resource>
+        <resource path="/processes/{processId}/attributes/">
+            <param name="processId" style="template" type="xs:string"/>
+            <method name="GET">
+                <request>
+                    <param name="active" style="query" type="xs:boolean"/>
+                    <param name="limit" style="query" type="xs:int"/>
+                    <param name="start" style="query" type="xs:int"/>
+                </request>
+                <response>
+                    <representation mediaType="application/json" element="prefix1:responseMultiple"/>
+                </response>
+            </method>
+        </resource>
+        <resource path="/processes/">
+            <method name="GET">
+                <request>
+                    <param name="active" style="query" type="xs:boolean"/>
+                    <param name="limit" style="query" type="xs:int"/>
+                    <param name="start" style="query" type="xs:int"/>
+                </request>
+                <response>
+                    <representation mediaType="application/json" element="prefix1:responseMultiple"/>
+                </response>
+            </method>
+            <resource path="{processId}/">
+                <param name="processId" style="template" type="xs:string"/>
+                <method name="GET">
+                    <request></request>
+                    <response>
+                        <representation mediaType="application/json" element="prefix1:responseSingle"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/configuration/processes/">
+            <resource path="statuses/">
+                <method name="GET">
+                    <response>
+                        <representation mediaType="application/json" element="prefix1:responseMultiple"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/processes/{processId}/instances/{processInstanceId}/activities/">
+            <param name="processId" style="template" type="xs:string"/>
+            <param name="processInstanceId" style="template" type="xs:long"/>
+            <method name="GET">
+                <request></request>
+                <response>
+                    <representation mediaType="application/json" element="prefix1:responseMultiple"/>
+                </response>
+            </method>
+            <resource path="{processActivityId}/">
+                <param name="processId" style="template" type="xs:string"/>
+                <param name="processInstanceId" style="template" type="xs:long"/>
+                <param name="processActivityId" style="template" type="xs:string"/>
+                <method name="GET">
+                    <request></request>
+                    <response>
+                        <representation mediaType="application/json" element="prefix1:responseSingle"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/processes/{processId}/instances/{processInstanceId}/attachments/">
+            <param name="processId" style="template" type="xs:string"/>
+            <param name="processInstanceId" style="template" type="xs:long"/>
+            <method name="GET">
+                <request></request>
+                <response>
+                    <representation mediaType="application/json" element="prefix1:responseMultiple"/>
+                </response>
+            </method>
+            <method name="POST">
+                <request>
+                    <representation mediaType="application/x-www-form-urlencoded"/>
+                </request>
+                <response>
+                    <representation mediaType="application/json" element="prefix1:responseSingle"/>
+                </response>
+            </method>
+            <resource path="{attachmentId}/">
+                <param name="processId" style="template" type="xs:string"/>
+                <param name="processInstanceId" style="template" type="xs:long"/>
+                <param name="attachmentId" style="template" type="xs:string"/>
+                <method name="DELETE">
+                    <request></request>
+                    <response status="204"></response>
+                </method>
+                <method name="GET">
+                    <request></request>
+                    <response>
+                        <representation mediaType="application/json" element="prefix1:responseSingle"/>
+                    </response>
+                </method>
+                <method name="PUT">
+                    <request>
+                        <representation mediaType="application/x-www-form-urlencoded"/>
+                    </request>
+                    <response status="204"></response>
+                </method>
+            </resource>
+            <resource path="{attachmentId}/{file: [^/]+}">
+                <param name="processId" style="template" type="xs:string"/>
+                <param name="processInstanceId" style="template" type="xs:long"/>
+                <param name="attachmentId" style="template" type="xs:string"/>
+                <method name="GET">
+                    <request></request>
+                    <response>
+                        <representation mediaType="application/octet-stream"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/processes/{processId}/instances/">
+            <param name="processId" style="template" type="xs:string"/>
+            <method name="GET">
+                <request>
+                    <param name="filter" style="query" type="xs:string"/>
+                    <param name="sort" style="query" type="xs:string"/>
+                    <param name="limit" style="query" type="xs:int"/>
+                    <param name="start" style="query" type="xs:int"/>
+                    <param name="positionOf" style="query" repeating="true" type="xs:long"/>
+                </request>
+                <response>
+                    <representation mediaType="application/json" element="prefix1:responseMultiple"/>
+                </response>
+            </method>
+            <method name="POST">
+                <request>
+                    <representation mediaType="application/json" element="prefix1:processInstanceAdvanceable"/>
+                </request>
+                <response>
+                    <representation mediaType="application/json" element="prefix1:responseSingle"/>
+                </response>
+            </method>
+            <resource path="{processInstanceId}">
+                <param name="processId" style="template" type="xs:string"/>
+                <param name="processInstanceId" style="template" type="xs:long"/>
+                <method name="DELETE">
+                    <request></request>
+                    <response status="204"></response>
+                </method>
+                <method name="GET">
+                    <request></request>
+                    <response>
+                        <representation mediaType="application/json" element="prefix1:responseSingle"/>
+                    </response>
+                </method>
+                <method name="PUT">
+                    <request>
+                        <representation mediaType="application/json" element="prefix1:processInstanceAdvanceable"/>
+                    </request>
+                    <response status="204"></response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/processes/{processId}/start_activities/">
+            <param name="processId" style="template" type="xs:string"/>
+            <method name="GET">
+                <request></request>
+                <response>
+                    <representation mediaType="application/json" element="prefix1:responseMultiple"/>
+                </response>
+            </method>
+            <resource path="{processActivityId}">
+                <param name="processId" style="template" type="xs:string"/>
+                <param name="processActivityId" style="template" type="xs:string"/>
+                <method name="GET">
+                    <request></request>
+                    <response>
+                        <representation mediaType="application/json" element="prefix1:responseSingle"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/sessions/">
+            <method name="POST">
+                <request>
+                    <representation mediaType="application/json" element="prefix1:session"/>
+                </request>
+                <response>
+                    <representation mediaType="application/json" element="prefix1:responseSingle"/>
+                </response>
+            </method>
+            <resource path="{id}/">
+                <param name="id" style="template" type="xs:string"/>
+                <method name="DELETE">
+                    <request></request>
+                    <response status="204"></response>
+                </method>
+                <method name="GET">
+                    <request></request>
+                    <response>
+                        <representation mediaType="application/json" element="prefix1:responseSingle"/>
+                    </response>
+                </method>
+                <method name="PUT">
+                    <request>
+                        <representation mediaType="application/json" element="prefix1:session"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json" element="prefix1:responseSingle"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+    </resources>
+</application>

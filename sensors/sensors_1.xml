@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sensori xmlns="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <sensore>
+        <mango relativePath="TD2"></mango>
+        <opemaint relativePath="classes/Building/cards/261257" attributeName="status" attributeType="STRING"
+                  operationType="UPDATE"></opemaint>
+    </sensore>
+    <sensore>
+        <mango relativePath="point-values/TD2/latest?limit=1"></mango>
+        <opemaint relativePath="classes/Building/cards/261257" attributeName="status" attributeType="STRING"
+                  operationType="UPDATE"></opemaint>
+    </sensore>
+</sensori>

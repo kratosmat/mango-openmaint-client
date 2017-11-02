@@ -1,0 +1,1106 @@
+<application xmlns="http://wadl.dev.java.net/2009/02" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <grammars></grammars>
+    <resources base="http://storelink.ns0.it:4321/openmaint/services/rest/v2">
+        <resource path="/configuration/attachments/">
+            <resource path="categories/">
+                <method name="GET">
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="categories/{categoryId}/attributes/">
+                <param name="categoryId" style="template" type="xs:string"/>
+                <method name="GET">
+                    <request></request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/classes/{classId}/cards/{cardId}/attachments/">
+            <param name="classId" style="template" type="xs:string"/>
+            <param name="cardId" style="template" type="xs:long"/>
+            <method name="GET">
+                <request></request>
+                <response>
+                    <representation mediaType="application/json"/>
+                </response>
+            </method>
+            <method name="POST">
+                <request>
+                    <representation mediaType="application/x-www-form-urlencoded"/>
+                </request>
+                <response>
+                    <representation mediaType="application/json"/>
+                </response>
+            </method>
+            <resource path="{attachmentId}/">
+                <param name="classId" style="template" type="xs:string"/>
+                <param name="cardId" style="template" type="xs:long"/>
+                <param name="attachmentId" style="template" type="xs:string"/>
+                <method name="DELETE">
+                    <request></request>
+                    <response status="204"></response>
+                </method>
+                <method name="GET">
+                    <request></request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+                <method name="PUT">
+                    <request>
+                        <representation mediaType="application/x-www-form-urlencoded"/>
+                    </request>
+                    <response status="204"></response>
+                </method>
+            </resource>
+            <resource path="{attachmentId}/{file: [^/]+}">
+                <param name="classId" style="template" type="xs:string"/>
+                <param name="cardId" style="template" type="xs:long"/>
+                <param name="attachmentId" style="template" type="xs:string"/>
+                <method name="GET">
+                    <request></request>
+                    <response>
+                        <representation mediaType="application/octet-stream"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/classes/{classId}/cards/{cardId}/emails">
+            <param name="classId" style="template" type="xs:string"/>
+            <param name="cardId" style="template" type="xs:long"/>
+            <method name="GET">
+                <request>
+                    <param name="limit" style="query" type="xs:int"/>
+                    <param name="start" style="query" type="xs:int"/>
+                </request>
+                <response>
+                    <representation mediaType="application/json"/>
+                </response>
+            </method>
+            <method name="POST">
+                <request>
+                    <representation mediaType="application/json"/>
+                </request>
+                <response>
+                    <representation mediaType="application/json"/>
+                </response>
+            </method>
+            <resource path="/statuses/">
+                <method name="GET">
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/{emailId}/">
+                <param name="classId" style="template" type="xs:string"/>
+                <param name="cardId" style="template" type="xs:long"/>
+                <param name="emailId" style="template" type="xs:long"/>
+                <method name="DELETE">
+                    <request></request>
+                    <response status="204"></response>
+                </method>
+                <method name="GET">
+                    <request></request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+                <method name="PUT">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response status="204"></response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/classes/{classId}/cards/">
+            <param name="classId" style="template" type="xs:string"/>
+            <method name="GET">
+                <request>
+                    <param name="filter" style="query" type="xs:string"/>
+                    <param name="sort" style="query" type="xs:string"/>
+                    <param name="limit" style="query" type="xs:int"/>
+                    <param name="start" style="query" type="xs:int"/>
+                    <param name="positionOf" style="query" repeating="true" type="xs:long"/>
+                </request>
+                <response>
+                    <representation mediaType="application/json"/>
+                </response>
+            </method>
+            <method name="POST">
+                <request>
+                    <representation mediaType="application/json"/>
+                </request>
+                <response>
+                    <representation mediaType="application/json"/>
+                </response>
+            </method>
+            <resource path="{cardId}/">
+                <param name="classId" style="template" type="xs:string"/>
+                <param name="cardId" style="template" type="xs:long"/>
+                <method name="DELETE">
+                    <request></request>
+                    <response status="204"></response>
+                </method>
+                <method name="GET">
+                    <request></request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+                <method name="PUT">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response status="204"></response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/classes/">
+            <method name="GET">
+                <request>
+                    <param name="active" style="query" type="xs:boolean"/>
+                    <param name="limit" style="query" type="xs:int"/>
+                    <param name="start" style="query" type="xs:int"/>
+                </request>
+                <response>
+                    <representation mediaType="application/json"/>
+                </response>
+            </method>
+            <resource path="{classId}/">
+                <param name="classId" style="template" type="xs:string"/>
+                <method name="GET">
+                    <request></request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/classes/{classId}/attributes/">
+            <param name="classId" style="template" type="xs:string"/>
+            <method name="GET">
+                <request>
+                    <param name="active" style="query" type="xs:boolean"/>
+                    <param name="limit" style="query" type="xs:int"/>
+                    <param name="start" style="query" type="xs:int"/>
+                </request>
+                <response>
+                    <representation mediaType="application/json"/>
+                </response>
+            </method>
+        </resource>
+        <resource path="/classes/{classId}/filters/">
+            <param name="classId" style="template" type="xs:string"/>
+            <method name="GET">
+                <request>
+                    <param name="limit" style="query" type="xs:int"/>
+                    <param name="start" style="query" type="xs:int"/>
+                </request>
+                <response>
+                    <representation mediaType="application/json"/>
+                </response>
+            </method>
+            <method name="POST">
+                <request>
+                    <representation mediaType="*/*"/>
+                </request>
+                <response>
+                    <representation mediaType="application/json"/>
+                </response>
+            </method>
+            <resource path="{filterId}/">
+                <param name="classId" style="template" type="xs:string"/>
+                <param name="filterId" style="template" type="xs:long"/>
+                <method name="DELETE">
+                    <request></request>
+                    <response status="204"></response>
+                </method>
+                <method name="GET">
+                    <request></request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+                <method name="PUT">
+                    <request>
+                        <representation mediaType="*/*"/>
+                    </request>
+                    <response status="204"></response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/roles/{roleId}/classes_privileges/">
+            <param name="roleId" style="template" type="xs:string"/>
+            <method name="GET">
+                <request></request>
+                <response>
+                    <representation mediaType="application/json"/>
+                </response>
+            </method>
+            <resource path="{classId}/">
+                <param name="roleId" style="template" type="xs:string"/>
+                <param name="classId" style="template" type="xs:string"/>
+                <method name="GET">
+                    <request></request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/classes/{classId}/temporary_filters/">
+            <param name="classId" style="template" type="xs:string"/>
+            <method name="GET">
+                <request>
+                    <param name="limit" style="query" type="xs:int"/>
+                    <param name="start" style="query" type="xs:int"/>
+                </request>
+                <response>
+                    <representation mediaType="application/json"/>
+                </response>
+            </method>
+            <method name="POST">
+                <request>
+                    <representation mediaType="*/*"/>
+                </request>
+                <response>
+                    <representation mediaType="application/json"/>
+                </response>
+            </method>
+            <resource path="{filterId}/">
+                <param name="classId" style="template" type="xs:string"/>
+                <param name="filterId" style="template" type="xs:long"/>
+                <method name="DELETE">
+                    <request></request>
+                    <response status="204"></response>
+                </method>
+                <method name="GET">
+                    <request></request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+                <method name="PUT">
+                    <request>
+                        <representation mediaType="*/*"/>
+                    </request>
+                    <response status="204"></response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/cql/">
+            <method name="GET">
+                <request>
+                    <param name="filter" style="query" type="xs:string"/>
+                    <param name="sort" style="query" type="xs:string"/>
+                    <param name="limit" style="query" type="xs:int"/>
+                    <param name="start" style="query" type="xs:int"/>
+                </request>
+                <response>
+                    <representation mediaType="application/json"/>
+                </response>
+            </method>
+        </resource>
+        <resource path="/domains/">
+            <method name="GET">
+                <request>
+                    <param name="filter" style="query" type="xs:string"/>
+                    <param name="limit" style="query" type="xs:int"/>
+                    <param name="start" style="query" type="xs:int"/>
+                </request>
+                <response>
+                    <representation mediaType="application/json"/>
+                </response>
+            </method>
+            <resource path="{domainId}/">
+                <param name="domainId" style="template" type="xs:string"/>
+                <method name="GET">
+                    <request></request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/domains/{domainId}/attributes/">
+            <param name="domainId" style="template" type="xs:string"/>
+            <method name="GET">
+                <request>
+                    <param name="active" style="query" type="xs:boolean"/>
+                    <param name="limit" style="query" type="xs:int"/>
+                    <param name="start" style="query" type="xs:int"/>
+                </request>
+                <response>
+                    <representation mediaType="application/json"/>
+                </response>
+            </method>
+        </resource>
+        <resource path="/domainTrees">
+            <method name="GET">
+                <request>
+                    <param name="filter" style="query" type="xs:string"/>
+                    <param name="limit" style="query" type="xs:int"/>
+                    <param name="start" style="query" type="xs:int"/>
+                </request>
+                <response>
+                    <representation mediaType="application/json"/>
+                </response>
+            </method>
+            <resource path="/{id}/">
+                <param name="id" style="template" type="xs:string"/>
+                <method name="GET">
+                    <request></request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/email_templates/">
+            <method name="GET">
+                <request>
+                    <param name="limit" style="query" type="xs:int"/>
+                    <param name="start" style="query" type="xs:int"/>
+                </request>
+                <response>
+                    <representation mediaType="application/json"/>
+                </response>
+            </method>
+            <resource path="{id}/">
+                <param name="id" style="template" type="xs:string"/>
+                <method name="GET">
+                    <request></request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/filestores/">
+            <resource path="{datastoreId}/folders/">
+                <param name="datastoreId" style="template" type="xs:string"/>
+                <method name="GET">
+                    <request></request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="{datastoreId}/folders/{folderId}/">
+                <param name="datastoreId" style="template" type="xs:string"/>
+                <param name="folderId" style="template" type="xs:string"/>
+                <method name="GET">
+                    <request></request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="{datastoreId}/folders/{folderId}/files/">
+                <param name="datastoreId" style="template" type="xs:string"/>
+                <param name="folderId" style="template" type="xs:string"/>
+                <method name="GET">
+                    <request></request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+                <method name="POST">
+                    <request>
+                        <representation mediaType="application/x-www-form-urlencoded"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="{datastoreId}/folders/{folderId}/files/{fileId}/">
+                <param name="datastoreId" style="template" type="xs:string"/>
+                <param name="folderId" style="template" type="xs:string"/>
+                <param name="fileId" style="template" type="xs:string"/>
+                <method name="DELETE">
+                    <request></request>
+                    <response status="204"></response>
+                </method>
+                <method name="GET">
+                    <request></request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="{datastoreId}/folders/{folderId}/files/{fileId}/download">
+                <param name="datastoreId" style="template" type="xs:string"/>
+                <param name="folderId" style="template" type="xs:string"/>
+                <param name="fileId" style="template" type="xs:string"/>
+                <method name="GET">
+                    <request></request>
+                    <response>
+                        <representation mediaType="application/octet-stream"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/functions/">
+            <method name="GET">
+                <request>
+                    <param name="limit" style="query" type="xs:int"/>
+                    <param name="start" style="query" type="xs:int"/>
+                    <param name="filter" style="query" type="xs:string"/>
+                    <param name="detailed" style="query" type="xs:boolean"/>
+                </request>
+                <response>
+                    <representation mediaType="application/json"/>
+                </response>
+            </method>
+            <resource path="{functionId}/">
+                <param name="functionId" style="template" type="xs:long"/>
+                <method name="GET">
+                    <request></request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="{functionId}/attributes/">
+                <param name="functionId" style="template" type="xs:long"/>
+                <method name="GET">
+                    <request>
+                        <param name="limit" style="query" type="xs:int"/>
+                        <param name="start" style="query" type="xs:int"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="{functionId}/outputs/">
+                <param name="functionId" style="template" type="xs:long"/>
+                <method name="GET">
+                    <request>
+                        <param name="parameters" style="query" type="xs:string"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="{functionId}/parameters/">
+                <param name="functionId" style="template" type="xs:long"/>
+                <method name="GET">
+                    <request>
+                        <param name="limit" style="query" type="xs:int"/>
+                        <param name="start" style="query" type="xs:int"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/">
+            <resource path="classes/{class}/geoattributes/">
+                <param name="class" style="template" type="xs:string"/>
+                <method name="GET">
+                    <request>
+                        <param name="start" style="query" type="xs:int"/>
+                        <param name="limit" style="query" type="xs:int"/>
+                        <param name="detailed" style="query" type="xs:boolean"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="classes/{class}/geoattributes/{attribute}/">
+                <param name="class" style="template" type="xs:string"/>
+                <param name="attribute" style="template" type="xs:string"/>
+                <method name="GET">
+                    <request></request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="classes/{class}/geocards/">
+                <param name="class" style="template" type="xs:string"/>
+                <method name="GET">
+                    <request>
+                        <param name="attribute" style="query" repeating="true" type="xs:string"/>
+                        <param name="area" style="query" repeating="true" type="xs:string"/>
+                        <param name="start" style="query" type="xs:int"/>
+                        <param name="limit" style="query" type="xs:int"/>
+                        <param name="detailed" style="query" type="xs:boolean"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="classes/{class}/geocards/{card}/">
+                <param name="class" style="template" type="xs:string"/>
+                <param name="card" style="template" type="xs:long"/>
+                <method name="GET">
+                    <request></request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/configuration/graph/">
+            <method name="GET">
+                <response>
+                    <representation mediaType="application/json"/>
+                </response>
+            </method>
+        </resource>
+        <resource path="/icons/">
+            <method name="GET">
+                <response>
+                    <representation mediaType="application/json"/>
+                </response>
+            </method>
+            <method name="POST">
+                <request>
+                    <representation mediaType="application/json"/>
+                </request>
+                <response>
+                    <representation mediaType="application/json"/>
+                </response>
+            </method>
+            <resource path="{id}/">
+                <param name="id" style="template" type="xs:long"/>
+                <method name="DELETE">
+                    <request></request>
+                    <response status="204"></response>
+                </method>
+                <method name="GET">
+                    <request></request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+                <method name="PUT">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response status="204"></response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/sessions/{session}/impersonate/">
+            <param name="session" style="template" type="xs:string"/>
+            <method name="DELETE">
+                <request></request>
+                <response status="204"></response>
+            </method>
+            <resource path="{username}/">
+                <param name="session" style="template" type="xs:string"/>
+                <param name="username" style="template" type="xs:string"/>
+                <method name="PUT">
+                    <request></request>
+                    <response status="204"></response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/lookup_types/">
+            <method name="GET">
+                <request>
+                    <param name="limit" style="query" type="xs:int"/>
+                    <param name="start" style="query" type="xs:int"/>
+                </request>
+                <response>
+                    <representation mediaType="application/json"/>
+                </response>
+            </method>
+            <resource path="{lookupTypeId}/">
+                <param name="lookupTypeId" style="template" type="xs:string"/>
+                <method name="GET">
+                    <request></request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/lookup_types/{lookupTypeId}/values/">
+            <param name="lookupTypeId" style="template" type="xs:string"/>
+            <method name="GET">
+                <request>
+                    <param name="active" style="query" type="xs:boolean"/>
+                    <param name="limit" style="query" type="xs:int"/>
+                    <param name="start" style="query" type="xs:int"/>
+                </request>
+                <response>
+                    <representation mediaType="application/json"/>
+                </response>
+            </method>
+            <resource path="{lookupValueId}/">
+                <param name="lookupTypeId" style="template" type="xs:string"/>
+                <param name="lookupValueId" style="template" type="xs:long"/>
+                <method name="GET">
+                    <request></request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/menu/">
+            <method name="GET">
+                <response>
+                    <representation mediaType="application/json"/>
+                </response>
+            </method>
+        </resource>
+        <resource path="/processes/{processId}/attributes/">
+            <param name="processId" style="template" type="xs:string"/>
+            <method name="GET">
+                <request>
+                    <param name="active" style="query" type="xs:boolean"/>
+                    <param name="limit" style="query" type="xs:int"/>
+                    <param name="start" style="query" type="xs:int"/>
+                </request>
+                <response>
+                    <representation mediaType="application/json"/>
+                </response>
+            </method>
+        </resource>
+        <resource path="/processes/">
+            <method name="GET">
+                <request>
+                    <param name="active" style="query" type="xs:boolean"/>
+                    <param name="limit" style="query" type="xs:int"/>
+                    <param name="start" style="query" type="xs:int"/>
+                </request>
+                <response>
+                    <representation mediaType="application/json"/>
+                </response>
+            </method>
+            <resource path="{processId}/">
+                <param name="processId" style="template" type="xs:string"/>
+                <method name="GET">
+                    <request></request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="{processId}/generate_id">
+                <param name="processId" style="template" type="xs:string"/>
+                <method name="GET">
+                    <request></request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/configuration/processes/">
+            <resource path="statuses/">
+                <method name="GET">
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/processes/{processId}/filters/">
+            <param name="processId" style="template" type="xs:string"/>
+            <method name="GET">
+                <request>
+                    <param name="limit" style="query" type="xs:int"/>
+                    <param name="start" style="query" type="xs:int"/>
+                </request>
+                <response>
+                    <representation mediaType="application/json"/>
+                </response>
+            </method>
+            <method name="POST">
+                <request>
+                    <representation mediaType="*/*"/>
+                </request>
+                <response>
+                    <representation mediaType="application/json"/>
+                </response>
+            </method>
+            <resource path="{filterId}/">
+                <param name="processId" style="template" type="xs:string"/>
+                <param name="filterId" style="template" type="xs:long"/>
+                <method name="DELETE">
+                    <request></request>
+                    <response status="204"></response>
+                </method>
+                <method name="GET">
+                    <request></request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+                <method name="PUT">
+                    <request>
+                        <representation mediaType="*/*"/>
+                    </request>
+                    <response status="204"></response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/processes/{processId}/instances/{processInstanceId}/activities/">
+            <param name="processId" style="template" type="xs:string"/>
+            <param name="processInstanceId" style="template" type="xs:long"/>
+            <method name="GET">
+                <request></request>
+                <response>
+                    <representation mediaType="application/json"/>
+                </response>
+            </method>
+            <resource path="{processActivityId}/">
+                <param name="processId" style="template" type="xs:string"/>
+                <param name="processInstanceId" style="template" type="xs:long"/>
+                <param name="processActivityId" style="template" type="xs:string"/>
+                <method name="GET">
+                    <request></request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/processes/{processId}/instances/{processInstanceId}/attachments/">
+            <param name="processId" style="template" type="xs:string"/>
+            <param name="processInstanceId" style="template" type="xs:long"/>
+            <method name="GET">
+                <request></request>
+                <response>
+                    <representation mediaType="application/json"/>
+                </response>
+            </method>
+            <method name="POST">
+                <request>
+                    <representation mediaType="application/x-www-form-urlencoded"/>
+                </request>
+                <response>
+                    <representation mediaType="application/json"/>
+                </response>
+            </method>
+            <resource path="{attachmentId}/">
+                <param name="processId" style="template" type="xs:string"/>
+                <param name="processInstanceId" style="template" type="xs:long"/>
+                <param name="attachmentId" style="template" type="xs:string"/>
+                <method name="DELETE">
+                    <request></request>
+                    <response status="204"></response>
+                </method>
+                <method name="GET">
+                    <request></request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+                <method name="PUT">
+                    <request>
+                        <representation mediaType="application/x-www-form-urlencoded"/>
+                    </request>
+                    <response status="204"></response>
+                </method>
+            </resource>
+            <resource path="{attachmentId}/{file: [^/]+}">
+                <param name="processId" style="template" type="xs:string"/>
+                <param name="processInstanceId" style="template" type="xs:long"/>
+                <param name="attachmentId" style="template" type="xs:string"/>
+                <method name="GET">
+                    <request></request>
+                    <response>
+                        <representation mediaType="application/octet-stream"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/processes/{processId}/instances/{processInstanceId}/emails/">
+            <param name="processId" style="template" type="xs:string"/>
+            <param name="processInstanceId" style="template" type="xs:long"/>
+            <method name="GET">
+                <request>
+                    <param name="limit" style="query" type="xs:int"/>
+                    <param name="start" style="query" type="xs:int"/>
+                </request>
+                <response>
+                    <representation mediaType="application/json"/>
+                </response>
+            </method>
+            <method name="POST">
+                <request>
+                    <representation mediaType="application/json"/>
+                </request>
+                <response>
+                    <representation mediaType="application/json"/>
+                </response>
+            </method>
+            <resource path="statuses/">
+                <method name="GET">
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="{emailId}/">
+                <param name="processId" style="template" type="xs:string"/>
+                <param name="processInstanceId" style="template" type="xs:long"/>
+                <param name="emailId" style="template" type="xs:long"/>
+                <method name="DELETE">
+                    <request></request>
+                    <response status="204"></response>
+                </method>
+                <method name="GET">
+                    <request></request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+                <method name="PUT">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response status="204"></response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/processes/{processId}/instances/{processInstanceId}/privileges/">
+            <param name="processId" style="template" type="xs:string"/>
+            <param name="processInstanceId" style="template" type="xs:long"/>
+            <method name="GET">
+                <request></request>
+                <response>
+                    <representation mediaType="application/json"/>
+                </response>
+            </method>
+        </resource>
+        <resource path="/processes/{processId}/instances/">
+            <param name="processId" style="template" type="xs:string"/>
+            <method name="GET">
+                <request>
+                    <param name="filter" style="query" type="xs:string"/>
+                    <param name="sort" style="query" type="xs:string"/>
+                    <param name="limit" style="query" type="xs:int"/>
+                    <param name="start" style="query" type="xs:int"/>
+                    <param name="positionOf" style="query" repeating="true" type="xs:long"/>
+                </request>
+                <response>
+                    <representation mediaType="application/json"/>
+                </response>
+            </method>
+            <method name="POST">
+                <request>
+                    <representation mediaType="application/json"/>
+                </request>
+                <response>
+                    <representation mediaType="application/json"/>
+                </response>
+            </method>
+            <resource path="{processInstanceId}">
+                <param name="processId" style="template" type="xs:string"/>
+                <param name="processInstanceId" style="template" type="xs:long"/>
+                <method name="DELETE">
+                    <request></request>
+                    <response status="204"></response>
+                </method>
+                <method name="GET">
+                    <request></request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+                <method name="PUT">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response status="204"></response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/processes/{processId}/start_activities/">
+            <param name="processId" style="template" type="xs:string"/>
+            <method name="GET">
+                <request></request>
+                <response>
+                    <representation mediaType="application/json"/>
+                </response>
+            </method>
+            <resource path="{processActivityId}">
+                <param name="processId" style="template" type="xs:string"/>
+                <param name="processActivityId" style="template" type="xs:string"/>
+                <method name="GET">
+                    <request></request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/processes/{processId}/temporary_filters/">
+            <param name="processId" style="template" type="xs:string"/>
+            <method name="GET">
+                <request>
+                    <param name="limit" style="query" type="xs:int"/>
+                    <param name="start" style="query" type="xs:int"/>
+                </request>
+                <response>
+                    <representation mediaType="application/json"/>
+                </response>
+            </method>
+            <method name="POST">
+                <request>
+                    <representation mediaType="*/*"/>
+                </request>
+                <response>
+                    <representation mediaType="application/json"/>
+                </response>
+            </method>
+            <resource path="{filterId}/">
+                <param name="processId" style="template" type="xs:string"/>
+                <param name="filterId" style="template" type="xs:long"/>
+                <method name="DELETE">
+                    <request></request>
+                    <response status="204"></response>
+                </method>
+                <method name="GET">
+                    <request></request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+                <method name="PUT">
+                    <request>
+                        <representation mediaType="*/*"/>
+                    </request>
+                    <response status="204"></response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/domains/{domainId}/relations/">
+            <param name="domainId" style="template" type="xs:string"/>
+            <method name="GET">
+                <request>
+                    <param name="filter" style="query" type="xs:string"/>
+                    <param name="limit" style="query" type="xs:int"/>
+                    <param name="start" style="query" type="xs:int"/>
+                    <param name="detailed" style="query" type="xs:boolean"/>
+                </request>
+                <response>
+                    <representation mediaType="application/json"/>
+                </response>
+            </method>
+            <method name="POST">
+                <request>
+                    <representation mediaType="*/*"/>
+                </request>
+                <response>
+                    <representation mediaType="application/json"/>
+                </response>
+            </method>
+            <resource path="{relationId}/">
+                <param name="domainId" style="template" type="xs:string"/>
+                <param name="relationId" style="template" type="xs:long"/>
+                <method name="DELETE">
+                    <request></request>
+                    <response status="204"></response>
+                </method>
+                <method name="GET">
+                    <request></request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+                <method name="PUT">
+                    <request>
+                        <representation mediaType="*/*"/>
+                    </request>
+                    <response status="204"></response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/reports/">
+            <method name="GET">
+                <request>
+                    <param name="filter" style="query" type="xs:string"/>
+                    <param name="limit" style="query" type="xs:int"/>
+                    <param name="start" style="query" type="xs:int"/>
+                </request>
+                <response>
+                    <representation mediaType="application/json"/>
+                </response>
+            </method>
+            <resource path="{reportId}/">
+                <param name="reportId" style="template" type="xs:long"/>
+                <method name="GET">
+                    <request></request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="{reportId}/attributes/">
+                <param name="reportId" style="template" type="xs:long"/>
+                <method name="GET">
+                    <request>
+                        <param name="limit" style="query" type="xs:int"/>
+                        <param name="start" style="query" type="xs:int"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="{reportId}/{file: [^/]+}">
+                <param name="reportId" style="template" type="xs:long"/>
+                <method name="GET">
+                    <request>
+                        <param name="extension" style="query" type="xs:string"/>
+                        <param name="parameters" style="query"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/octet-stream"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/sessions/">
+            <method name="POST">
+                <request>
+                    <representation mediaType="application/json"/>
+                </request>
+                <response>
+                    <representation mediaType="application/json"/>
+                </response>
+            </method>
+            <resource path="{id}/">
+                <param name="id" style="template" type="xs:string"/>
+                <method name="DELETE">
+                    <request></request>
+                    <response status="204"></response>
+                </method>
+                <method name="GET">
+                    <request></request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+                <method name="PUT">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+    </resources>
+</application>
