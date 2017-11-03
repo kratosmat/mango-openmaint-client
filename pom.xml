@@ -82,12 +82,12 @@
         <repository>
             <id>storelink-releases</id>
             <name>Storelink repo</name>
-            <url>http://storelink.ns0.it/nexus/content/repositories/releases</url>
+            <url>http://storelink.ns0.it:8181/nexus/content/repositories/releases</url>
         </repository>
         <repository>
             <id>storelink-snapshot</id>
             <name>Storelink repo</name>
-            <url>http://storelink.ns0.it/nexus/content/repositories/snapshots</url>
+            <url>http://storelink.ns0.it:8181/nexus/content/repositories/snapshots</url>
         </repository>
     </repositories>
 

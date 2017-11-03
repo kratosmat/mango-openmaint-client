@@ -29,6 +29,6 @@ public class Datum {
     public Object lookupType;
     public String _id;
     public String targetType;
-    public Meta metadata;
+    public Metadata metadata;
 
 }
