@@ -10,7 +10,7 @@
 
     <properties>
         <junit-version>4.11</junit-version>
-        <mango-api-version>0.6.2-SNAPSHOT</mango-api-version>
+        <mango-api-version>0.6.1</mango-api-version>
     </properties>
 
     <dependencies>
@@ -56,12 +56,6 @@
             <version>1.7.12</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.glassfish.jersey.core/jersey-client -->
-        <!--dependency>
-            <groupId>org.glassfish.jersey.core</groupId>
-            <artifactId>jersey-client</artifactId>
-            <version>2.26</version>
-        </dependency-->
         <dependency>
             <groupId>com.sun.jersey</groupId>
             <artifactId>jersey-bundle</artifactId>
@@ -84,17 +78,17 @@
         </plugins>
     </build>
 
-    <!--repositories>
+    <repositories>
         <repository>
             <id>storelink-releases</id>
             <name>Storelink repo</name>
-            <url>http://dev1.storelink.it:8081/nexus/content/repositories/releases</url>
+            <url>http://storelink.ns0.it/nexus/content/repositories/releases</url>
         </repository>
         <repository>
             <id>storelink-snapshot</id>
             <name>Storelink repo</name>
-            <url>http://dev1.storelink.it:8081/nexus/content/repositories/snapshots</url>
+            <url>http://storelink.ns0.it/nexus/content/repositories/snapshots</url>
         </repository>
-    </repositories-->
+    </repositories>
 
 </project>

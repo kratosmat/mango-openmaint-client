@@ -4,28 +4,39 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.GenericType;
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
 import com.sun.jersey.api.client.filter.LoggingFilter;
-import it.storelink.mango.ApiException;
 import it.storelink.mango.api.utils.StringUtil;
 import it.storelink.openmaintmango.User;
+import it.storelink.openmaintmango.openmaint.client.sessions.Output;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import javax.ws.rs.core.MultivaluedMap;
+import javax.ws.rs.core.Response;
+import java.util.HashMap;
+import java.util.Map;
 
 public class OpenMaintAPI {
 
     private static Logger logger = LoggerFactory.getLogger(OpenMaintAPI.class);
-    private String basePath = "http://storelink.ns0.it:4321/openmaint/services/rest/v2";
+    private String _basePath = "http://storelink.ns0.it:4321/openmaint/services/rest/v2";
+
+    private Integer statusCode;
+    private MultivaluedMap<String, String> responseHeaders;
+    private Map<String, String> defaultHeaderMap = new HashMap<String, String>();
+
 
     public OpenMaintAPI() {}
 
     public OpenMaintAPI(String basePath) {
-        this.basePath = basePath;
+        this._basePath = basePath;
     }
 
-    public void login(String username, String password) {
-
+    public Output login(String username, String password) {
+        Map<String, String> headerParams = new HashMap<>();
         User user = new User(username, password);
 
         final String[] accepts = {
@@ -38,14 +49,75 @@ public class OpenMaintAPI {
         };
         final String contentType = selectHeaderContentType(contentTypes);
 
+        Output response = null;
         try {
-            ClientResponse response = getAPIResponse(basePath + "/sessions/", "POST", user, accept, contentType);
+            GenericType<Output> returnType = new GenericType<Output>() {};
+            response = invokeAPI(_basePath + "/sessions/", "POST", user, headerParams, accept, contentType, returnType);
             logger.info(response.toString());
         }
         catch (Exception e) {
             logger.error(e.getMessage(), e);
         }
+        return response;
+    }
 
+    public it.storelink.openmaintmango.openmaint.client.building.Output attributes(String sessionId) {
+        Map<String, String> headerParams = new HashMap<>();
+        final String[] accepts = {
+                "application/json"
+        };
+        final String accept = selectHeaderAccept(accepts);
+
+        final String[] contentTypes = {
+                "application/json"
+        };
+        final String contentType = selectHeaderContentType(contentTypes);
+        headerParams.put("CMDBuild-Authorization", sessionId);
+
+        it.storelink.openmaintmango.openmaint.client.building.Output response = null;
+        try {
+            GenericType<it.storelink.openmaintmango.openmaint.client.building.Output> returnType = new GenericType<it.storelink.openmaintmango.openmaint.client.building.Output>() {};
+            response = invokeAPI(_basePath + "/classes/Building/attributes/", "GET", null, headerParams, accept, contentType, returnType);
+            logger.info(response.toString());
+        }
+        catch (Exception e) {
+            logger.error(e.getMessage(), e);
+        }
+        return response;
+    }
+
+
+    private <T> T  invokeAPI(String path, String method, Object body, Map<String, String> headerParams, String accept, String contentType, GenericType<T> returnType) throws OpenMaintApiException {
+
+        ClientResponse response = getAPIResponse(path, method, body, headerParams, accept, contentType);
+        statusCode = response.getStatusInfo().getStatusCode();
+        responseHeaders = response.getHeaders();
+
+        if(response.getStatusInfo() == ClientResponse.Status.NO_CONTENT) {
+            return null;
+        }
+        else if (response.getStatusInfo().getFamily() == Response.Status.Family.SUCCESSFUL) {
+            if (returnType == null) return null;
+            else return response.getEntity(returnType);
+        }
+        else {
+            String message = "error";
+            String respBody = null;
+            if (response.hasEntity()) {
+                try {
+                    respBody = response.getEntity(String.class);
+                    message = respBody;
+                }
+                catch (RuntimeException e) {
+                    logger.error(e.getMessage());
+                }
+            }
+            throw new OpenMaintApiException(
+                    response.getStatusInfo().getStatusCode(),
+                    message,
+                    response.getHeaders(),
+                    respBody);
+        }
     }
 
     public String selectHeaderContentType(String[] contentTypes) {
@@ -76,7 +148,7 @@ public class OpenMaintAPI {
         return mime != null && mime.matches("(?i)application\\/json(;.*)?");
     }
 
-    private ClientResponse getAPIResponse(String basePath, String method, /*List<Pair> queryParams, */ Object body, /*Map<String, String> headerParams, Map<String, Object> formParams, */ String accept, String contentType/*, String[] authNames*/) throws OpenMaintApiException {
+    private ClientResponse getAPIResponse(String basePath, String method, /*List<Pair> queryParams, */ Object body, Map<String, String> headerParams, /*Map<String, Object> formParams, */String accept, String contentType/*, String[] authNames*/) throws OpenMaintApiException {
 
         /*
         if (body != null && !formParams.isEmpty()){
@@ -110,7 +182,6 @@ public class OpenMaintAPI {
         else
             builder = client.resource(basePath /*+ querystring*/).accept(accept);
 
-        /*
         for (String key : headerParams.keySet()) {
             builder = builder.header(key, headerParams.get(key));
         }
@@ -119,7 +190,6 @@ public class OpenMaintAPI {
                 builder = builder.header(key, defaultHeaderMap.get(key));
             }
         }
-        */
 
         ClientResponse response = null;
 

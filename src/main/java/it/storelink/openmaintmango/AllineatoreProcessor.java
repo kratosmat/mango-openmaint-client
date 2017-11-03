@@ -12,6 +12,7 @@ import it.storelink.mango.api.utils.Pair;
 import it.storelink.mango.api.utils.StringUtil;
 import it.storelink.openmaint.OpenMaintAPI;
 import it.storelink.openmaintmango.config.ConfigSingleton;
+import it.storelink.openmaintmango.openmaint.client.sessions.Output;
 import it.storelink.openmaintmango.xmlconfig.SensoreType;
 import it.storelink.mango.api.DefaultApiImpl;
 import it.storelink.mango.api.MangoRestApi;
@@ -63,7 +64,11 @@ public class AllineatoreProcessor {
     public static void main(String[] args) throws ApiException {
 
         OpenMaintAPI openMaintAPI = new OpenMaintAPI(ConfigSingleton.getInstance().getSystemParam_OPENMAINT_BASE_URL());
-        openMaintAPI.login("admin", "pIPP0");
+        Output response = openMaintAPI.login("admin", "pIPP0");
+        logger.debug(response.toString());
+
+        it.storelink.openmaintmango.openmaint.client.building.Output response2 = openMaintAPI.attributes(response.data._id);
+        logger.debug(response.toString());
     }
 
     private static URI getOpenMaintBaseURI() {

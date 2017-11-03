@@ -27,6 +27,8 @@ public class Datum {
     public Boolean writable;
     public Boolean hidden;
     public Object lookupType;
-    public String id;
+    public String _id;
+    public String targetType;
+    public Meta metadata;
 
 }
