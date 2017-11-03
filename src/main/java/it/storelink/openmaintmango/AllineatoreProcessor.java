@@ -1,31 +1,38 @@
 package it.storelink.openmaintmango;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
 import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
+import com.sun.jersey.api.client.config.DefaultClientConfig;
+import com.sun.jersey.api.client.filter.LoggingFilter;
+import it.storelink.mango.ApiException;
+import it.storelink.mango.api.utils.Pair;
+import it.storelink.mango.api.utils.StringUtil;
+import it.storelink.openmaint.OpenMaintAPI;
+import it.storelink.openmaintmango.config.ConfigSingleton;
+import it.storelink.openmaintmango.xmlconfig.SensoreType;
 import it.storelink.mango.api.DefaultApiImpl;
 import it.storelink.mango.api.MangoRestApi;
 import it.storelink.mango.model.PointValueModel;
-import it.storelink.openmaintmango.config.ConfigSingleton;
-import it.storelink.openmaintmango.openmaint.client.building.Output;
-import it.storelink.openmaintmango.xmlconfig.SensoreType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 import java.net.URI;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 
 public class AllineatoreProcessor {
-
     private static Logger logger = LoggerFactory.getLogger(AllineatoreProcessor.class);
 
     private static MangoRestApi api;
     private static Boolean initialized = false;
-
-    //private Client client = Client.create();
-    //private WebResource webTarget = client.resource(getOpenMaintBaseURI());
-
 
     List<SensoreType> listaSensori = null;
     public AllineatoreProcessor( List<SensoreType> l) {
@@ -53,34 +60,11 @@ public class AllineatoreProcessor {
         }
     }
 
-    /*
-    public static void fra2(String[] args) {
-        ClientConfig clientConfig = new ClientConfig();
+    public static void main(String[] args) throws ApiException {
 
-        Client client = ClientBuilder.newClient(clientConfig);
-
-        WebTarget webTarget = client.target(getOpenMaintBaseURI());
-        WebTarget sessionsWebTarget = webTarget.path("/sessions/");
-        User user = new User("admin", "pIPP0");
-
-        Response response = sessionsWebTarget.request().post(Entity.entity(user, MediaType.APPLICATION_JSON));
-        it.storelink.openmaintmango.openmaint.client.sessions.Output sessions = response.readEntity(it.storelink.openmaintmango.openmaint.client.sessions.Output.class);
-        System.out.println(sessions.data._id);
-
-        WebTarget buildingWebTarget = webTarget.path("/classes/Building/attributes/");
-
-        Invocation.Builder invocationBuilder =
-                buildingWebTarget.request(MediaType.APPLICATION_JSON);
-        invocationBuilder.header("CMDBuild-Authorization", sessions.data._id);
-        Response responseGet = invocationBuilder.get();
-
-        System.out.println(responseGet);
-        System.out.println(responseGet.getStatus());
-        System.out.println(responseGet.getStatusInfo());
-        Output building = responseGet.readEntity(Output.class);
-        System.out.println(building.meta.total);
+        OpenMaintAPI openMaintAPI = new OpenMaintAPI(ConfigSingleton.getInstance().getSystemParam_OPENMAINT_BASE_URL());
+        openMaintAPI.login("admin", "pIPP0");
     }
-    */
 
     private static URI getOpenMaintBaseURI() {
         return UriBuilder.fromUri(ConfigSingleton.getInstance().getSystemParam_OPENMAINT_BASE_URL()).build();

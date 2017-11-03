@@ -62,7 +62,11 @@
             <artifactId>jersey-client</artifactId>
             <version>2.26</version>
         </dependency-->
-
+        <dependency>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-bundle</artifactId>
+            <version>1.18</version>
+        </dependency>
 
     </dependencies>
 
