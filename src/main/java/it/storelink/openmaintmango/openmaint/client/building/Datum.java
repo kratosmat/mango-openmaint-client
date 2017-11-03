@@ -20,15 +20,15 @@ public class Datum {
     public Object precision;
     public Object scale;
     public String targetClass;
+    public String targetType;
     public Object length;
     public Object editorType;
     public Filter filter;
     public List<Object> values = null;
     public Boolean writable;
     public Boolean hidden;
-    public Object lookupType;
-    public String _id;
-    public String targetType;
     public Metadata metadata;
+    public Object lookupType;
+    public String id;
 
 }
