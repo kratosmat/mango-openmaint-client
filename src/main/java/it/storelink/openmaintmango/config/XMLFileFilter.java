@@ -1,15 +1,15 @@
 package it.storelink.openmaintmango.config;
+import org.apache.log4j.Logger;
+
 import java.io.*;
 import java.util.Calendar;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * A class that implements the Java FileFilter interface.
  */
 public class XMLFileFilter implements FileFilter {
 
-    private Logger logger = LoggerFactory.getLogger(XMLFileFilter.class);
+    private Logger logger = Logger.getLogger(XMLFileFilter.class);
 
     private final String[] okFileExtensions = new String[]{"XML"};
     private String t = "";

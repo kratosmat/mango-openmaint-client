@@ -2,8 +2,7 @@ package it.storelink.openmaintmango;
 
 import it.storelink.openmaintmango.config.ConfigSingleton;
 import it.storelink.openmaintmango.config.XMLFileFilter;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -13,7 +12,7 @@ import java.util.List;
 
 public class AllineatoreMain {
 
-    private static Logger logger = LoggerFactory.getLogger(AllineatoreMain.class);
+    private static Logger logger = Logger.getLogger(AllineatoreMain.class);
 
     public static void main(String[] args) {
         logger.info("Start");

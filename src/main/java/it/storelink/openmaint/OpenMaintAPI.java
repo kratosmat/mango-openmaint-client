@@ -11,8 +11,7 @@ import com.sun.jersey.api.client.filter.LoggingFilter;
 import it.storelink.mango.api.utils.StringUtil;
 import it.storelink.openmaintmango.User;
 import it.storelink.openmaintmango.openmaint.client.sessions.Output;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
@@ -21,7 +20,7 @@ import java.util.Map;
 
 public class OpenMaintAPI {
 
-    private static Logger logger = LoggerFactory.getLogger(OpenMaintAPI.class);
+    private static Logger logger = Logger.getLogger(OpenMaintAPI.class);
     private String _basePath = "http://storelink.ns0.it:4321/openmaint/services/rest/v2";
 
     private Integer statusCode;
@@ -217,7 +216,9 @@ public class OpenMaintAPI {
         JacksonJsonProvider jsonProvider = new JacksonJsonProvider(mapper);
         DefaultClientConfig conf = new DefaultClientConfig();
         conf.getSingletons().add(jsonProvider);
+        long ts = System.currentTimeMillis();
         Client client = Client.create(conf);
+        logger.info((System.currentTimeMillis()-ts) + " ms");
         client.addFilter(new LoggingFilter());
         return client;
     }

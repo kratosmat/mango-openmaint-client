@@ -1,15 +1,6 @@
 package it.storelink.openmaintmango;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
-import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.WebResource;
-import com.sun.jersey.api.client.config.DefaultClientConfig;
-import com.sun.jersey.api.client.filter.LoggingFilter;
 import it.storelink.mango.ApiException;
-import it.storelink.mango.api.utils.Pair;
-import it.storelink.mango.api.utils.StringUtil;
 import it.storelink.openmaint.OpenMaintAPI;
 import it.storelink.openmaintmango.config.ConfigSingleton;
 import it.storelink.openmaintmango.openmaint.client.sessions.Output;
@@ -17,20 +8,16 @@ import it.storelink.openmaintmango.xmlconfig.SensoreType;
 import it.storelink.mango.api.DefaultApiImpl;
 import it.storelink.mango.api.MangoRestApi;
 import it.storelink.mango.model.PointValueModel;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 import java.net.URI;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 
 public class AllineatoreProcessor {
-    private static Logger logger = LoggerFactory.getLogger(AllineatoreProcessor.class);
+    private static Logger logger = Logger.getLogger(AllineatoreProcessor.class);
 
     private static MangoRestApi api;
     private static Boolean initialized = false;

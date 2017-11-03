@@ -5,8 +5,7 @@ import it.storelink.openmaintmango.config.ConfigSingleton;
 import it.storelink.openmaintmango.xmlconfig.SensoreType;
 import it.storelink.openmaintmango.xmlconfig.SensoriType;
 import it.storelink.openmaintmango.xmlconfig.ObjectFactory;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
@@ -18,7 +17,7 @@ public class AllineatoreTask implements Runnable {
     public AllineatoreTask(File f) {
         sensorFile =  f;
     }
-    private static Logger logger = LoggerFactory.getLogger(AllineatoreTask.class);
+    private static Logger logger = Logger.getLogger(AllineatoreTask.class);
     public boolean isRunning() {
         return isRunning;
     }

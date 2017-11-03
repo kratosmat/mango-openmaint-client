@@ -1,7 +1,6 @@
 package it.storelink.openmaintmango;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 
 import java.util.Iterator;
 import java.util.List;
@@ -9,7 +8,7 @@ import java.util.List;
 public class AllineatoreThreadMonitor implements AllineatoreThreadMonitorInterface {
     private Thread m_thrd = null;
     private List<AllineatoreTask> l_task = null;
-    private static Logger logger = LoggerFactory.getLogger(AllineatoreThreadMonitor.class);
+    private static Logger logger = Logger.getLogger(AllineatoreThreadMonitor.class);
 
     public AllineatoreThreadMonitor(Thread thrd, List<AllineatoreTask> l ) {
         m_thrd = thrd;

@@ -1,5 +1,7 @@
 package it.storelink.openmaintmango.config;
 
+import org.apache.log4j.Logger;
+
 import java.io.InputStream;
 
 import java.lang.reflect.InvocationTargetException;
@@ -8,12 +10,8 @@ import java.lang.reflect.Method;
 
 import java.util.Properties;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-
 public class ConfigSingleton {
-    private static Logger logger = LoggerFactory.getLogger(ConfigSingleton.class);
+    private static Logger logger = Logger.getLogger(ConfigSingleton.class);
     private static ConfigSingleton sm_instance;
 
     private Properties map = new Properties();
