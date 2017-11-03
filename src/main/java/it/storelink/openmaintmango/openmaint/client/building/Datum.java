@@ -29,6 +29,6 @@ public class Datum {
     public Boolean hidden;
     public Metadata metadata;
     public Object lookupType;
-    public String id;
+    public String _id;
 
 }
