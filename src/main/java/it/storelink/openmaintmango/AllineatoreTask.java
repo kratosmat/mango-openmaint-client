@@ -14,8 +14,21 @@ import java.util.List;
 
 public class AllineatoreTask implements Runnable {
     File sensorFile = null;
+    AllineatoreProcessor allineatoreProcessor;
     public AllineatoreTask(File f) {
         sensorFile =  f;
+        try {
+            JAXBContext jc = JAXBContext.newInstance(SensoriType.class);
+            JAXBContext jaxbContext = JAXBContext.newInstance(ObjectFactory.class);
+            SensoriType sensoriType = ((JAXBElement<SensoriType>) jaxbContext.createUnmarshaller().unmarshal(sensorFile)).getValue();
+            List<SensoreType> lista = sensoriType.getSensore();
+            allineatoreProcessor = new AllineatoreProcessor(lista);
+
+        } catch (Exception e) {
+            isRunning = false;
+            e.printStackTrace();
+        } finally {
+        }
     }
     private static Logger logger = Logger.getLogger(AllineatoreTask.class);
     public boolean isRunning() {
@@ -37,11 +50,6 @@ public class AllineatoreTask implements Runnable {
             } else {
 
                 try {
-                    JAXBContext jc = JAXBContext.newInstance(SensoriType.class);
-                    JAXBContext jaxbContext = JAXBContext.newInstance(ObjectFactory.class);
-                    SensoriType sensoriType = ((JAXBElement<SensoriType>) jaxbContext.createUnmarshaller().unmarshal(sensorFile)).getValue();
-                    List<SensoreType> lista = sensoriType.getSensore();
-                    AllineatoreProcessor allineatoreProcessor = new AllineatoreProcessor(lista);
                     allineatoreProcessor.process();
                 } catch (Exception e) {
                     isRunning = false;
@@ -51,7 +59,7 @@ public class AllineatoreTask implements Runnable {
             }
             count++;
             try {
-                Thread.sleep(1000);
+                Thread.sleep(100000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

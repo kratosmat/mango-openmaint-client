@@ -27,6 +27,7 @@ public class OpenMaintAPI {
     private MultivaluedMap<String, String> responseHeaders;
     private Map<String, String> defaultHeaderMap = new HashMap<String, String>();
 
+    private static String sessionId ="";
 
     public OpenMaintAPI() {}
 
@@ -52,15 +53,17 @@ public class OpenMaintAPI {
         try {
             GenericType<Output> returnType = new GenericType<Output>() {};
             response = invokeAPI(_basePath + "/sessions/", "POST", user, headerParams, accept, contentType, returnType);
+            sessionId = response.data._id;
             logger.info(response.toString());
         }
         catch (Exception e) {
             logger.error(e.getMessage(), e);
         }
+
         return response;
     }
 
-    public it.storelink.openmaintmango.openmaint.client.building.Output attributes(String sessionId) {
+    public it.storelink.openmaintmango.openmaint.client.classattributes.Output attributes(String classId) {
         Map<String, String> headerParams = new HashMap<>();
         final String[] accepts = {
                 "application/json"
@@ -73,10 +76,10 @@ public class OpenMaintAPI {
         final String contentType = selectHeaderContentType(contentTypes);
         headerParams.put("CMDBuild-Authorization", sessionId);
 
-        it.storelink.openmaintmango.openmaint.client.building.Output response = null;
+        it.storelink.openmaintmango.openmaint.client.classattributes.Output response = null;
         try {
-            GenericType<it.storelink.openmaintmango.openmaint.client.building.Output> returnType = new GenericType<it.storelink.openmaintmango.openmaint.client.building.Output>() {};
-            response = invokeAPI(_basePath + "/classes/Building/attributes/", "GET", null, headerParams, accept, contentType, returnType);
+            GenericType<it.storelink.openmaintmango.openmaint.client.classattributes.Output> returnType = new GenericType<it.storelink.openmaintmango.openmaint.client.classattributes.Output>() {};
+            response = invokeAPI(_basePath + classId + "/attributes/", "GET", null, headerParams, accept, contentType, returnType);
             logger.info(response.toString());
         }
         catch (Exception e) {
@@ -84,7 +87,53 @@ public class OpenMaintAPI {
         }
         return response;
     }
+    public void updateObj( String objId, String body) {
+        Map<String, String> headerParams = new HashMap<>();
+        final String[] accepts = {
+                "application/json"
+        };
+        final String accept = selectHeaderAccept(accepts);
 
+        final String[] contentTypes = {
+                "application/json"
+        };
+        final String contentType = selectHeaderContentType(contentTypes);
+        headerParams.put("CMDBuild-Authorization", sessionId);
+
+
+        try {
+            invokeAPI(_basePath + objId , "PUT", body, headerParams, accept, contentType, null);
+
+        }
+        catch (Exception e) {
+            logger.error(e.getMessage(), e);
+        }
+
+    }
+
+    public void insertObj( String className, String body) {
+        Map<String, String> headerParams = new HashMap<>();
+        final String[] accepts = {
+                "application/json"
+        };
+        final String accept = selectHeaderAccept(accepts);
+
+        final String[] contentTypes = {
+                "application/json"
+        };
+        final String contentType = selectHeaderContentType(contentTypes);
+        headerParams.put("CMDBuild-Authorization", sessionId);
+
+
+        try {
+            invokeAPI(_basePath + "/classes/"+ className +"/cards" , "POST", body, headerParams, accept, contentType, null);
+
+        }
+        catch (Exception e) {
+            logger.error(e.getMessage(), e);
+        }
+
+    }
 
     private <T> T  invokeAPI(String path, String method, Object body, Map<String, String> headerParams, String accept, String contentType, GenericType<T> returnType) throws OpenMaintApiException {
 

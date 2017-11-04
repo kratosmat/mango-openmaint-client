@@ -1,5 +1,5 @@
 
-package it.storelink.openmaintmango.openmaint.client.building;
+package it.storelink.openmaintmango.openmaint.client.classattributes;
 
 
 public class Filter {

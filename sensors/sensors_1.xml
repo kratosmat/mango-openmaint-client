@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sensori xmlns="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <sensore>
-        <mango relativePath="TD2"></mango>
-        <opemaint relativePath="classes/Building/cards/261257" attributeName="status" attributeType="STRING"
+        <mango xid="TD2"></mango>
+        <opemaint relativePath="/classes/Building/cards/261257" attributeName="status2" attributeType="STRING"
                   operationType="UPDATE"></opemaint>
     </sensore>
     <sensore>
-        <mango relativePath="point-values/TD2/latest?limit=1"></mango>
-        <opemaint relativePath="classes/Building/cards/261257" attributeName="status" attributeType="STRING"
-                  operationType="UPDATE"></opemaint>
+        <mango xid="TD2"></mango>
+        <opemaint relativePath="/classes/MeterReading/cards/" attributeName="Value" attributeType="STRING"
+                  operationType="INSERT">
+				  <field name="BeginDate" type="TIMESTAMP">2015-11-08T15:26:00</field>
+				  <field name="Date" type="TIMESTAMP">2015-10-01T08:00:00</field>
+				  <field name="Item" type="FOREIGNKEY">255756</field>
+				  <field name="Meter" type="FOREIGNKEY">255748</field>
+				  <field name="_type" type="STRING">MeterReading</field>
+		</opemaint>
     </sensore>
 </sensori>

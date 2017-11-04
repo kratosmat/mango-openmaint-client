@@ -34,6 +34,16 @@ public class AllineatoreMain {
 
         AllineatoreThreadMonitor allineatoreThreadMonitor = new AllineatoreThreadMonitor(Thread.currentThread(),l_task);
         allineatoreThreadMonitor.start();
+
+        while (!Thread.interrupted()) {
+            // loop until interrupted
+            logger.info("AllineatoreMain is alive");
+            try {
+                Thread.sleep(100000);
+            } catch (InterruptedException ex) {
+                Thread.currentThread().interrupt();
+            }
+        }
         logger.info("End");
     }
 }

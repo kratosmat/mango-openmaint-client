@@ -12,20 +12,27 @@
       <xs:element type="xs:opemaintType" name="opemaint"/>
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType name="opemaintType">
+  <xs:complexType name="fieldType">
     <xs:simpleContent>
       <xs:extension base="xs:string">
-        <xs:attribute type="xs:string" name="relativePath" use="optional"/>
-        <xs:attribute type="xs:string" name="attributeName" use="optional"/>
-        <xs:attribute type="xs:string" name="attributeType" use="optional"/>
-        <xs:attribute type="xs:string" name="operationType" use="optional"/>
+        <xs:attribute type="xs:string" name="name" use="optional"/>
+        <xs:attribute type="xs:string" name="type" use="optional"/>
       </xs:extension>
     </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="opemaintType" mixed="true">
+    <xs:sequence>
+      <xs:element type="xs:fieldType" name="field" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute type="xs:string" name="relativePath" use="optional"/>
+    <xs:attribute type="xs:string" name="attributeName" use="optional"/>
+    <xs:attribute type="xs:string" name="attributeType" use="optional"/>
+    <xs:attribute type="xs:string" name="operationType" use="optional"/>
   </xs:complexType>
   <xs:complexType name="mangoType">
     <xs:simpleContent>
       <xs:extension base="xs:string">
-        <xs:attribute type="xs:string" name="relativePath" use="optional"/>
+        <xs:attribute type="xs:string" name="xid" use="optional"/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
