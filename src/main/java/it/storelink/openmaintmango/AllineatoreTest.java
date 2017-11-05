@@ -14,8 +14,8 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import java.io.File;
 import java.net.URI;
-import java.util.Iterator;
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 
 public class AllineatoreTest {
@@ -24,6 +24,14 @@ public class AllineatoreTest {
 
     public static void main(String[] args) throws ApiException {
         try {
+
+            Map cache = new HashMap();
+            cache.put("A","A");
+            cache.put("A","B");
+            Object o = cache.get("C");
+
+            String formattedTime = (new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")).format(new Date());
+            logger.info(formattedTime);
         OpenMaintAPI openMaintAPI = new OpenMaintAPI(ConfigSingleton.getInstance().getSystemParam_OPENMAINT_BASE_URL());
         Output response = openMaintAPI.login("admin", "pIPP0");
         logger.debug(response.toString());

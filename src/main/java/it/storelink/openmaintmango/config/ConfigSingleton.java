@@ -18,6 +18,8 @@ public class ConfigSingleton {
 
 
     public static final String SCENARIO_REPEAT = "SCENARIO_REPEAT";
+    public static final String SCENARIO_SLEEP = "SCENARIO_SLEEP";
+
     public static final String INSTALL_PATH = "INSTALL_PATH";
     public static final String SENSORI_FOLDER = "SENSORI_FOLDER";
     public static final String OPENMAINT_BASE_URL = "OPENMAINT_BASE_URL";
@@ -124,6 +126,16 @@ public class ConfigSingleton {
     public int getSystemParam_SCENARIO_REPEAT() {
         int toret = -1;
         String parametro = (String) map.get(ConfigSingleton.SCENARIO_REPEAT);
+        if (parametro != null) {
+            toret = (new Integer(parametro.trim())).intValue();
+        }
+        return toret;
+    }
+
+
+    public int getSystemParam_SCENARIO_SLEEP() {
+        int toret = -1;
+        String parametro = (String) map.get(ConfigSingleton.SCENARIO_SLEEP);
         if (parametro != null) {
             toret = (new Integer(parametro.trim())).intValue();
         }
@@ -242,6 +254,9 @@ public class ConfigSingleton {
 
         int b_config = ConfigSingleton.getInstance().getSystemParam_SCENARIO_REPEAT();
         logger.info("getSystemParam_SCENARIO_REPEAT() :" + b_config);
+
+        b_config = ConfigSingleton.getInstance().getSystemParam_SCENARIO_SLEEP();
+        logger.info("getSystemParam_SCENARIO_SLEEP() :" + b_config);
 
 
     }

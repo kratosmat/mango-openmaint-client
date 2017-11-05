@@ -15,13 +15,12 @@ import org.apache.log4j.Logger;
 import javax.ws.rs.core.UriBuilder;
 import javax.xml.bind.JAXBElement;
 import java.net.URI;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 
 public class AllineatoreProcessor {
+
     private static Logger logger = Logger.getLogger(AllineatoreProcessor.class);
 
     private static MangoRestApi mangoApi;
@@ -29,6 +28,8 @@ public class AllineatoreProcessor {
     private static OpenMaintAPI openMaintAPI;
     private static Boolean openMaintInitialized = false;
     List<SensoreType> listaSensori = null;
+
+    private static Map cache = new HashMap();
 
     public AllineatoreProcessor( List<SensoreType> l) {
 
@@ -70,9 +71,24 @@ public class AllineatoreProcessor {
             if ("INSERT".equalsIgnoreCase(opType)){
                 processInsert(openMaintAPI, sensor, mangoVal.toString());
             } else   if ("UPDATE".equalsIgnoreCase(opType)){
-                processUpdate(openMaintAPI,  sensor , mangoVal.toString() );
+                if (! isInCache(sensor,  mangoVal.toString()) ){
+                    processUpdate(openMaintAPI,  sensor , mangoVal.toString() );
+                    putInCache(sensor, mangoVal.toString());
+                }
             }
         }
+    }
+
+    private void putInCache(SensoreType sensor, String val) {
+        cache.put(sensor.getOpemaint().getRelativePath(), val);
+    }
+
+    private boolean isInCache(SensoreType sensor,String val) {
+        if ( cache.get(sensor.getOpemaint().getRelativePath()) != null && ((String)cache.get(sensor.getOpemaint().getRelativePath())).equalsIgnoreCase(val)  ) {
+            logger.info("sensor " +sensor.getOpemaint().getRelativePath() + " is in cache ");
+            return true;
+        } else
+        return false;
     }
 
 
@@ -88,12 +104,14 @@ public class AllineatoreProcessor {
                 attType.equalsIgnoreCase("TIME") ||
                 attType.equalsIgnoreCase("TIMESTAMP") ||
                 attType.equalsIgnoreCase("TEXT")  ){
+
             mapFields.put(attName,mangoVal);
+
         }else if ( attType.equalsIgnoreCase("REFERENCE") ) {
             //TO_DO
         } else {
-            Integer intValue = new Integer(mangoVal);
-            mapFields.put(attName,intValue);
+            Integer mangoIntValue = new Integer(mangoVal);
+            mapFields.put(attName,mangoIntValue);
         }
         List content = sensor.getOpemaint().getContent();
         for (Iterator iterator1 = content.iterator(); iterator1.hasNext(); ) {
@@ -108,7 +126,13 @@ public class AllineatoreProcessor {
                         fType.equalsIgnoreCase("TIME") ||
                         fType.equalsIgnoreCase("TIMESTAMP") ||
                         fType.equalsIgnoreCase("TEXT")  ){
-                    mapFields.put(fName,fValue);
+
+                   if(fValue.equalsIgnoreCase(fType) && "TIMESTAMP".equalsIgnoreCase(fValue) ) {
+                       String formattedTime = (new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")).format(new Date());
+                       mapFields.put(fName,formattedTime);
+                   }else {
+                       mapFields.put(fName,fValue);
+                   }
                 }else if ( fType.equalsIgnoreCase("REFERENCE") ) {
                     //TO_DO
                 } else {

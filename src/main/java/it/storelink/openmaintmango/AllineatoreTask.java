@@ -1,6 +1,7 @@
 package it.storelink.openmaintmango;
 
 
+import com.sun.jersey.api.client.Client;
 import it.storelink.openmaintmango.config.ConfigSingleton;
 import it.storelink.openmaintmango.xmlconfig.SensoreType;
 import it.storelink.openmaintmango.xmlconfig.SensoriType;
@@ -50,7 +51,11 @@ public class AllineatoreTask implements Runnable {
             } else {
 
                 try {
+
+                    long ts = System.currentTimeMillis();
                     allineatoreProcessor.process();
+                    logger.info("Processo di allineamento termitao in "+(System.currentTimeMillis()-ts) + " ms");
+
                 } catch (Exception e) {
                     isRunning = false;
                     e.printStackTrace();
@@ -59,7 +64,7 @@ public class AllineatoreTask implements Runnable {
             }
             count++;
             try {
-                Thread.sleep(100000);
+                Thread.sleep(ConfigSingleton.getInstance().getSystemParam_SCENARIO_SLEEP());
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

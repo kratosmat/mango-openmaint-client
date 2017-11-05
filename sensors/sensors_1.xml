@@ -10,7 +10,7 @@
         <opemaint relativePath="/classes/MeterReading/cards/" attributeName="Value" attributeType="STRING"
                   operationType="INSERT">
 				  <field name="BeginDate" type="TIMESTAMP">2015-11-08T15:26:00</field>
-				  <field name="Date" type="TIMESTAMP">2015-10-01T08:00:00</field>
+				  <field name="Date" type="TIMESTAMP">TIMESTAMP</field>
 				  <field name="Item" type="FOREIGNKEY">255756</field>
 				  <field name="Meter" type="FOREIGNKEY">255748</field>
 				  <field name="_type" type="STRING">MeterReading</field>
