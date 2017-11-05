@@ -7,16 +7,6 @@
 #
 #  -  buildClassPath(),return the classpath for only 1 folder
 #  -  buildGeneralClassPath(),build the classpath inside the variable CLASSPATH1 of the application
-#  -  SetJavaHome(),set the Java Home variable APP_JAVA_HOME
-#  -  GetShortProductName(), which is used in prompt, warning, and
-#     error messages shown to the user.
-#  -  SetSkipJ2SDKCheck(),set if yuo have to skip the check of JVM
-#  -  CheckJDK(),main function asking for a JVM to the user if not found automatically
-#  -  GetDefaultJDK(),this fuction searchs for JVM inside the server.
-#  -  CheckJavaHome(), if the APP_JAVA_HOME is to check
-#  -  GetDotJdkFileName(), which is the file in the user's home directory
-#     that stores the path to the JDK or JRE used for the product.
-#  -  GetDotJdkFileName(), where to store the information of the JVM location.
 #
 #=============================================================================
 
