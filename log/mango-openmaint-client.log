@@ -1,0 +1,1268 @@
+17-11-10 20:15:43   INFO  [it.storelink.openmaintmango.AllineatoreMain] main.18  -  Start
+SLF4J: Class path contains multiple SLF4J bindings.
+SLF4J: Found binding in [jar:file:/C:/iot/git/mango-openmaint-client/lib/slf4j-log4j12-1.7.12.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: Found binding in [jar:file:/C:/iot/git/mango-openmaint-client/lib/slf4j-simple-1.7.12.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
+SLF4J: Actual binding is of type [org.slf4j.impl.Log4jLoggerFactory]
+nov 10, 2017 8:15:46 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 1 * Client out-bound request
+1 > GET http://localhost:8080/rest/v1/login/admin
+1 > Accept: application/json
+1 > Cookie: 
+1 > logout: true
+1 > Password: admin
+1 > User-Agent: Java-Swagger
+
+nov 10, 2017 8:15:46 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 1 * Client in-bound response
+1 < 200
+1 < Transfer-Encoding: chunked
+1 < Server: Jetty(9.2.12.v20150709)
+1 < X-Content-Type-Options: nosniff
+1 < Pragma: no-cache
+1 < Date: Fri, 10 Nov 2017 19:15:46 GMT
+1 < X-Frame-Options: SAMEORIGIN
+1 < Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+1 < messages: 
+1 < user-home-uri: /data_point_details.shtm
+1 < Vary: Accept-Encoding, User-Agent
+1 < Set-Cookie: MANGO8080=wld2kuivblv4tfaonee1kfu2;Path=/
+1 < Set-Cookie: XSRF-TOKEN=3179fca6-1c89-4742-8b50-4a64978590cd;Path=/
+1 < Expires: Thu, 01 Jan 1970 00:00:00 GMT
+1 < X-XSS-Protection: 1; mode=block
+1 < errors: 
+1 < Content-Type: application/json; charset=UTF-8
+1 < 
+{
+  "username" : "admin",
+  "email" : "admin@yourMangoDomain.com",
+  "validationMessages" : null,
+  "permissions" : "superadmin",
+  "password" : "0DPiKuNIrrVmD8IUCuw1hQxNqZc=",
+  "homeUrl" : "/data_point_details.shtm",
+  "phone" : "",
+  "disabled" : false,
+  "timezone" : null,
+  "muted" : true,
+  "receiveAlarmEmails" : "NONE",
+  "systemTimezone" : "Europe/Berlin",
+  "receiveOwnAuditEvents" : false,
+  "admin" : true
+}
+
+17-11-10 20:15:47   INFO  [it.storelink.openmaint.OpenMaintAPI] getClient.270  -  124 ms
+nov 10, 2017 8:15:47 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 1 * Client out-bound request
+1 > POST http://storelink.ns0.it:4321/openmaint/services/rest/v2/sessions/
+1 > Accept: application/json
+1 > Content-Type: application/json
+{"username":"admin","password":"pIPP0","role":"","_id":""}
+
+nov 10, 2017 8:15:47 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 1 * Client in-bound response
+1 < 200
+1 < Transfer-Encoding: chunked
+1 < Server: Apache-Coyote/1.1
+1 < Date: Fri, 10 Nov 2017 19:16:25 GMT
+1 < Content-Type: application/json
+1 < 
+{"data":{"username":"admin","role":"SuperUser","availableRoles":["SuperUser"],"_id":"ksu8j5o802dpvjj77deq45tgbo"}}
+
+17-11-10 20:15:47   INFO  [it.storelink.openmaint.OpenMaintAPI] login.57  -  it.storelink.openmaintmango.openmaint.client.sessions.Output@5136d012
+17-11-10 20:15:47   INFO  [it.storelink.openmaintmango.AllineatoreMain] main.40  -  AllineatoreMain is alive
+17-11-10 20:15:47   INFO  [it.storelink.openmaintmango.AllineatoreTask] run.47  -  isRunning: true
+17-11-10 20:15:47   INFO  [it.storelink.openmaintmango.AllineatoreProcessor] process.58  -  process started
+nov 10, 2017 8:15:47 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 2 * Client out-bound request
+2 > GET http://localhost:8080/rest/v1/point-values/TD2/latest?useRendered=false&unitConversion=false&limit=1&useCache=true
+2 > Accept: application/json
+2 > Cookie: MANGO8080=wld2kuivblv4tfaonee1kfu2;
+2 > User-Agent: Java-Swagger
+
+nov 10, 2017 8:15:47 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 2 * Client in-bound response
+2 < 200
+2 < Transfer-Encoding: chunked
+2 < Server: Jetty(9.2.12.v20150709)
+2 < X-Content-Type-Options: nosniff
+2 < Pragma: no-cache
+2 < Date: Fri, 10 Nov 2017 19:15:47 GMT
+2 < X-Frame-Options: SAMEORIGIN
+2 < Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+2 < messages: 
+2 < Vary: Accept-Encoding, User-Agent
+2 < Set-Cookie: XSRF-TOKEN=3179fca6-1c89-4742-8b50-4a64978590cd;Path=/
+2 < Set-Cookie: MANGO8080=wld2kuivblv4tfaonee1kfu2;Path=/
+2 < Expires: Thu, 01 Jan 1970 00:00:00 GMT
+2 < X-XSS-Protection: 1; mode=block
+2 < errors: 
+2 < Content-Type: application/json; charset=UTF-8
+2 < 
+[ {
+  "dataType" : "NUMERIC",
+  "value" : 54.86110901088016,
+  "timestamp" : 1510341344722,
+  "annotation" : null
+} ]
+
+17-11-10 20:15:47   INFO  [it.storelink.openmaintmango.AllineatoreProcessor] process.68  -  Get value : 54.86110901088016
+17-11-10 20:15:47   INFO  [it.storelink.openmaintmango.AllineatoreProcessor] isInCache.93  -  sensor /classes/QE/cards/263505 is not in cache. Val in cache :  null . Val : 54.86110901088016
+17-11-10 20:15:47   INFO  [it.storelink.openmaintmango.AllineatoreProcessor] processUpdate.169  -  {"Power_Active_total":"54.86110901088016"}
+17-11-10 20:15:47   INFO  [it.storelink.openmaint.OpenMaintAPI] getClient.270  -  170 ms
+nov 10, 2017 8:15:47 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 1 * Client out-bound request
+1 > PUT http://storelink.ns0.it:4321/openmaint/services/rest/v2/classes/QE/cards/263505
+1 > Accept: application/json
+1 > CMDBuild-Authorization: ksu8j5o802dpvjj77deq45tgbo
+1 > Content-Type: application/json
+{"Power_Active_total":"54.86110901088016"}
+
+nov 10, 2017 8:15:47 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 1 * Client in-bound response
+1 < 204
+1 < Server: Apache-Coyote/1.1
+1 < Date: Fri, 10 Nov 2017 19:16:25 GMT
+1 < 
+
+nov 10, 2017 8:15:47 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 3 * Client out-bound request
+3 > GET http://localhost:8080/rest/v1/point-values/TD2/latest?useRendered=false&unitConversion=false&limit=1&useCache=true
+3 > Accept: application/json
+3 > Cookie: MANGO8080=wld2kuivblv4tfaonee1kfu2;
+3 > User-Agent: Java-Swagger
+
+nov 10, 2017 8:15:47 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 3 * Client in-bound response
+3 < 200
+3 < Transfer-Encoding: chunked
+3 < Server: Jetty(9.2.12.v20150709)
+3 < X-Content-Type-Options: nosniff
+3 < Pragma: no-cache
+3 < Date: Fri, 10 Nov 2017 19:15:47 GMT
+3 < X-Frame-Options: SAMEORIGIN
+3 < Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+3 < messages: 
+3 < Vary: Accept-Encoding, User-Agent
+3 < Set-Cookie: XSRF-TOKEN=3179fca6-1c89-4742-8b50-4a64978590cd;Path=/
+3 < Expires: Thu, 01 Jan 1970 00:00:00 GMT
+3 < X-XSS-Protection: 1; mode=block
+3 < errors: 
+3 < Content-Type: application/json; charset=UTF-8
+3 < 
+[ {
+  "dataType" : "NUMERIC",
+  "value" : 54.86110901088016,
+  "timestamp" : 1510341344722,
+  "annotation" : null
+} ]
+
+17-11-10 20:15:47   INFO  [it.storelink.openmaintmango.AllineatoreProcessor] process.68  -  Get value : 54.86110901088016
+17-11-10 20:15:47   INFO  [it.storelink.openmaintmango.AllineatoreProcessor] processInsert.106  -  MeterReading
+17-11-10 20:15:47   INFO  [it.storelink.openmaintmango.AllineatoreProcessor] processInsert.150  -  {"Item":255756,"Meter":255748,"Value":"54.86110901088016","_type":"MeterReading","Date":"2017-11-10T20:15:47","BeginDate":"2015-11-08T15:26:00"}
+17-11-10 20:15:47   INFO  [it.storelink.openmaint.OpenMaintAPI] getClient.270  -  385 ms
+nov 10, 2017 8:15:47 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 1 * Client out-bound request
+1 > POST http://storelink.ns0.it:4321/openmaint/services/rest/v2/classes/MeterReading/cards
+1 > Accept: application/json
+1 > CMDBuild-Authorization: ksu8j5o802dpvjj77deq45tgbo
+1 > Content-Type: application/json
+{"Item":255756,"Meter":255748,"Value":"54.86110901088016","_type":"MeterReading","Date":"2017-11-10T20:15:47","BeginDate":"2015-11-08T15:26:00"}
+
+nov 10, 2017 8:15:47 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 1 * Client in-bound response
+1 < 200
+1 < Transfer-Encoding: chunked
+1 < Server: Apache-Coyote/1.1
+1 < Date: Fri, 10 Nov 2017 19:16:25 GMT
+1 < Content-Type: application/json
+1 < 
+{"data":264014}
+
+17-11-10 20:15:47   INFO  [it.storelink.openmaintmango.AllineatoreTask] run.57  -  Processo di allineamento termitao in 828 ms
+17-11-10 20:16:47   INFO  [it.storelink.openmaintmango.AllineatoreTask] run.47  -  isRunning: true
+17-11-10 20:16:47   INFO  [it.storelink.openmaintmango.AllineatoreProcessor] process.58  -  process started
+nov 10, 2017 8:16:47 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 4 * Client out-bound request
+4 > GET http://localhost:8080/rest/v1/point-values/TD2/latest?useRendered=false&unitConversion=false&limit=1&useCache=true
+4 > Accept: application/json
+4 > Cookie: MANGO8080=wld2kuivblv4tfaonee1kfu2;
+4 > User-Agent: Java-Swagger
+
+nov 10, 2017 8:16:47 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 4 * Client in-bound response
+4 < 200
+4 < Transfer-Encoding: chunked
+4 < Server: Jetty(9.2.12.v20150709)
+4 < X-Content-Type-Options: nosniff
+4 < Pragma: no-cache
+4 < Date: Fri, 10 Nov 2017 19:16:47 GMT
+4 < X-Frame-Options: SAMEORIGIN
+4 < Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+4 < messages: 
+4 < Vary: Accept-Encoding, User-Agent
+4 < Set-Cookie: XSRF-TOKEN=3179fca6-1c89-4742-8b50-4a64978590cd;Path=/
+4 < Expires: Thu, 01 Jan 1970 00:00:00 GMT
+4 < X-XSS-Protection: 1; mode=block
+4 < errors: 
+4 < Content-Type: application/json; charset=UTF-8
+4 < 
+[ {
+  "dataType" : "NUMERIC",
+  "value" : 26.179332548001355,
+  "timestamp" : 1510341404722,
+  "annotation" : null
+} ]
+
+17-11-10 20:16:47   INFO  [it.storelink.openmaintmango.AllineatoreProcessor] process.68  -  Get value : 26.179332548001355
+17-11-10 20:16:47   INFO  [it.storelink.openmaintmango.AllineatoreProcessor] isInCache.93  -  sensor /classes/QE/cards/263505 is not in cache. Val in cache :  54.86110901088016 . Val : 26.179332548001355
+17-11-10 20:16:48   INFO  [it.storelink.openmaintmango.AllineatoreProcessor] processUpdate.169  -  {"Power_Active_total":"26.179332548001355"}
+17-11-10 20:16:48   INFO  [it.storelink.openmaint.OpenMaintAPI] getClient.270  -  287 ms
+nov 10, 2017 8:16:48 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 1 * Client out-bound request
+1 > PUT http://storelink.ns0.it:4321/openmaint/services/rest/v2/classes/QE/cards/263505
+1 > Accept: application/json
+1 > CMDBuild-Authorization: ksu8j5o802dpvjj77deq45tgbo
+1 > Content-Type: application/json
+{"Power_Active_total":"26.179332548001355"}
+
+nov 10, 2017 8:16:48 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 1 * Client in-bound response
+1 < 204
+1 < Server: Apache-Coyote/1.1
+1 < Date: Fri, 10 Nov 2017 19:17:26 GMT
+1 < 
+
+nov 10, 2017 8:16:48 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 5 * Client out-bound request
+5 > GET http://localhost:8080/rest/v1/point-values/TD2/latest?useRendered=false&unitConversion=false&limit=1&useCache=true
+5 > Accept: application/json
+5 > Cookie: MANGO8080=wld2kuivblv4tfaonee1kfu2;
+5 > User-Agent: Java-Swagger
+
+nov 10, 2017 8:16:48 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 5 * Client in-bound response
+5 < 200
+5 < Transfer-Encoding: chunked
+5 < Server: Jetty(9.2.12.v20150709)
+5 < X-Content-Type-Options: nosniff
+5 < Pragma: no-cache
+5 < Date: Fri, 10 Nov 2017 19:16:48 GMT
+5 < X-Frame-Options: SAMEORIGIN
+5 < Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+5 < messages: 
+5 < Vary: Accept-Encoding, User-Agent
+5 < Set-Cookie: XSRF-TOKEN=3179fca6-1c89-4742-8b50-4a64978590cd;Path=/
+5 < Expires: Thu, 01 Jan 1970 00:00:00 GMT
+5 < X-XSS-Protection: 1; mode=block
+5 < errors: 
+5 < Content-Type: application/json; charset=UTF-8
+5 < 
+[ {
+  "dataType" : "NUMERIC",
+  "value" : 26.179332548001355,
+  "timestamp" : 1510341404722,
+  "annotation" : null
+} ]
+
+17-11-10 20:16:48   INFO  [it.storelink.openmaintmango.AllineatoreProcessor] process.68  -  Get value : 26.179332548001355
+17-11-10 20:16:48   INFO  [it.storelink.openmaintmango.AllineatoreProcessor] processInsert.106  -  MeterReading
+17-11-10 20:16:48   INFO  [it.storelink.openmaintmango.AllineatoreProcessor] processInsert.150  -  {"Item":255756,"Meter":255748,"Value":"26.179332548001355","_type":"MeterReading","Date":"2017-11-10T20:16:48","BeginDate":"2015-11-08T15:26:00"}
+17-11-10 20:16:48   INFO  [it.storelink.openmaint.OpenMaintAPI] getClient.270  -  103 ms
+nov 10, 2017 8:16:48 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 1 * Client out-bound request
+1 > POST http://storelink.ns0.it:4321/openmaint/services/rest/v2/classes/MeterReading/cards
+1 > Accept: application/json
+1 > CMDBuild-Authorization: ksu8j5o802dpvjj77deq45tgbo
+1 > Content-Type: application/json
+{"Item":255756,"Meter":255748,"Value":"26.179332548001355","_type":"MeterReading","Date":"2017-11-10T20:16:48","BeginDate":"2015-11-08T15:26:00"}
+
+nov 10, 2017 8:16:48 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 1 * Client in-bound response
+1 < 200
+1 < Transfer-Encoding: chunked
+1 < Server: Apache-Coyote/1.1
+1 < Date: Fri, 10 Nov 2017 19:17:26 GMT
+1 < Content-Type: application/json
+1 < 
+{"data":264016}
+
+17-11-10 20:16:48   INFO  [it.storelink.openmaintmango.AllineatoreTask] run.57  -  Processo di allineamento termitao in 557 ms
+17-11-10 20:17:27   INFO  [it.storelink.openmaintmango.AllineatoreMain] main.40  -  AllineatoreMain is alive
+17-11-10 20:17:48   INFO  [it.storelink.openmaintmango.AllineatoreTask] run.47  -  isRunning: true
+17-11-10 20:17:48   INFO  [it.storelink.openmaintmango.AllineatoreProcessor] process.58  -  process started
+nov 10, 2017 8:17:48 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 6 * Client out-bound request
+6 > GET http://localhost:8080/rest/v1/point-values/TD2/latest?useRendered=false&unitConversion=false&limit=1&useCache=true
+6 > Accept: application/json
+6 > Cookie: MANGO8080=wld2kuivblv4tfaonee1kfu2;
+6 > User-Agent: Java-Swagger
+
+nov 10, 2017 8:17:48 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 6 * Client in-bound response
+6 < 200
+6 < Transfer-Encoding: chunked
+6 < Server: Jetty(9.2.12.v20150709)
+6 < X-Content-Type-Options: nosniff
+6 < Pragma: no-cache
+6 < Date: Fri, 10 Nov 2017 19:17:48 GMT
+6 < X-Frame-Options: SAMEORIGIN
+6 < Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+6 < messages: 
+6 < Vary: Accept-Encoding, User-Agent
+6 < Set-Cookie: XSRF-TOKEN=3179fca6-1c89-4742-8b50-4a64978590cd;Path=/
+6 < Expires: Thu, 01 Jan 1970 00:00:00 GMT
+6 < X-XSS-Protection: 1; mode=block
+6 < errors: 
+6 < Content-Type: application/json; charset=UTF-8
+6 < 
+[ {
+  "dataType" : "NUMERIC",
+  "value" : 5.30354517304783,
+  "timestamp" : 1510341464722,
+  "annotation" : null
+} ]
+
+17-11-10 20:17:48   INFO  [it.storelink.openmaintmango.AllineatoreProcessor] process.68  -  Get value : 5.30354517304783
+17-11-10 20:17:48   INFO  [it.storelink.openmaintmango.AllineatoreProcessor] isInCache.93  -  sensor /classes/QE/cards/263505 is not in cache. Val in cache :  26.179332548001355 . Val : 5.30354517304783
+17-11-10 20:17:48   INFO  [it.storelink.openmaintmango.AllineatoreProcessor] processUpdate.169  -  {"Power_Active_total":"5.30354517304783"}
+17-11-10 20:17:48   INFO  [it.storelink.openmaint.OpenMaintAPI] getClient.270  -  322 ms
+nov 10, 2017 8:17:48 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 1 * Client out-bound request
+1 > PUT http://storelink.ns0.it:4321/openmaint/services/rest/v2/classes/QE/cards/263505
+1 > Accept: application/json
+1 > CMDBuild-Authorization: ksu8j5o802dpvjj77deq45tgbo
+1 > Content-Type: application/json
+{"Power_Active_total":"5.30354517304783"}
+
+nov 10, 2017 8:17:48 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 1 * Client in-bound response
+1 < 204
+1 < Server: Apache-Coyote/1.1
+1 < Date: Fri, 10 Nov 2017 19:18:26 GMT
+1 < 
+
+nov 10, 2017 8:17:48 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 7 * Client out-bound request
+7 > GET http://localhost:8080/rest/v1/point-values/TD2/latest?useRendered=false&unitConversion=false&limit=1&useCache=true
+7 > Accept: application/json
+7 > Cookie: MANGO8080=wld2kuivblv4tfaonee1kfu2;
+7 > User-Agent: Java-Swagger
+
+nov 10, 2017 8:17:49 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 7 * Client in-bound response
+7 < 200
+7 < Transfer-Encoding: chunked
+7 < Server: Jetty(9.2.12.v20150709)
+7 < X-Content-Type-Options: nosniff
+7 < Pragma: no-cache
+7 < Date: Fri, 10 Nov 2017 19:17:48 GMT
+7 < X-Frame-Options: SAMEORIGIN
+7 < Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+7 < messages: 
+7 < Vary: Accept-Encoding, User-Agent
+7 < Set-Cookie: XSRF-TOKEN=3179fca6-1c89-4742-8b50-4a64978590cd;Path=/
+7 < Expires: Thu, 01 Jan 1970 00:00:00 GMT
+7 < X-XSS-Protection: 1; mode=block
+7 < errors: 
+7 < Content-Type: application/json; charset=UTF-8
+7 < 
+[ {
+  "dataType" : "NUMERIC",
+  "value" : 5.30354517304783,
+  "timestamp" : 1510341464722,
+  "annotation" : null
+} ]
+
+17-11-10 20:17:49   INFO  [it.storelink.openmaintmango.AllineatoreProcessor] process.68  -  Get value : 5.30354517304783
+17-11-10 20:17:49   INFO  [it.storelink.openmaintmango.AllineatoreProcessor] processInsert.106  -  MeterReading
+17-11-10 20:17:49   INFO  [it.storelink.openmaintmango.AllineatoreProcessor] processInsert.150  -  {"Item":255756,"Meter":255748,"Value":"5.30354517304783","_type":"MeterReading","Date":"2017-11-10T20:17:49","BeginDate":"2015-11-08T15:26:00"}
+17-11-10 20:17:49   INFO  [it.storelink.openmaint.OpenMaintAPI] getClient.270  -  93 ms
+nov 10, 2017 8:17:49 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 1 * Client out-bound request
+1 > POST http://storelink.ns0.it:4321/openmaint/services/rest/v2/classes/MeterReading/cards
+1 > Accept: application/json
+1 > CMDBuild-Authorization: ksu8j5o802dpvjj77deq45tgbo
+1 > Content-Type: application/json
+{"Item":255756,"Meter":255748,"Value":"5.30354517304783","_type":"MeterReading","Date":"2017-11-10T20:17:49","BeginDate":"2015-11-08T15:26:00"}
+
+nov 10, 2017 8:17:49 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 1 * Client in-bound response
+1 < 200
+1 < Transfer-Encoding: chunked
+1 < Server: Apache-Coyote/1.1
+1 < Date: Fri, 10 Nov 2017 19:18:27 GMT
+1 < Content-Type: application/json
+1 < 
+{"data":264018}
+
+17-11-10 20:17:49   INFO  [it.storelink.openmaintmango.AllineatoreTask] run.57  -  Processo di allineamento termitao in 661 ms
+17-11-10 20:18:49   INFO  [it.storelink.openmaintmango.AllineatoreTask] run.47  -  isRunning: true
+17-11-10 20:18:49   INFO  [it.storelink.openmaintmango.AllineatoreProcessor] process.58  -  process started
+nov 10, 2017 8:18:49 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 8 * Client out-bound request
+8 > GET http://localhost:8080/rest/v1/point-values/TD2/latest?useRendered=false&unitConversion=false&limit=1&useCache=true
+8 > Accept: application/json
+8 > Cookie: MANGO8080=wld2kuivblv4tfaonee1kfu2;
+8 > User-Agent: Java-Swagger
+
+nov 10, 2017 8:18:49 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 8 * Client in-bound response
+8 < 200
+8 < Transfer-Encoding: chunked
+8 < Server: Jetty(9.2.12.v20150709)
+8 < X-Content-Type-Options: nosniff
+8 < Pragma: no-cache
+8 < Date: Fri, 10 Nov 2017 19:18:49 GMT
+8 < X-Frame-Options: SAMEORIGIN
+8 < Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+8 < messages: 
+8 < Vary: Accept-Encoding, User-Agent
+8 < Set-Cookie: XSRF-TOKEN=3179fca6-1c89-4742-8b50-4a64978590cd;Path=/
+8 < Expires: Thu, 01 Jan 1970 00:00:00 GMT
+8 < X-XSS-Protection: 1; mode=block
+8 < errors: 
+8 < Content-Type: application/json; charset=UTF-8
+8 < 
+[ {
+  "dataType" : "NUMERIC",
+  "value" : 80.28664309047844,
+  "timestamp" : 1510341524722,
+  "annotation" : null
+} ]
+
+17-11-10 20:18:49   INFO  [it.storelink.openmaintmango.AllineatoreProcessor] process.68  -  Get value : 80.28664309047844
+17-11-10 20:18:49   INFO  [it.storelink.openmaintmango.AllineatoreProcessor] isInCache.93  -  sensor /classes/QE/cards/263505 is not in cache. Val in cache :  5.30354517304783 . Val : 80.28664309047844
+17-11-10 20:18:49   INFO  [it.storelink.openmaintmango.AllineatoreProcessor] processUpdate.169  -  {"Power_Active_total":"80.28664309047844"}
+17-11-10 20:18:49   INFO  [it.storelink.openmaint.OpenMaintAPI] getClient.270  -  57 ms
+nov 10, 2017 8:18:49 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 1 * Client out-bound request
+1 > PUT http://storelink.ns0.it:4321/openmaint/services/rest/v2/classes/QE/cards/263505
+1 > Accept: application/json
+1 > CMDBuild-Authorization: ksu8j5o802dpvjj77deq45tgbo
+1 > Content-Type: application/json
+{"Power_Active_total":"80.28664309047844"}
+
+nov 10, 2017 8:18:49 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 1 * Client in-bound response
+1 < 204
+1 < Server: Apache-Coyote/1.1
+1 < Date: Fri, 10 Nov 2017 19:19:27 GMT
+1 < 
+
+nov 10, 2017 8:18:49 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 9 * Client out-bound request
+9 > GET http://localhost:8080/rest/v1/point-values/TD2/latest?useRendered=false&unitConversion=false&limit=1&useCache=true
+9 > Accept: application/json
+9 > Cookie: MANGO8080=wld2kuivblv4tfaonee1kfu2;
+9 > User-Agent: Java-Swagger
+
+nov 10, 2017 8:18:49 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 9 * Client in-bound response
+9 < 200
+9 < Transfer-Encoding: chunked
+9 < Server: Jetty(9.2.12.v20150709)
+9 < X-Content-Type-Options: nosniff
+9 < Pragma: no-cache
+9 < Date: Fri, 10 Nov 2017 19:18:49 GMT
+9 < X-Frame-Options: SAMEORIGIN
+9 < Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+9 < messages: 
+9 < Vary: Accept-Encoding, User-Agent
+9 < Set-Cookie: XSRF-TOKEN=3179fca6-1c89-4742-8b50-4a64978590cd;Path=/
+9 < Expires: Thu, 01 Jan 1970 00:00:00 GMT
+9 < X-XSS-Protection: 1; mode=block
+9 < errors: 
+9 < Content-Type: application/json; charset=UTF-8
+9 < 
+[ {
+  "dataType" : "NUMERIC",
+  "value" : 38.17038419938812,
+  "timestamp" : 1510341529722,
+  "annotation" : null
+} ]
+
+17-11-10 20:18:49   INFO  [it.storelink.openmaintmango.AllineatoreProcessor] process.68  -  Get value : 38.17038419938812
+17-11-10 20:18:49   INFO  [it.storelink.openmaintmango.AllineatoreProcessor] processInsert.106  -  MeterReading
+17-11-10 20:18:49   INFO  [it.storelink.openmaintmango.AllineatoreProcessor] processInsert.150  -  {"Item":255756,"Meter":255748,"Value":"38.17038419938812","_type":"MeterReading","Date":"2017-11-10T20:18:49","BeginDate":"2015-11-08T15:26:00"}
+17-11-10 20:18:49   INFO  [it.storelink.openmaint.OpenMaintAPI] getClient.270  -  92 ms
+nov 10, 2017 8:18:49 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 1 * Client out-bound request
+1 > POST http://storelink.ns0.it:4321/openmaint/services/rest/v2/classes/MeterReading/cards
+1 > Accept: application/json
+1 > CMDBuild-Authorization: ksu8j5o802dpvjj77deq45tgbo
+1 > Content-Type: application/json
+{"Item":255756,"Meter":255748,"Value":"38.17038419938812","_type":"MeterReading","Date":"2017-11-10T20:18:49","BeginDate":"2015-11-08T15:26:00"}
+
+nov 10, 2017 8:18:49 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 1 * Client in-bound response
+1 < 200
+1 < Transfer-Encoding: chunked
+1 < Server: Apache-Coyote/1.1
+1 < Date: Fri, 10 Nov 2017 19:19:27 GMT
+1 < Content-Type: application/json
+1 < 
+{"data":264020}
+
+17-11-10 20:18:49   INFO  [it.storelink.openmaintmango.AllineatoreTask] run.57  -  Processo di allineamento termitao in 799 ms
+17-11-10 20:19:07   INFO  [it.storelink.openmaintmango.AllineatoreMain] main.40  -  AllineatoreMain is alive
+17-11-10 20:19:49   INFO  [it.storelink.openmaintmango.AllineatoreTask] run.47  -  isRunning: true
+17-11-10 20:19:49   INFO  [it.storelink.openmaintmango.AllineatoreProcessor] process.58  -  process started
+nov 10, 2017 8:19:49 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 10 * Client out-bound request
+10 > GET http://localhost:8080/rest/v1/point-values/TD2/latest?useRendered=false&unitConversion=false&limit=1&useCache=true
+10 > Accept: application/json
+10 > Cookie: MANGO8080=wld2kuivblv4tfaonee1kfu2;
+10 > User-Agent: Java-Swagger
+
+nov 10, 2017 8:19:49 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 10 * Client in-bound response
+10 < 200
+10 < Transfer-Encoding: chunked
+10 < Server: Jetty(9.2.12.v20150709)
+10 < X-Content-Type-Options: nosniff
+10 < Pragma: no-cache
+10 < Date: Fri, 10 Nov 2017 19:19:49 GMT
+10 < X-Frame-Options: SAMEORIGIN
+10 < Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+10 < messages: 
+10 < Vary: Accept-Encoding, User-Agent
+10 < Set-Cookie: XSRF-TOKEN=3179fca6-1c89-4742-8b50-4a64978590cd;Path=/
+10 < Expires: Thu, 01 Jan 1970 00:00:00 GMT
+10 < X-XSS-Protection: 1; mode=block
+10 < errors: 
+10 < Content-Type: application/json; charset=UTF-8
+10 < 
+[ {
+  "dataType" : "NUMERIC",
+  "value" : 45.53770296520449,
+  "timestamp" : 1510341589722,
+  "annotation" : null
+} ]
+
+17-11-10 20:19:50   INFO  [it.storelink.openmaintmango.AllineatoreProcessor] process.68  -  Get value : 45.53770296520449
+17-11-10 20:19:50   INFO  [it.storelink.openmaintmango.AllineatoreProcessor] isInCache.93  -  sensor /classes/QE/cards/263505 is not in cache. Val in cache :  80.28664309047844 . Val : 45.53770296520449
+17-11-10 20:19:50   INFO  [it.storelink.openmaintmango.AllineatoreProcessor] processUpdate.169  -  {"Power_Active_total":"45.53770296520449"}
+17-11-10 20:19:50   INFO  [it.storelink.openmaint.OpenMaintAPI] getClient.270  -  71 ms
+nov 10, 2017 8:19:50 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 1 * Client out-bound request
+1 > PUT http://storelink.ns0.it:4321/openmaint/services/rest/v2/classes/QE/cards/263505
+1 > Accept: application/json
+1 > CMDBuild-Authorization: ksu8j5o802dpvjj77deq45tgbo
+1 > Content-Type: application/json
+{"Power_Active_total":"45.53770296520449"}
+
+nov 10, 2017 8:19:50 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 1 * Client in-bound response
+1 < 204
+1 < Server: Apache-Coyote/1.1
+1 < Date: Fri, 10 Nov 2017 19:20:28 GMT
+1 < 
+
+nov 10, 2017 8:19:50 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 11 * Client out-bound request
+11 > GET http://localhost:8080/rest/v1/point-values/TD2/latest?useRendered=false&unitConversion=false&limit=1&useCache=true
+11 > Accept: application/json
+11 > Cookie: MANGO8080=wld2kuivblv4tfaonee1kfu2;
+11 > User-Agent: Java-Swagger
+
+nov 10, 2017 8:19:50 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 11 * Client in-bound response
+11 < 200
+11 < Transfer-Encoding: chunked
+11 < Server: Jetty(9.2.12.v20150709)
+11 < X-Content-Type-Options: nosniff
+11 < Pragma: no-cache
+11 < Date: Fri, 10 Nov 2017 19:19:50 GMT
+11 < X-Frame-Options: SAMEORIGIN
+11 < Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+11 < messages: 
+11 < Vary: Accept-Encoding, User-Agent
+11 < Set-Cookie: XSRF-TOKEN=3179fca6-1c89-4742-8b50-4a64978590cd;Path=/
+11 < Expires: Thu, 01 Jan 1970 00:00:00 GMT
+11 < X-XSS-Protection: 1; mode=block
+11 < errors: 
+11 < Content-Type: application/json; charset=UTF-8
+11 < 
+[ {
+  "dataType" : "NUMERIC",
+  "value" : 45.53770296520449,
+  "timestamp" : 1510341589722,
+  "annotation" : null
+} ]
+
+17-11-10 20:19:50   INFO  [it.storelink.openmaintmango.AllineatoreProcessor] process.68  -  Get value : 45.53770296520449
+17-11-10 20:19:50   INFO  [it.storelink.openmaintmango.AllineatoreProcessor] processInsert.106  -  MeterReading
+17-11-10 20:19:50   INFO  [it.storelink.openmaintmango.AllineatoreProcessor] processInsert.150  -  {"Item":255756,"Meter":255748,"Value":"45.53770296520449","_type":"MeterReading","Date":"2017-11-10T20:19:50","BeginDate":"2015-11-08T15:26:00"}
+17-11-10 20:19:50   INFO  [it.storelink.openmaint.OpenMaintAPI] getClient.270  -  115 ms
+nov 10, 2017 8:19:50 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 1 * Client out-bound request
+1 > POST http://storelink.ns0.it:4321/openmaint/services/rest/v2/classes/MeterReading/cards
+1 > Accept: application/json
+1 > CMDBuild-Authorization: ksu8j5o802dpvjj77deq45tgbo
+1 > Content-Type: application/json
+{"Item":255756,"Meter":255748,"Value":"45.53770296520449","_type":"MeterReading","Date":"2017-11-10T20:19:50","BeginDate":"2015-11-08T15:26:00"}
+
+nov 10, 2017 8:19:50 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 1 * Client in-bound response
+1 < 200
+1 < Transfer-Encoding: chunked
+1 < Server: Apache-Coyote/1.1
+1 < Date: Fri, 10 Nov 2017 19:20:28 GMT
+1 < Content-Type: application/json
+1 < 
+{"data":264022}
+
+17-11-10 20:19:50   INFO  [it.storelink.openmaintmango.AllineatoreTask] run.57  -  Processo di allineamento termitao in 606 ms
+17-11-10 20:20:47   INFO  [it.storelink.openmaintmango.AllineatoreMain] main.40  -  AllineatoreMain is alive
+17-11-10 20:20:50   INFO  [it.storelink.openmaintmango.AllineatoreTask] run.47  -  isRunning: true
+17-11-10 20:20:50   INFO  [it.storelink.openmaintmango.AllineatoreProcessor] process.58  -  process started
+nov 10, 2017 8:20:50 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 12 * Client out-bound request
+12 > GET http://localhost:8080/rest/v1/point-values/TD2/latest?useRendered=false&unitConversion=false&limit=1&useCache=true
+12 > Accept: application/json
+12 > Cookie: MANGO8080=wld2kuivblv4tfaonee1kfu2;
+12 > User-Agent: Java-Swagger
+
+nov 10, 2017 8:20:50 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 12 * Client in-bound response
+12 < 200
+12 < Transfer-Encoding: chunked
+12 < Server: Jetty(9.2.12.v20150709)
+12 < X-Content-Type-Options: nosniff
+12 < Pragma: no-cache
+12 < Date: Fri, 10 Nov 2017 19:20:50 GMT
+12 < X-Frame-Options: SAMEORIGIN
+12 < Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+12 < messages: 
+12 < Vary: Accept-Encoding, User-Agent
+12 < Set-Cookie: XSRF-TOKEN=3179fca6-1c89-4742-8b50-4a64978590cd;Path=/
+12 < Expires: Thu, 01 Jan 1970 00:00:00 GMT
+12 < X-XSS-Protection: 1; mode=block
+12 < errors: 
+12 < Content-Type: application/json; charset=UTF-8
+12 < 
+[ {
+  "dataType" : "NUMERIC",
+  "value" : 47.27507688280812,
+  "timestamp" : 1510341649722,
+  "annotation" : null
+} ]
+
+17-11-10 20:20:50   INFO  [it.storelink.openmaintmango.AllineatoreProcessor] process.68  -  Get value : 47.27507688280812
+17-11-10 20:20:50   INFO  [it.storelink.openmaintmango.AllineatoreProcessor] isInCache.93  -  sensor /classes/QE/cards/263505 is not in cache. Val in cache :  45.53770296520449 . Val : 47.27507688280812
+17-11-10 20:20:50   INFO  [it.storelink.openmaintmango.AllineatoreProcessor] processUpdate.169  -  {"Power_Active_total":"47.27507688280812"}
+17-11-10 20:20:50   INFO  [it.storelink.openmaint.OpenMaintAPI] getClient.270  -  84 ms
+nov 10, 2017 8:20:50 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 1 * Client out-bound request
+1 > PUT http://storelink.ns0.it:4321/openmaint/services/rest/v2/classes/QE/cards/263505
+1 > Accept: application/json
+1 > CMDBuild-Authorization: ksu8j5o802dpvjj77deq45tgbo
+1 > Content-Type: application/json
+{"Power_Active_total":"47.27507688280812"}
+
+nov 10, 2017 8:20:50 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 1 * Client in-bound response
+1 < 204
+1 < Server: Apache-Coyote/1.1
+1 < Date: Fri, 10 Nov 2017 19:21:28 GMT
+1 < 
+
+nov 10, 2017 8:20:50 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 13 * Client out-bound request
+13 > GET http://localhost:8080/rest/v1/point-values/TD2/latest?useRendered=false&unitConversion=false&limit=1&useCache=true
+13 > Accept: application/json
+13 > Cookie: MANGO8080=wld2kuivblv4tfaonee1kfu2;
+13 > User-Agent: Java-Swagger
+
+nov 10, 2017 8:20:50 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 13 * Client in-bound response
+13 < 200
+13 < Transfer-Encoding: chunked
+13 < Server: Jetty(9.2.12.v20150709)
+13 < X-Content-Type-Options: nosniff
+13 < Pragma: no-cache
+13 < Date: Fri, 10 Nov 2017 19:20:50 GMT
+13 < X-Frame-Options: SAMEORIGIN
+13 < Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+13 < messages: 
+13 < Vary: Accept-Encoding, User-Agent
+13 < Set-Cookie: XSRF-TOKEN=3179fca6-1c89-4742-8b50-4a64978590cd;Path=/
+13 < Expires: Thu, 01 Jan 1970 00:00:00 GMT
+13 < X-XSS-Protection: 1; mode=block
+13 < errors: 
+13 < Content-Type: application/json; charset=UTF-8
+13 < 
+[ {
+  "dataType" : "NUMERIC",
+  "value" : 47.27507688280812,
+  "timestamp" : 1510341649722,
+  "annotation" : null
+} ]
+
+17-11-10 20:20:50   INFO  [it.storelink.openmaintmango.AllineatoreProcessor] process.68  -  Get value : 47.27507688280812
+17-11-10 20:20:50   INFO  [it.storelink.openmaintmango.AllineatoreProcessor] processInsert.106  -  MeterReading
+17-11-10 20:20:50   INFO  [it.storelink.openmaintmango.AllineatoreProcessor] processInsert.150  -  {"Item":255756,"Meter":255748,"Value":"47.27507688280812","_type":"MeterReading","Date":"2017-11-10T20:20:50","BeginDate":"2015-11-08T15:26:00"}
+17-11-10 20:20:50   INFO  [it.storelink.openmaint.OpenMaintAPI] getClient.270  -  72 ms
+nov 10, 2017 8:20:50 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 1 * Client out-bound request
+1 > POST http://storelink.ns0.it:4321/openmaint/services/rest/v2/classes/MeterReading/cards
+1 > Accept: application/json
+1 > CMDBuild-Authorization: ksu8j5o802dpvjj77deq45tgbo
+1 > Content-Type: application/json
+{"Item":255756,"Meter":255748,"Value":"47.27507688280812","_type":"MeterReading","Date":"2017-11-10T20:20:50","BeginDate":"2015-11-08T15:26:00"}
+
+nov 10, 2017 8:20:50 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 1 * Client in-bound response
+1 < 200
+1 < Transfer-Encoding: chunked
+1 < Server: Apache-Coyote/1.1
+1 < Date: Fri, 10 Nov 2017 19:21:28 GMT
+1 < Content-Type: application/json
+1 < 
+{"data":264024}
+
+17-11-10 20:20:50   INFO  [it.storelink.openmaintmango.AllineatoreTask] run.57  -  Processo di allineamento termitao in 261 ms
+17-11-10 20:21:50   INFO  [it.storelink.openmaintmango.AllineatoreTask] run.47  -  isRunning: true
+17-11-10 20:21:50   INFO  [it.storelink.openmaintmango.AllineatoreProcessor] process.58  -  process started
+nov 10, 2017 8:21:50 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 14 * Client out-bound request
+14 > GET http://localhost:8080/rest/v1/point-values/TD2/latest?useRendered=false&unitConversion=false&limit=1&useCache=true
+14 > Accept: application/json
+14 > Cookie: MANGO8080=wld2kuivblv4tfaonee1kfu2;
+14 > User-Agent: Java-Swagger
+
+nov 10, 2017 8:21:50 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 14 * Client in-bound response
+14 < 200
+14 < Transfer-Encoding: chunked
+14 < Server: Jetty(9.2.12.v20150709)
+14 < X-Content-Type-Options: nosniff
+14 < Pragma: no-cache
+14 < Date: Fri, 10 Nov 2017 19:21:50 GMT
+14 < X-Frame-Options: SAMEORIGIN
+14 < Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+14 < messages: 
+14 < Vary: Accept-Encoding, User-Agent
+14 < Set-Cookie: XSRF-TOKEN=3179fca6-1c89-4742-8b50-4a64978590cd;Path=/
+14 < Expires: Thu, 01 Jan 1970 00:00:00 GMT
+14 < X-XSS-Protection: 1; mode=block
+14 < errors: 
+14 < Content-Type: application/json; charset=UTF-8
+14 < 
+[ {
+  "dataType" : "NUMERIC",
+  "value" : 83.06323762720808,
+  "timestamp" : 1510341709722,
+  "annotation" : null
+} ]
+
+17-11-10 20:21:50   INFO  [it.storelink.openmaintmango.AllineatoreProcessor] process.68  -  Get value : 83.06323762720808
+17-11-10 20:21:50   INFO  [it.storelink.openmaintmango.AllineatoreProcessor] isInCache.93  -  sensor /classes/QE/cards/263505 is not in cache. Val in cache :  47.27507688280812 . Val : 83.06323762720808
+17-11-10 20:21:50   INFO  [it.storelink.openmaintmango.AllineatoreProcessor] processUpdate.169  -  {"Power_Active_total":"83.06323762720808"}
+17-11-10 20:21:51   INFO  [it.storelink.openmaint.OpenMaintAPI] getClient.270  -  236 ms
+nov 10, 2017 8:21:51 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 1 * Client out-bound request
+1 > PUT http://storelink.ns0.it:4321/openmaint/services/rest/v2/classes/QE/cards/263505
+1 > Accept: application/json
+1 > CMDBuild-Authorization: ksu8j5o802dpvjj77deq45tgbo
+1 > Content-Type: application/json
+{"Power_Active_total":"83.06323762720808"}
+
+nov 10, 2017 8:21:51 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 1 * Client in-bound response
+1 < 204
+1 < Server: Apache-Coyote/1.1
+1 < Date: Fri, 10 Nov 2017 19:22:29 GMT
+1 < 
+
+nov 10, 2017 8:21:51 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 15 * Client out-bound request
+15 > GET http://localhost:8080/rest/v1/point-values/TD2/latest?useRendered=false&unitConversion=false&limit=1&useCache=true
+15 > Accept: application/json
+15 > Cookie: MANGO8080=wld2kuivblv4tfaonee1kfu2;
+15 > User-Agent: Java-Swagger
+
+nov 10, 2017 8:21:51 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 15 * Client in-bound response
+15 < 200
+15 < Transfer-Encoding: chunked
+15 < Server: Jetty(9.2.12.v20150709)
+15 < X-Content-Type-Options: nosniff
+15 < Pragma: no-cache
+15 < Date: Fri, 10 Nov 2017 19:21:51 GMT
+15 < X-Frame-Options: SAMEORIGIN
+15 < Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+15 < messages: 
+15 < Vary: Accept-Encoding, User-Agent
+15 < Set-Cookie: XSRF-TOKEN=3179fca6-1c89-4742-8b50-4a64978590cd;Path=/
+15 < Expires: Thu, 01 Jan 1970 00:00:00 GMT
+15 < X-XSS-Protection: 1; mode=block
+15 < errors: 
+15 < Content-Type: application/json; charset=UTF-8
+15 < 
+[ {
+  "dataType" : "NUMERIC",
+  "value" : 83.06323762720808,
+  "timestamp" : 1510341709722,
+  "annotation" : null
+} ]
+
+17-11-10 20:21:51   INFO  [it.storelink.openmaintmango.AllineatoreProcessor] process.68  -  Get value : 83.06323762720808
+17-11-10 20:21:51   INFO  [it.storelink.openmaintmango.AllineatoreProcessor] processInsert.106  -  MeterReading
+17-11-10 20:21:51   INFO  [it.storelink.openmaintmango.AllineatoreProcessor] processInsert.150  -  {"Item":255756,"Meter":255748,"Value":"83.06323762720808","_type":"MeterReading","Date":"2017-11-10T20:21:51","BeginDate":"2015-11-08T15:26:00"}
+17-11-10 20:21:51   INFO  [it.storelink.openmaint.OpenMaintAPI] getClient.270  -  95 ms
+nov 10, 2017 8:21:51 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 1 * Client out-bound request
+1 > POST http://storelink.ns0.it:4321/openmaint/services/rest/v2/classes/MeterReading/cards
+1 > Accept: application/json
+1 > CMDBuild-Authorization: ksu8j5o802dpvjj77deq45tgbo
+1 > Content-Type: application/json
+{"Item":255756,"Meter":255748,"Value":"83.06323762720808","_type":"MeterReading","Date":"2017-11-10T20:21:51","BeginDate":"2015-11-08T15:26:00"}
+
+nov 10, 2017 8:21:51 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 1 * Client in-bound response
+1 < 200
+1 < Transfer-Encoding: chunked
+1 < Server: Apache-Coyote/1.1
+1 < Date: Fri, 10 Nov 2017 19:22:29 GMT
+1 < Content-Type: application/json
+1 < 
+{"data":264026}
+
+17-11-10 20:21:51   INFO  [it.storelink.openmaintmango.AllineatoreTask] run.57  -  Processo di allineamento termitao in 457 ms
+17-11-10 20:22:27   INFO  [it.storelink.openmaintmango.AllineatoreMain] main.40  -  AllineatoreMain is alive
+17-11-10 20:22:51   INFO  [it.storelink.openmaintmango.AllineatoreTask] run.47  -  isRunning: true
+17-11-10 20:22:51   INFO  [it.storelink.openmaintmango.AllineatoreProcessor] process.58  -  process started
+nov 10, 2017 8:22:51 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 16 * Client out-bound request
+16 > GET http://localhost:8080/rest/v1/point-values/TD2/latest?useRendered=false&unitConversion=false&limit=1&useCache=true
+16 > Accept: application/json
+16 > Cookie: MANGO8080=wld2kuivblv4tfaonee1kfu2;
+16 > User-Agent: Java-Swagger
+
+nov 10, 2017 8:22:51 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 16 * Client in-bound response
+16 < 200
+16 < Transfer-Encoding: chunked
+16 < Server: Jetty(9.2.12.v20150709)
+16 < X-Content-Type-Options: nosniff
+16 < Pragma: no-cache
+16 < Date: Fri, 10 Nov 2017 19:22:51 GMT
+16 < X-Frame-Options: SAMEORIGIN
+16 < Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+16 < messages: 
+16 < Vary: Accept-Encoding, User-Agent
+16 < Set-Cookie: XSRF-TOKEN=3179fca6-1c89-4742-8b50-4a64978590cd;Path=/
+16 < Expires: Thu, 01 Jan 1970 00:00:00 GMT
+16 < X-XSS-Protection: 1; mode=block
+16 < errors: 
+16 < Content-Type: application/json; charset=UTF-8
+16 < 
+[ {
+  "dataType" : "NUMERIC",
+  "value" : 93.02122194430301,
+  "timestamp" : 1510341769722,
+  "annotation" : null
+} ]
+
+17-11-10 20:22:51   INFO  [it.storelink.openmaintmango.AllineatoreProcessor] process.68  -  Get value : 93.02122194430301
+17-11-10 20:22:51   INFO  [it.storelink.openmaintmango.AllineatoreProcessor] isInCache.93  -  sensor /classes/QE/cards/263505 is not in cache. Val in cache :  83.06323762720808 . Val : 93.02122194430301
+17-11-10 20:22:51   INFO  [it.storelink.openmaintmango.AllineatoreProcessor] processUpdate.169  -  {"Power_Active_total":"93.02122194430301"}
+17-11-10 20:22:52   INFO  [it.storelink.openmaint.OpenMaintAPI] getClient.270  -  675 ms
+nov 10, 2017 8:22:52 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 1 * Client out-bound request
+1 > PUT http://storelink.ns0.it:4321/openmaint/services/rest/v2/classes/QE/cards/263505
+1 > Accept: application/json
+1 > CMDBuild-Authorization: ksu8j5o802dpvjj77deq45tgbo
+1 > Content-Type: application/json
+{"Power_Active_total":"93.02122194430301"}
+
+nov 10, 2017 8:22:52 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 1 * Client in-bound response
+1 < 204
+1 < Server: Apache-Coyote/1.1
+1 < Date: Fri, 10 Nov 2017 19:23:30 GMT
+1 < 
+
+nov 10, 2017 8:22:52 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 17 * Client out-bound request
+17 > GET http://localhost:8080/rest/v1/point-values/TD2/latest?useRendered=false&unitConversion=false&limit=1&useCache=true
+17 > Accept: application/json
+17 > Cookie: MANGO8080=wld2kuivblv4tfaonee1kfu2;
+17 > User-Agent: Java-Swagger
+
+nov 10, 2017 8:22:52 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 17 * Client in-bound response
+17 < 200
+17 < Transfer-Encoding: chunked
+17 < Server: Jetty(9.2.12.v20150709)
+17 < X-Content-Type-Options: nosniff
+17 < Pragma: no-cache
+17 < Date: Fri, 10 Nov 2017 19:22:52 GMT
+17 < X-Frame-Options: SAMEORIGIN
+17 < Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+17 < messages: 
+17 < Vary: Accept-Encoding, User-Agent
+17 < Set-Cookie: XSRF-TOKEN=3179fca6-1c89-4742-8b50-4a64978590cd;Path=/
+17 < Expires: Thu, 01 Jan 1970 00:00:00 GMT
+17 < X-XSS-Protection: 1; mode=block
+17 < errors: 
+17 < Content-Type: application/json; charset=UTF-8
+17 < 
+[ {
+  "dataType" : "NUMERIC",
+  "value" : 93.02122194430301,
+  "timestamp" : 1510341769722,
+  "annotation" : null
+} ]
+
+17-11-10 20:22:52   INFO  [it.storelink.openmaintmango.AllineatoreProcessor] process.68  -  Get value : 93.02122194430301
+17-11-10 20:22:52   INFO  [it.storelink.openmaintmango.AllineatoreProcessor] processInsert.106  -  MeterReading
+17-11-10 20:22:52   INFO  [it.storelink.openmaintmango.AllineatoreProcessor] processInsert.150  -  {"Item":255756,"Meter":255748,"Value":"93.02122194430301","_type":"MeterReading","Date":"2017-11-10T20:22:52","BeginDate":"2015-11-08T15:26:00"}
+17-11-10 20:22:52   INFO  [it.storelink.openmaint.OpenMaintAPI] getClient.270  -  149 ms
+nov 10, 2017 8:22:52 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 1 * Client out-bound request
+1 > POST http://storelink.ns0.it:4321/openmaint/services/rest/v2/classes/MeterReading/cards
+1 > Accept: application/json
+1 > CMDBuild-Authorization: ksu8j5o802dpvjj77deq45tgbo
+1 > Content-Type: application/json
+{"Item":255756,"Meter":255748,"Value":"93.02122194430301","_type":"MeterReading","Date":"2017-11-10T20:22:52","BeginDate":"2015-11-08T15:26:00"}
+
+nov 10, 2017 8:22:52 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 1 * Client in-bound response
+1 < 200
+1 < Transfer-Encoding: chunked
+1 < Server: Apache-Coyote/1.1
+1 < Date: Fri, 10 Nov 2017 19:23:30 GMT
+1 < Content-Type: application/json
+1 < 
+{"data":264028}
+
+17-11-10 20:22:52   INFO  [it.storelink.openmaintmango.AllineatoreTask] run.57  -  Processo di allineamento termitao in 972 ms
+17-11-10 20:23:52   INFO  [it.storelink.openmaintmango.AllineatoreTask] run.47  -  isRunning: true
+17-11-10 20:23:52   INFO  [it.storelink.openmaintmango.AllineatoreProcessor] process.58  -  process started
+nov 10, 2017 8:23:52 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 18 * Client out-bound request
+18 > GET http://localhost:8080/rest/v1/point-values/TD2/latest?useRendered=false&unitConversion=false&limit=1&useCache=true
+18 > Accept: application/json
+18 > Cookie: MANGO8080=wld2kuivblv4tfaonee1kfu2;
+18 > User-Agent: Java-Swagger
+
+nov 10, 2017 8:23:52 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 18 * Client in-bound response
+18 < 200
+18 < Transfer-Encoding: chunked
+18 < Server: Jetty(9.2.12.v20150709)
+18 < X-Content-Type-Options: nosniff
+18 < Pragma: no-cache
+18 < Date: Fri, 10 Nov 2017 19:23:52 GMT
+18 < X-Frame-Options: SAMEORIGIN
+18 < Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+18 < messages: 
+18 < Vary: Accept-Encoding, User-Agent
+18 < Set-Cookie: XSRF-TOKEN=3179fca6-1c89-4742-8b50-4a64978590cd;Path=/
+18 < Expires: Thu, 01 Jan 1970 00:00:00 GMT
+18 < X-XSS-Protection: 1; mode=block
+18 < errors: 
+18 < Content-Type: application/json; charset=UTF-8
+18 < 
+[ {
+  "dataType" : "NUMERIC",
+  "value" : 80.38179031608637,
+  "timestamp" : 1510341829722,
+  "annotation" : null
+} ]
+
+17-11-10 20:23:52   INFO  [it.storelink.openmaintmango.AllineatoreProcessor] process.68  -  Get value : 80.38179031608637
+17-11-10 20:23:52   INFO  [it.storelink.openmaintmango.AllineatoreProcessor] isInCache.93  -  sensor /classes/QE/cards/263505 is not in cache. Val in cache :  93.02122194430301 . Val : 80.38179031608637
+17-11-10 20:23:52   INFO  [it.storelink.openmaintmango.AllineatoreProcessor] processUpdate.169  -  {"Power_Active_total":"80.38179031608637"}
+17-11-10 20:23:52   INFO  [it.storelink.openmaint.OpenMaintAPI] getClient.270  -  73 ms
+nov 10, 2017 8:23:52 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 1 * Client out-bound request
+1 > PUT http://storelink.ns0.it:4321/openmaint/services/rest/v2/classes/QE/cards/263505
+1 > Accept: application/json
+1 > CMDBuild-Authorization: ksu8j5o802dpvjj77deq45tgbo
+1 > Content-Type: application/json
+{"Power_Active_total":"80.38179031608637"}
+
+nov 10, 2017 8:23:52 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 1 * Client in-bound response
+1 < 204
+1 < Server: Apache-Coyote/1.1
+1 < Date: Fri, 10 Nov 2017 19:24:30 GMT
+1 < 
+
+nov 10, 2017 8:23:52 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 19 * Client out-bound request
+19 > GET http://localhost:8080/rest/v1/point-values/TD2/latest?useRendered=false&unitConversion=false&limit=1&useCache=true
+19 > Accept: application/json
+19 > Cookie: MANGO8080=wld2kuivblv4tfaonee1kfu2;
+19 > User-Agent: Java-Swagger
+
+nov 10, 2017 8:23:52 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 19 * Client in-bound response
+19 < 200
+19 < Transfer-Encoding: chunked
+19 < Server: Jetty(9.2.12.v20150709)
+19 < X-Content-Type-Options: nosniff
+19 < Pragma: no-cache
+19 < Date: Fri, 10 Nov 2017 19:23:52 GMT
+19 < X-Frame-Options: SAMEORIGIN
+19 < Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+19 < messages: 
+19 < Vary: Accept-Encoding, User-Agent
+19 < Set-Cookie: XSRF-TOKEN=3179fca6-1c89-4742-8b50-4a64978590cd;Path=/
+19 < Expires: Thu, 01 Jan 1970 00:00:00 GMT
+19 < X-XSS-Protection: 1; mode=block
+19 < errors: 
+19 < Content-Type: application/json; charset=UTF-8
+19 < 
+[ {
+  "dataType" : "NUMERIC",
+  "value" : 80.38179031608637,
+  "timestamp" : 1510341829722,
+  "annotation" : null
+} ]
+
+17-11-10 20:23:52   INFO  [it.storelink.openmaintmango.AllineatoreProcessor] process.68  -  Get value : 80.38179031608637
+17-11-10 20:23:52   INFO  [it.storelink.openmaintmango.AllineatoreProcessor] processInsert.106  -  MeterReading
+17-11-10 20:23:52   INFO  [it.storelink.openmaintmango.AllineatoreProcessor] processInsert.150  -  {"Item":255756,"Meter":255748,"Value":"80.38179031608637","_type":"MeterReading","Date":"2017-11-10T20:23:52","BeginDate":"2015-11-08T15:26:00"}
+17-11-10 20:23:52   INFO  [it.storelink.openmaint.OpenMaintAPI] getClient.270  -  96 ms
+nov 10, 2017 8:23:52 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 1 * Client out-bound request
+1 > POST http://storelink.ns0.it:4321/openmaint/services/rest/v2/classes/MeterReading/cards
+1 > Accept: application/json
+1 > CMDBuild-Authorization: ksu8j5o802dpvjj77deq45tgbo
+1 > Content-Type: application/json
+{"Item":255756,"Meter":255748,"Value":"80.38179031608637","_type":"MeterReading","Date":"2017-11-10T20:23:52","BeginDate":"2015-11-08T15:26:00"}
+
+nov 10, 2017 8:23:52 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 1 * Client in-bound response
+1 < 200
+1 < Transfer-Encoding: chunked
+1 < Server: Apache-Coyote/1.1
+1 < Date: Fri, 10 Nov 2017 19:24:30 GMT
+1 < Content-Type: application/json
+1 < 
+{"data":264030}
+
+17-11-10 20:23:52   INFO  [it.storelink.openmaintmango.AllineatoreTask] run.57  -  Processo di allineamento termitao in 420 ms
+17-11-10 20:24:07   INFO  [it.storelink.openmaintmango.AllineatoreMain] main.40  -  AllineatoreMain is alive
+17-11-10 20:24:52   INFO  [it.storelink.openmaintmango.AllineatoreTask] run.47  -  isRunning: true
+17-11-10 20:24:52   INFO  [it.storelink.openmaintmango.AllineatoreProcessor] process.58  -  process started
+nov 10, 2017 8:24:52 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 20 * Client out-bound request
+20 > GET http://localhost:8080/rest/v1/point-values/TD2/latest?useRendered=false&unitConversion=false&limit=1&useCache=true
+20 > Accept: application/json
+20 > Cookie: MANGO8080=wld2kuivblv4tfaonee1kfu2;
+20 > User-Agent: Java-Swagger
+
+nov 10, 2017 8:24:52 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 20 * Client in-bound response
+20 < 200
+20 < Transfer-Encoding: chunked
+20 < Server: Jetty(9.2.12.v20150709)
+20 < X-Content-Type-Options: nosniff
+20 < Pragma: no-cache
+20 < Date: Fri, 10 Nov 2017 19:24:52 GMT
+20 < X-Frame-Options: SAMEORIGIN
+20 < Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+20 < messages: 
+20 < Vary: Accept-Encoding, User-Agent
+20 < Set-Cookie: XSRF-TOKEN=3179fca6-1c89-4742-8b50-4a64978590cd;Path=/
+20 < Expires: Thu, 01 Jan 1970 00:00:00 GMT
+20 < X-XSS-Protection: 1; mode=block
+20 < errors: 
+20 < Content-Type: application/json; charset=UTF-8
+20 < 
+[ {
+  "dataType" : "NUMERIC",
+  "value" : 44.40342363482943,
+  "timestamp" : 1510341889722,
+  "annotation" : null
+} ]
+
+17-11-10 20:24:52   INFO  [it.storelink.openmaintmango.AllineatoreProcessor] process.68  -  Get value : 44.40342363482943
+17-11-10 20:24:52   INFO  [it.storelink.openmaintmango.AllineatoreProcessor] isInCache.93  -  sensor /classes/QE/cards/263505 is not in cache. Val in cache :  80.38179031608637 . Val : 44.40342363482943
+17-11-10 20:24:52   INFO  [it.storelink.openmaintmango.AllineatoreProcessor] processUpdate.169  -  {"Power_Active_total":"44.40342363482943"}
+17-11-10 20:24:52   INFO  [it.storelink.openmaint.OpenMaintAPI] getClient.270  -  55 ms
+nov 10, 2017 8:24:52 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 1 * Client out-bound request
+1 > PUT http://storelink.ns0.it:4321/openmaint/services/rest/v2/classes/QE/cards/263505
+1 > Accept: application/json
+1 > CMDBuild-Authorization: ksu8j5o802dpvjj77deq45tgbo
+1 > Content-Type: application/json
+{"Power_Active_total":"44.40342363482943"}
+
+nov 10, 2017 8:24:52 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 1 * Client in-bound response
+1 < 204
+1 < Server: Apache-Coyote/1.1
+1 < Date: Fri, 10 Nov 2017 19:25:30 GMT
+1 < 
+
+nov 10, 2017 8:24:52 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 21 * Client out-bound request
+21 > GET http://localhost:8080/rest/v1/point-values/TD2/latest?useRendered=false&unitConversion=false&limit=1&useCache=true
+21 > Accept: application/json
+21 > Cookie: MANGO8080=wld2kuivblv4tfaonee1kfu2;
+21 > User-Agent: Java-Swagger
+
+nov 10, 2017 8:24:52 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 21 * Client in-bound response
+21 < 200
+21 < Transfer-Encoding: chunked
+21 < Server: Jetty(9.2.12.v20150709)
+21 < X-Content-Type-Options: nosniff
+21 < Pragma: no-cache
+21 < Date: Fri, 10 Nov 2017 19:24:52 GMT
+21 < X-Frame-Options: SAMEORIGIN
+21 < Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+21 < messages: 
+21 < Vary: Accept-Encoding, User-Agent
+21 < Set-Cookie: XSRF-TOKEN=3179fca6-1c89-4742-8b50-4a64978590cd;Path=/
+21 < Expires: Thu, 01 Jan 1970 00:00:00 GMT
+21 < X-XSS-Protection: 1; mode=block
+21 < errors: 
+21 < Content-Type: application/json; charset=UTF-8
+21 < 
+[ {
+  "dataType" : "NUMERIC",
+  "value" : 44.40342363482943,
+  "timestamp" : 1510341889722,
+  "annotation" : null
+} ]
+
+17-11-10 20:24:52   INFO  [it.storelink.openmaintmango.AllineatoreProcessor] process.68  -  Get value : 44.40342363482943
+17-11-10 20:24:52   INFO  [it.storelink.openmaintmango.AllineatoreProcessor] processInsert.106  -  MeterReading
+17-11-10 20:24:52   INFO  [it.storelink.openmaintmango.AllineatoreProcessor] processInsert.150  -  {"Item":255756,"Meter":255748,"Value":"44.40342363482943","_type":"MeterReading","Date":"2017-11-10T20:24:52","BeginDate":"2015-11-08T15:26:00"}
+17-11-10 20:24:52   INFO  [it.storelink.openmaint.OpenMaintAPI] getClient.270  -  50 ms
+nov 10, 2017 8:24:52 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 1 * Client out-bound request
+1 > POST http://storelink.ns0.it:4321/openmaint/services/rest/v2/classes/MeterReading/cards
+1 > Accept: application/json
+1 > CMDBuild-Authorization: ksu8j5o802dpvjj77deq45tgbo
+1 > Content-Type: application/json
+{"Item":255756,"Meter":255748,"Value":"44.40342363482943","_type":"MeterReading","Date":"2017-11-10T20:24:52","BeginDate":"2015-11-08T15:26:00"}
+
+nov 10, 2017 8:24:52 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 1 * Client in-bound response
+1 < 200
+1 < Transfer-Encoding: chunked
+1 < Server: Apache-Coyote/1.1
+1 < Date: Fri, 10 Nov 2017 19:25:30 GMT
+1 < Content-Type: application/json
+1 < 
+{"data":264032}
+
+17-11-10 20:24:52   INFO  [it.storelink.openmaintmango.AllineatoreTask] run.57  -  Processo di allineamento termitao in 207 ms
+17-11-10 20:25:47   INFO  [it.storelink.openmaintmango.AllineatoreMain] main.40  -  AllineatoreMain is alive
+17-11-10 20:25:52   INFO  [it.storelink.openmaintmango.AllineatoreTask] run.47  -  isRunning: true
+17-11-10 20:25:52   INFO  [it.storelink.openmaintmango.AllineatoreProcessor] process.58  -  process started
+nov 10, 2017 8:25:52 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 22 * Client out-bound request
+22 > GET http://localhost:8080/rest/v1/point-values/TD2/latest?useRendered=false&unitConversion=false&limit=1&useCache=true
+22 > Accept: application/json
+22 > Cookie: MANGO8080=wld2kuivblv4tfaonee1kfu2;
+22 > User-Agent: Java-Swagger
+
+nov 10, 2017 8:25:52 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 22 * Client in-bound response
+22 < 200
+22 < Transfer-Encoding: chunked
+22 < Server: Jetty(9.2.12.v20150709)
+22 < X-Content-Type-Options: nosniff
+22 < Pragma: no-cache
+22 < Date: Fri, 10 Nov 2017 19:25:52 GMT
+22 < X-Frame-Options: SAMEORIGIN
+22 < Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+22 < messages: 
+22 < Vary: Accept-Encoding, User-Agent
+22 < Set-Cookie: XSRF-TOKEN=3179fca6-1c89-4742-8b50-4a64978590cd;Path=/
+22 < Expires: Thu, 01 Jan 1970 00:00:00 GMT
+22 < X-XSS-Protection: 1; mode=block
+22 < errors: 
+22 < Content-Type: application/json; charset=UTF-8
+22 < 
+[ {
+  "dataType" : "NUMERIC",
+  "value" : 25.19085678716212,
+  "timestamp" : 1510341949722,
+  "annotation" : null
+} ]
+
+17-11-10 20:25:52   INFO  [it.storelink.openmaintmango.AllineatoreProcessor] process.68  -  Get value : 25.19085678716212
+17-11-10 20:25:52   INFO  [it.storelink.openmaintmango.AllineatoreProcessor] isInCache.93  -  sensor /classes/QE/cards/263505 is not in cache. Val in cache :  44.40342363482943 . Val : 25.19085678716212
+17-11-10 20:25:52   INFO  [it.storelink.openmaintmango.AllineatoreProcessor] processUpdate.169  -  {"Power_Active_total":"25.19085678716212"}
+17-11-10 20:25:53   INFO  [it.storelink.openmaint.OpenMaintAPI] getClient.270  -  145 ms
+nov 10, 2017 8:25:53 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 1 * Client out-bound request
+1 > PUT http://storelink.ns0.it:4321/openmaint/services/rest/v2/classes/QE/cards/263505
+1 > Accept: application/json
+1 > CMDBuild-Authorization: ksu8j5o802dpvjj77deq45tgbo
+1 > Content-Type: application/json
+{"Power_Active_total":"25.19085678716212"}
+
+nov 10, 2017 8:25:53 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 1 * Client in-bound response
+1 < 204
+1 < Server: Apache-Coyote/1.1
+1 < Date: Fri, 10 Nov 2017 19:26:31 GMT
+1 < 
+
+nov 10, 2017 8:25:53 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 23 * Client out-bound request
+23 > GET http://localhost:8080/rest/v1/point-values/TD2/latest?useRendered=false&unitConversion=false&limit=1&useCache=true
+23 > Accept: application/json
+23 > Cookie: MANGO8080=wld2kuivblv4tfaonee1kfu2;
+23 > User-Agent: Java-Swagger
+
+nov 10, 2017 8:25:53 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 23 * Client in-bound response
+23 < 200
+23 < Transfer-Encoding: chunked
+23 < Server: Jetty(9.2.12.v20150709)
+23 < X-Content-Type-Options: nosniff
+23 < Pragma: no-cache
+23 < Date: Fri, 10 Nov 2017 19:25:53 GMT
+23 < X-Frame-Options: SAMEORIGIN
+23 < Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+23 < messages: 
+23 < Vary: Accept-Encoding, User-Agent
+23 < Set-Cookie: XSRF-TOKEN=3179fca6-1c89-4742-8b50-4a64978590cd;Path=/
+23 < Expires: Thu, 01 Jan 1970 00:00:00 GMT
+23 < X-XSS-Protection: 1; mode=block
+23 < errors: 
+23 < Content-Type: application/json; charset=UTF-8
+23 < 
+[ {
+  "dataType" : "NUMERIC",
+  "value" : 25.19085678716212,
+  "timestamp" : 1510341949722,
+  "annotation" : null
+} ]
+
+17-11-10 20:25:53   INFO  [it.storelink.openmaintmango.AllineatoreProcessor] process.68  -  Get value : 25.19085678716212
+17-11-10 20:25:53   INFO  [it.storelink.openmaintmango.AllineatoreProcessor] processInsert.106  -  MeterReading
+17-11-10 20:25:53   INFO  [it.storelink.openmaintmango.AllineatoreProcessor] processInsert.150  -  {"Item":255756,"Meter":255748,"Value":"25.19085678716212","_type":"MeterReading","Date":"2017-11-10T20:25:53","BeginDate":"2015-11-08T15:26:00"}
+17-11-10 20:25:53   INFO  [it.storelink.openmaint.OpenMaintAPI] getClient.270  -  58 ms
+nov 10, 2017 8:25:53 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 1 * Client out-bound request
+1 > POST http://storelink.ns0.it:4321/openmaint/services/rest/v2/classes/MeterReading/cards
+1 > Accept: application/json
+1 > CMDBuild-Authorization: ksu8j5o802dpvjj77deq45tgbo
+1 > Content-Type: application/json
+{"Item":255756,"Meter":255748,"Value":"25.19085678716212","_type":"MeterReading","Date":"2017-11-10T20:25:53","BeginDate":"2015-11-08T15:26:00"}
+
+nov 10, 2017 8:25:53 PM com.sun.jersey.api.client.filter.LoggingFilter log
+INFO: 1 * Client in-bound response
+1 < 200
+1 < Transfer-Encoding: chunked
+1 < Server: Apache-Coyote/1.1
+1 < Date: Fri, 10 Nov 2017 19:26:31 GMT
+1 < Content-Type: application/json
+1 < 
+{"data":264034}
+
+17-11-10 20:25:53   INFO  [it.storelink.openmaintmango.AllineatoreTask] run.57  -  Processo di allineamento termitao in 388 ms
+^C
