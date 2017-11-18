@@ -43,7 +43,7 @@ public class AllineatoreProcessor {
             mangoApi.setBasePath(ConfigSingleton.getInstance().getSystemParam_MANGO_BASE_URL());
             mangoApi.setBaseWSPath(ConfigSingleton.getInstance().getSystemParam_MANGO_BASE_WSURL());
             mangoApi.setDebugging(true);
-            mangoApi.login(ConfigSingleton.getInstance().getSystemParam_MANGO_USR(),ConfigSingleton.getInstance().getSystemParam_MANGO_PWD() , true);
+            mangoApi.login(ConfigSingleton.getInstance().getSystemParam_MANGO_USR(),ConfigSingleton.getInstance().getSystemParam_MANGO_PWD());
             mangoInitialized = true;
 
             openMaintAPI = new OpenMaintAPI(ConfigSingleton.getInstance().getSystemParam_OPENMAINT_BASE_URL());
