@@ -42,7 +42,7 @@ buildClassPath() {
 #
 buildGeneralClassPath() {
 	CLASSPATH1=
-	CLASSPATH1=`buildClassPath lib`
+	CLASSPATH1=`buildClassPath target/lib`
 }
 
 
