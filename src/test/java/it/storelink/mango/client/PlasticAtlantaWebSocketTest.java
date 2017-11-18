@@ -18,7 +18,7 @@ import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.TimeUnit;
 
 @FixMethodOrder(MethodSorters.DEFAULT)
-public class WebSocketTest extends MangoBaseTest {
+public class PlasticAtlantaWebSocketTest extends MangoBaseTest{
 
     private PointValueRegistrationModel createPointValueRegistrationModel(String xid) {
         PointValueRegistrationModel registrationModel = new PointValueRegistrationModel();
@@ -51,8 +51,7 @@ public class WebSocketTest extends MangoBaseTest {
             //Start manager
             api.startWSManager();
 
-
-            PointValueRegistrationModel registrationModel1 = createPointValueRegistrationModel("DP_400512");
+            PointValueRegistrationModel registrationModel1 = createPointValueRegistrationModel("DP_469112");
             //create an user queue
             BlockingQueue<ResponsePointValueEventModel> queue1 = new LinkedBlockingDeque<ResponsePointValueEventModel>();
             //register a datapoint to write on user queue
@@ -64,7 +63,7 @@ public class WebSocketTest extends MangoBaseTest {
             downLatch.await(10, TimeUnit.SECONDS);
 
             //register a second datapoint
-            PointValueRegistrationModel registrationModel2 = createPointValueRegistrationModel("DP_784704");
+            PointValueRegistrationModel registrationModel2 = createPointValueRegistrationModel("DP_099769");
             BlockingQueue<ResponsePointValueEventModel> queue2 = new LinkedBlockingDeque<ResponsePointValueEventModel>();
             api.registerDataPoint(registrationModel2, queue2);
             DefaultConsumer c2 = new DefaultConsumer(queue2);

@@ -1,11 +1,7 @@
 package it.storelink.mango.client;
 
 import it.storelink.mango.ApiException;
-import it.storelink.mango.api.DefaultApiImpl;
-import it.storelink.mango.model.*;
-import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
+import it.storelink.mango.model.DataPointModel;
 import org.junit.Assert;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -13,54 +9,25 @@ import org.junit.runners.MethodSorters;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.fail;
-
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class ProvisioningBacnetTest extends MangoBaseTest {
+public class ProvisioningZigBeeTest extends MangoBaseTest {
 
 
-    private static Logger LOG = LoggerFactory.getLogger(ProvisioningBacnetTest.class);
+    private static Logger LOG = LoggerFactory.getLogger(ProvisioningZigBeeTest.class);
 
-    /*
-    private static MangoRestApi api;
-    private static Boolean initialized = false;
-    private static String user = "mario";
-    private static String password = "ro$$i";
-    private static String baseHost = "79.60.49.49";
-    private static String basePort = "7778";
-    */
-
-    /*
-    private static String user = "admin";
-    private static String password = "admin";
-    private static String baseHost = "localhost";
-    private static String basePort = "8080";
-
-    private static String baseUrl = "http://" + baseHost + ":" + basePort + "/rest";
-    private static String wsUrl = "ws://" +  baseHost + ":" + basePort + "/rest/v2/websocket/point-value";
-    */
-
-    /*
-    @BeforeClass
-    public static void init() {
-        try {
-            api = new DefaultApiImpl();
-            api.setBasePath(baseUrl);
-            api.setBaseWSPath(wsUrl);
-            api.setDebugging(true);
-            api.login(user, password, true);
-            initialized = true;
-        }
-        catch (Exception e) {
-            LOG.error(e.getMessage(), e);
-        }
+    @Test
+    public void _00_testGetDataPoints() throws ApiException, InterruptedException {
+        if(!initialized) return;
+        Thread.sleep(1000);
+        List<DataPointModel> dataPointModels = api.getDataPointsForDataSource("DS_375681");
+        Assert.assertNotNull(dataPointModels);
+        LOG.info(dataPointModels.toString());
     }
-    */
 
 
+    /*
     @Test
     public void _01_testSaveDataSourceVirtual() throws ApiException, InterruptedException {
         if(!initialized) return;
@@ -118,11 +85,11 @@ public class ProvisioningBacnetTest extends MangoBaseTest {
         //pl.setModelType("PL.VIRTUAL");
         pl.setSettable(false);
         pl.setRelinquishable(true);
-        pl.setMac("192.168.178.30:47808");
-        pl.setNetworkNumber(0);
+        pl.setAddress("192.168.178.30:47808");
+        pl.setIoLine(0);
         pl.setUseCovSubscription(true);
         pl.setObjectInstanceNumber(202);
-        //pl.setObjectTypeId("BINARY_INPUT");
+        pl.setNodeIdentifier("BINARY_INPUT");
         dp.setPointLocator(pl);
 
         dataPointModels.add(dp);
@@ -165,11 +132,11 @@ public class ProvisioningBacnetTest extends MangoBaseTest {
         pl.setDataType(PointLocatorModel.DataTypeEnum.BINARY);
         pl.setSettable(false);
         pl.setRelinquishable(true);
-        pl.setMac("192.168.178.30:47808");
-        pl.setNetworkNumber(0);
+        pl.setAddress("192.168.178.30:47808");
+        pl.setIoLine(0);
         pl.setUseCovSubscription(true);
         pl.setObjectInstanceNumber(202);
-        //pl.setObjectTypeId("BINARY_INPUT");
+        pl.setNodeIdentifier("BINARY_INPUT");
         model.setPointLocator(pl);
 
         DataPointModel model1 = api.updateDataPoint("DS_465467", model);
@@ -241,13 +208,6 @@ public class ProvisioningBacnetTest extends MangoBaseTest {
             LOG.error(e.getMessage(), e);
         }
         Assert.assertNull(dataSourceModel);
-    }
-
-    /*
-    @AfterClass
-    public static void close() throws ApiException {
-        if(!initialized) return;
-        if(api!=null) api.logout();
     }
     */
 

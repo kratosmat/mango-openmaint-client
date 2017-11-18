@@ -4,10 +4,9 @@ import it.storelink.mango.ApiException;
 import it.storelink.mango.api.DefaultApiImpl;
 import it.storelink.mango.api.MangoRestApi;
 import it.storelink.mango.model.DataSourceModel;
+import org.apache.log4j.Logger;
 import org.junit.*;
 import org.junit.runners.MethodSorters;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
@@ -19,19 +18,20 @@ public abstract class MangoBaseTest {
 
     protected static MangoRestApi api;
     protected static Boolean initialized = false;
-    protected static Logger LOG = LoggerFactory.getLogger(MangoBaseTest.class);
+    protected static Logger LOG = Logger.getLogger(MangoBaseTest.class);
+
+    protected static String user = "admin";
+    protected static String password = "@dmin123";
+    protected static String baseHost = "storelink.ns0.it";
+    protected static String basePort = "7779";
+
 
     /*
-    private static String user = "admin";
-    private static String password = "$t0rlinK";
-    private static String baseHost = "79.60.49.49";
-    private static String basePort = "7778";
-    */
-
     protected static String user = "admin";
     protected static String password = "admin";
     protected static String baseHost = "localhost";
     protected static String basePort = "8080";
+    */
 
     protected static String baseUrl = "http://" + baseHost + ":" + basePort + "/rest";
     protected static String wsUrl = "ws://" +  baseHost + ":" + basePort + "/rest/v1/websocket/point-value";
@@ -43,7 +43,7 @@ public abstract class MangoBaseTest {
             api.setBasePath(baseUrl);
             api.setBaseWSPath(wsUrl);
             api.setDebugging(true);
-            api.login(user, password, true);
+            api.login(user, password);
             initialized = true;
         }
         catch (Exception e) {
@@ -64,6 +64,6 @@ public abstract class MangoBaseTest {
     @AfterClass
     public static void close() throws ApiException {
         if(!initialized) return;
-        if(api!=null) api.logout();
+        if(api!=null) api.logout(user);
     }
 }

@@ -203,7 +203,7 @@ public class DiscoveryBacnetTest extends MangoBaseTest {
         pl.setNetworkNumber(networkNumber);
         pl.setMac(mac);
         pl.setRemoteDeviceInstanceNumber(Integer.valueOf(deviceObject.get("instanceNumber").toString()));
-        pl.setObjectTypeId(BacnetObjectTypes.convertTo((Integer) deviceObject.get("objectTypeId")));
+        pl.setObjectTypeId(BacnetObjectTypes.convertTo((Integer)deviceObject.get("objectTypeId")));
         pl.setObjectInstanceNumber(Integer.valueOf(deviceObject.get("instanceNumber").toString()));
         pl.setDataType(PointLocatorModel.DataTypeEnum.convertTo((Integer)deviceObject.get("dataTypeId")));
         pl.setUseCovSubscription((Boolean) deviceObject.get("cov"));

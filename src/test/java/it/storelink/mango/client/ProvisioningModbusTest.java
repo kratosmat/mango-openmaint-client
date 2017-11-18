@@ -2,12 +2,13 @@ package it.storelink.mango.client;
 
 import it.storelink.mango.ApiException;
 import it.storelink.mango.api.DefaultApiImpl;
-import it.storelink.mango.api.MangoRestApi;
 import it.storelink.mango.model.*;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
-import org.junit.*;
+import org.junit.Assert;
+import org.junit.FixMethodOrder;
+import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,16 +19,18 @@ import java.util.List;
 import static org.junit.Assert.fail;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class ProvisioningModbusTest {
+public class ProvisioningModbusTest extends MangoBaseTest {
 
-    private static MangoRestApi api;
-    private static Boolean initialized = false;
     private static Logger LOG = LoggerFactory.getLogger(ProvisioningModbusTest.class);
 
+    /*
+    private static MangoRestApi api;
+    private static Boolean initialized = false;
     private static String user = "admin";
     private static String password = "$t0rlinK";
     private static String baseHost = "79.60.49.49";
     private static String basePort = "7778";
+    */
 
     /*
     private static String user = "admin";
@@ -36,8 +39,9 @@ public class ProvisioningModbusTest {
     private static String basePort = "8080";
     */
 
+    /*
     private static String baseUrl = "http://" + baseHost + ":" + basePort + "/rest";
-    private static String wsUrl = "ws://" +  baseHost + ":" + basePort + "/rest/v1/websocket/point-value";
+    private static String wsUrl = "ws://" +  baseHost + ":" + basePort + "/rest/v2/websocket/point-value";
 
     @BeforeClass
     public static void init() {
@@ -53,15 +57,7 @@ public class ProvisioningModbusTest {
             LOG.error(e.getMessage(), e);
         }
     }
-
-    @Test
-    public void _00_testGetAllDataSources() throws ApiException, InterruptedException {
-        if(!initialized) return;
-        Thread.sleep(1000);
-        List<DataSourceModel> allDataSources = api.getAllDataSources();
-        Assert.assertNotNull(allDataSources);
-        LOG.info(allDataSources.toString());
-    }
+    */
 
     @Test
     public void _01_testSaveDataSource() throws ApiException, InterruptedException {
@@ -266,12 +262,12 @@ public class ProvisioningModbusTest {
         Assert.assertNull(dataSourceModel);
     }
 
-
-
+    /*
     @AfterClass
     public static void close() throws ApiException {
         if(!initialized) return;
         if(api!=null) api.logout();
     }
+    */
 
 }

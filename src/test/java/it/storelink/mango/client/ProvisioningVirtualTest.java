@@ -2,15 +2,14 @@ package it.storelink.mango.client;
 
 import it.storelink.mango.ApiException;
 import it.storelink.mango.api.DefaultApiImpl;
-import it.storelink.mango.api.MangoRestApi;
 import it.storelink.mango.model.*;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
-import org.junit.*;
+import org.junit.Assert;
+import org.junit.FixMethodOrder;
+import org.junit.Test;
 import org.junit.runners.MethodSorters;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,42 +17,7 @@ import java.util.List;
 import static org.junit.Assert.fail;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class ProvisioningVirtualTest {
-
-    private static MangoRestApi api;
-    private static Boolean initialized = false;
-    private static Logger LOG = LoggerFactory.getLogger(ProvisioningVirtualTest.class);
-
-//    private static String user = "mario";
-//    private static String password = "ro$$i";
-/*
-    private static String user = "admin";
-    private static String password = "$t0rlinK";
-    private static String baseHost = "79.60.49.49";
-    private static String basePort = "7778";
-*/
-    private static String user = "admin";
-    private static String password = "admin";
-    private static String baseHost = "192.168.178.30";
-    private static String basePort = "8080";
-
-    private static String baseUrl = "http://" + baseHost + ":" + basePort + "/rest";
-    private static String wsUrl = "ws://" +  baseHost + ":" + basePort + "/rest/v1/websocket/point-value";
-
-    @BeforeClass
-    public static void init() {
-        try {
-            api = new DefaultApiImpl();
-            api.setBasePath(baseUrl);
-            api.setBaseWSPath(wsUrl);
-            api.setDebugging(true);
-            api.login(user, password, true);
-            initialized = true;
-        }
-        catch (Exception e) {
-            LOG.error(e.getMessage(), e);
-        }
-    }
+public class ProvisioningVirtualTest extends MangoBaseTest {
 
     @Test
     public void _00_testGetAllDataSources() throws ApiException, InterruptedException {
@@ -244,13 +208,6 @@ public class ProvisioningVirtualTest {
             LOG.error(e.getMessage(), e);
         }
         Assert.assertNull(dataSourceModel);
-    }
-
-
-    @AfterClass
-    public static void close() throws ApiException {
-        if(!initialized) return;
-        if(api!=null) api.logout();
     }
 
 }
