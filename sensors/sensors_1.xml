@@ -1,19 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sensori xmlns="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <!--
+   <sensore>
+       <mango xid="TD2"></mango>
+       <opemaint relativePath="/classes/QE/cards/263505" attributeName="Power_Active_total" attributeType="STRING"
+                 operationType="UPDATE"></opemaint>
+   </sensore>
+      -->
     <sensore>
         <mango xid="TD2"></mango>
         <opemaint relativePath="/classes/Building/cards/261257" attributeName="status2" attributeType="STRING"
                   operationType="UPDATE"></opemaint>
     </sensore>
-    <sensore>
-        <mango xid="TD2"></mango>
-        <opemaint relativePath="/classes/MeterReading/cards/" attributeName="Value" attributeType="STRING"
-                  operationType="INSERT">
-				  <field name="BeginDate" type="TIMESTAMP">2015-11-08T15:26:00</field>
-				  <field name="Date" type="TIMESTAMP">TIMESTAMP</field>
-				  <field name="Item" type="FOREIGNKEY">255756</field>
-				  <field name="Meter" type="FOREIGNKEY">255748</field>
-				  <field name="_type" type="STRING">MeterReading</field>
+
+   <sensore>
+       <mango xid="TD2"></mango>
+       <opemaint relativePath="/classes/MeterReading/cards/" attributeName="Value" attributeType="STRING"
+                 operationType="INSERT">
+                 <field name="BeginDate" type="TIMESTAMP">2015-11-08T15:26:00</field>
+                 <field name="Date" type="TIMESTAMP">TIMESTAMP</field>
+                 <field name="Item" type="FOREIGNKEY">255756</field>
+                 <field name="Meter" type="FOREIGNKEY">255748</field>
+                 <field name="_type" type="STRING">MeterReading</field>
+
+                 <!--
+                 <field name="data" type="DATE">DATE</field>
+                 <field name="bool" type="BOOLEAN">true</field>
+                 <field name="dec" type="DECIMAL(4,2)">1.2</field>
+                 <field name="dou" type="DOUBLE">21111.2</field>
+                 -->
 		</opemaint>
     </sensore>
+
 </sensori>

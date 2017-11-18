@@ -21,7 +21,7 @@ import java.util.*;
 public class AllineatoreTest {
     private static Logger logger = Logger.getLogger(AllineatoreTest.class);
 
-
+    private static Map cache = new HashMap();
     public static void main(String[] args) throws ApiException {
         try {
 
@@ -61,10 +61,15 @@ public class AllineatoreTest {
                 String opType= sensor.getOpemaint().getOperationType();
                 String mangoVal = "7.9";
 
-                if ("INSERT".equalsIgnoreCase(opType)){
-                    AllineatoreProcessor.processInsert(openMaintAPI, sensor, mangoVal);
-                } else   if ("UPDATE".equalsIgnoreCase(opType)){
-                    AllineatoreProcessor.processUpdate(openMaintAPI, sensor , attributeValue);
+                logger.info("Get value : " + mangoVal);
+
+                if (! isInCache(sensor,  mangoVal.toString()) ){
+                    if ("INSERT".equalsIgnoreCase(opType)){
+                        AllineatoreProcessor.processInsert(openMaintAPI, sensor, mangoVal.toString());
+                    } else   if ("UPDATE".equalsIgnoreCase(opType)){
+                        AllineatoreProcessor.processUpdate(openMaintAPI,  sensor , mangoVal.toString() );
+                    }
+                    putInCache(sensor, mangoVal.toString());
                 }
             }
 
@@ -80,5 +85,22 @@ public class AllineatoreTest {
 
     private static URI getOpenMaintBaseURI() {
         return UriBuilder.fromUri(ConfigSingleton.getInstance().getSystemParam_OPENMAINT_BASE_URL()).build();
+    }
+
+    private static void putInCache(SensoreType sensor, String val) {
+        String sXid = sensor.getMango().getXid();
+        cache.put(sXid, val);
+    }
+
+    private static boolean isInCache(SensoreType sensor,String val) {
+        String sXidVal = (String)cache.get( sensor.getMango().getXid());
+        if ( sXidVal != null && sXidVal.equalsIgnoreCase(val)  ) {
+            logger.info("sensor " +  sensor.getMango().getXid() + " is in cache ");
+            return true;
+        } else{
+            logger.info("sensor " +  sensor.getMango().getXid() + " is not in cache. Val in cache :  " +sXidVal +" . Val : "+val);
+            return false;
+        }
+
     }
 }

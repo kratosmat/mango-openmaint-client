@@ -14,6 +14,9 @@ import org.apache.log4j.Logger;
 
 import javax.ws.rs.core.UriBuilder;
 import javax.xml.bind.JAXBElement;
+import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
 import java.net.URI;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -67,28 +70,39 @@ public class AllineatoreProcessor {
             }
             logger.info("Get value : " + mangoVal);
             String opType= sensor.getOpemaint().getOperationType();
-
-            if ("INSERT".equalsIgnoreCase(opType)){
-                processInsert(openMaintAPI, sensor, mangoVal.toString());
-            } else   if ("UPDATE".equalsIgnoreCase(opType)){
-                if (! isInCache(sensor,  mangoVal.toString()) ){
+            if (! isInCache(sensor,  mangoVal.toString()) ){
+                if ("INSERT".equalsIgnoreCase(opType)){
+                    processInsert(openMaintAPI, sensor, mangoVal.toString());
+                } else   if ("UPDATE".equalsIgnoreCase(opType)){
                     processUpdate(openMaintAPI,  sensor , mangoVal.toString() );
-                    putInCache(sensor, mangoVal.toString());
                 }
+                putInCache(sensor, mangoVal.toString());
             }
         }
     }
 
     private void putInCache(SensoreType sensor, String val) {
-        cache.put(sensor.getOpemaint().getRelativePath(), val);
+        String sXid = sensor.getMango().getXid();
+        String opType= sensor.getOpemaint().getOperationType();
+        String opRelPath= sensor.getOpemaint().getRelativePath();
+        String keyCache = sXid +"_"+ opType +"_"+   opRelPath;
+        cache.put(keyCache , val);
     }
 
     private boolean isInCache(SensoreType sensor,String val) {
-        if ( cache.get(sensor.getOpemaint().getRelativePath()) != null && ((String)cache.get(sensor.getOpemaint().getRelativePath())).equalsIgnoreCase(val)  ) {
-            logger.info("sensor " +sensor.getOpemaint().getRelativePath() + " is in cache ");
+        String sXid = sensor.getMango().getXid();
+        String opType= sensor.getOpemaint().getOperationType();
+        String opRelPath= sensor.getOpemaint().getRelativePath();
+        String keyCache = sXid +"_"+ opType +"_"+   opRelPath;
+        String sXidVal = (String)cache.get( keyCache );
+        if ( sXidVal != null && sXidVal.equalsIgnoreCase(val)  ) {
+            logger.info("sensor " +  keyCache + " is in cache ");
             return true;
-        } else
-        return false;
+        } else{
+            logger.info("sensor " +  keyCache + " is not in cache. Val in cache :  " +sXidVal +" . Val : "+val);
+            return false;
+        }
+
     }
 
 
@@ -100,19 +114,7 @@ public class AllineatoreProcessor {
         className = className.substring(0,className.indexOf("/") );
         logger.info(className);
         Map<String,Object> mapFields = new HashMap<>();
-        if (    attType.equalsIgnoreCase("STRING") ||
-                attType.equalsIgnoreCase("TIME") ||
-                attType.equalsIgnoreCase("TIMESTAMP") ||
-                attType.equalsIgnoreCase("TEXT")  ){
-
-            mapFields.put(attName,mangoVal);
-
-        }else if ( attType.equalsIgnoreCase("REFERENCE") ) {
-            //TO_DO
-        } else {
-            Integer mangoIntValue = new Integer(mangoVal);
-            mapFields.put(attName,mangoIntValue);
-        }
+        convertType(mapFields, attName, attType, mangoVal);
         List content = sensor.getOpemaint().getContent();
         for (Iterator iterator1 = content.iterator(); iterator1.hasNext(); ) {
             Object next =  iterator1.next();
@@ -120,25 +122,10 @@ public class AllineatoreProcessor {
                 JAXBElement<FieldType> fieldType = (JAXBElement) next;
                 FieldType field = fieldType.getValue();
                 String fName = field.getName();
-                String fValue = field.getValue();
                 String fType = field.getType();
-                if (    fType.equalsIgnoreCase("STRING") ||
-                        fType.equalsIgnoreCase("TIME") ||
-                        fType.equalsIgnoreCase("TIMESTAMP") ||
-                        fType.equalsIgnoreCase("TEXT")  ){
+                String fValue = field.getValue();
 
-                   if(fValue.equalsIgnoreCase(fType) && "TIMESTAMP".equalsIgnoreCase(fValue) ) {
-                       String formattedTime = (new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")).format(new Date());
-                       mapFields.put(fName,formattedTime);
-                   }else {
-                       mapFields.put(fName,fValue);
-                   }
-                }else if ( fType.equalsIgnoreCase("REFERENCE") ) {
-                    //TO_DO
-                } else {
-                    Integer intValue = new Integer(fValue);
-                    mapFields.put(fName,intValue);
-                }
+                convertType(mapFields, fName, fType, fValue);
             }
         }
         String jsoninsert = new ObjectMapper().writeValueAsString(mapFields);
@@ -146,20 +133,54 @@ public class AllineatoreProcessor {
         openMaintAPI.insertObj(className,jsoninsert);
     }
 
+    private static void convertType(Map<String, Object> mapFields, String fName, String fType, String fValue) {
+
+        if (    fType.toUpperCase().startsWith("STRING") ||
+                fType.toUpperCase().startsWith("TIME") ||
+                fType.toUpperCase().startsWith("TIMESTAMP") ||
+                fType.toUpperCase().startsWith("TEXT")  ||
+                fType.toUpperCase().startsWith("CHAR")  ||
+                fType.toUpperCase().startsWith("DATE") ||
+                fType.toUpperCase().startsWith("INET")  ){
+
+           if(fValue.toUpperCase().startsWith(fType) &&  ( "TIMESTAMP".toUpperCase().startsWith(fValue) || "DATE".toUpperCase().startsWith(fValue) ) ) {
+               String formattedTime = (new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")).format(new Date());
+               mapFields.put(fName,formattedTime);
+           }else {
+               mapFields.put(fName,fValue);
+           }
+        }else if ( fType.toUpperCase().startsWith("REFERENCE") ) {
+            //TO_DO
+        } else if ( fType.toUpperCase().startsWith("BOOLEAN") ) {
+          //  Boolean intValue = new Boolean(fValue);
+            mapFields.put(fName,fValue);
+        }else if ( fType.toUpperCase().startsWith("DECIMAL") ) {
+            int i1= fType.toUpperCase().indexOf("(");
+            int i2= fType.toUpperCase().indexOf(",");
+            int i3= fType.toUpperCase().indexOf(")");
+            String sPrecision = fType.substring(i1+1,i2);
+            String sScale = fType.substring(i2+1,i3);
+            int precision = Integer.parseInt(sPrecision);
+            int scale = Integer.parseInt(sScale);
+            BigDecimal intValue = new BigDecimal(fValue);
+            BigDecimal bValue =  intValue.round(new MathContext(precision, RoundingMode.HALF_UP)).setScale(scale, RoundingMode.HALF_UP);
+            mapFields.put(fName,bValue);
+        }else if ( fType.toUpperCase().startsWith("DOUBLE") ) {
+            Double intValue = new Double(fValue);
+            mapFields.put(fName,intValue);
+        } else  {
+            // FOREIGNKEY, INT, LOOKUP
+            Integer intValue = new Integer(fValue);
+            mapFields.put(fName,intValue);
+        }
+    }
+
     public static void processUpdate(OpenMaintAPI openMaintAPI,  SensoreType sensor,String attributeValue) throws JsonProcessingException {
         Map<String,Object> map = new HashMap<>();
         String objId= sensor.getOpemaint().getRelativePath();
         String attributeName=sensor.getOpemaint().getAttributeName();
         String attributeType=sensor.getOpemaint().getAttributeType();
-
-        if ( attributeType.equalsIgnoreCase("STRING") || attributeType.equalsIgnoreCase("TIME") || attributeType.equalsIgnoreCase("TIMESTAMP") || attributeType.equalsIgnoreCase("TEXT")  ){
-            map.put(attributeName,attributeValue);
-        } else if ( attributeType.equalsIgnoreCase("REFERENCE") ) {
-            //TO_DO
-        } else {
-            Integer attributeIntValue = new Integer(attributeValue);
-            map.put(attributeName,attributeIntValue);
-        }
+        convertType(map, attributeName, attributeType, attributeValue);
         String json = new ObjectMapper().writeValueAsString(map);
         logger.info(json);
         openMaintAPI.updateObj(objId, json);
