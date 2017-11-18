@@ -1,8 +1,6 @@
-package it.storelink.mango.client;
+package it.storelink.mango.api;
 
 import it.storelink.mango.ApiException;
-import it.storelink.mango.api.DefaultApiImpl;
-import it.storelink.mango.api.MangoRestApi;
 import it.storelink.mango.model.DataSourceModel;
 import org.apache.log4j.Logger;
 import org.junit.*;

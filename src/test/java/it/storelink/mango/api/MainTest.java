@@ -1,4 +1,4 @@
-package it.storelink.mango.client;
+package it.storelink.mango.api;
 
 import it.storelink.mango.ApiException;
 import it.storelink.mango.model.DataPointModel;
@@ -17,7 +17,7 @@ import org.junit.runners.MethodSorters;
 import java.util.List;
 
 @FixMethodOrder(MethodSorters.DEFAULT)
-public class MainTest extends MangoBaseTest{
+public class MainTest extends MangoBaseTest {
 
     @Test
     public void testGetAllDataSources() throws ApiException, InterruptedException {
@@ -41,7 +41,7 @@ public class MainTest extends MangoBaseTest{
     public void testGetLatestPointValues() throws ApiException, InterruptedException {
         if(!initialized) return;
         Thread.sleep(1000);
-        List<PointValueModel> pointValueModels = api.getLatestPointValues("virtual_dp1", 100, true, false, false);
+        List<PointValueModel> pointValueModels = api.getLatestPointValues("Demo 01-amps", 100, true, false, false);
         Assert.assertNotNull(pointValueModels);
         LOG.info(pointValueModels.toString());
     }
@@ -65,7 +65,7 @@ public class MainTest extends MangoBaseTest{
         //pointValueModel.setTimestamp(System.currentTimeMillis());
         pointValueModel.setValue(37.10);
         //pointValueModel.setAnnotation("from API");
-        PointValueModel pointValue = api.putPointValue("virtual_dp1", pointValueModel, false);
+        PointValueModel pointValue = api.putPointValue("Demo 01-amps", pointValueModel, false);
         Assert.assertNotNull(pointValue);
         LOG.info(pointValue.toString());
     }
@@ -78,7 +78,7 @@ public class MainTest extends MangoBaseTest{
         DateTime from = formatter.parseDateTime("09/01/2016 16:00:00");
         DateTime to = formatter.parseDateTime("21/02/2016 16:00:00");
 
-        List<PointValueModel> pointValueModels = api.getPointValues("virtual_dp1", false, false, from.toDate(), to.toDate(), "NONE", "", 0);
+        List<PointValueModel> pointValueModels = api.getPointValues("Demo 01-amps", false, false, from.toDate(), to.toDate(), "NONE", "", 0);
         Assert.assertNotNull(pointValueModels);
     }
 
@@ -90,7 +90,7 @@ public class MainTest extends MangoBaseTest{
         DateTime from = formatter.parseDateTime("09/01/2016 16:00:00");
         DateTime to = formatter.parseDateTime("21/02/2016 16:00:00");
 
-        Integer count = api.count("virtual_dp1", from.toDate(), to.toDate(), "NONE", "", 0);
+        Integer count = api.count("Demo 01-amps", from.toDate(), to.toDate(), "NONE", "", 0);
         Assert.assertNotNull(count);
         LOG.info(count.toString());
     }
@@ -103,7 +103,7 @@ public class MainTest extends MangoBaseTest{
         DateTime from = formatter.parseDateTime("09/01/2016 16:00:00");
         DateTime to = formatter.parseDateTime("22/02/2016 16:00:00");
 
-        List<PointValueModel> pointValueModels = api.firstAndLastPointValues("virtual_dp1", false, false, from.toDate(), to.toDate());
+        List<PointValueModel> pointValueModels = api.firstAndLastPointValues("Demo 01-amps", false, false, from.toDate(), to.toDate());
         Assert.assertNotNull(pointValueModels);
         LOG.info(pointValueModels.toString());
     }
@@ -116,7 +116,7 @@ public class MainTest extends MangoBaseTest{
         DateTime from = formatter.parseDateTime("09/01/2016 16:00:00");
         DateTime to = formatter.parseDateTime("22/02/2016 16:00:00");
 
-        StatisticsStream statisticsStream = api.getPointStatistics("virtual_dp1", false, false, from.toDate(), to.toDate());
+        StatisticsStream statisticsStream = api.getPointStatistics("Demo 01-amps", false, false, from.toDate(), to.toDate());
         Assert.assertNotNull(statisticsStream);
         LOG.info(statisticsStream.toString());
     }
@@ -136,7 +136,7 @@ public class MainTest extends MangoBaseTest{
     public void testGetDataPoint() throws ApiException, InterruptedException {
         if(!initialized) return;
         Thread.sleep(1000);
-        DataPointModel dataPointModel = api.getDataPoint("virtual_dp1");
+        DataPointModel dataPointModel = api.getDataPoint("Demo 01-amps");
         Assert.assertNotNull(dataPointModel);
         LOG.info(dataPointModel.toString());
     }
