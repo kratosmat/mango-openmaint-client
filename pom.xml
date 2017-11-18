@@ -10,7 +10,7 @@
 
     <properties>
         <junit-version>4.11</junit-version>
-        <mango-api-version>0.6.1</mango-api-version>
+        <mango-api-version>0.7.0-SNAPSHOT</mango-api-version>
     </properties>
 
     <dependencies>
