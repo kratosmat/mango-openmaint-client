@@ -30,6 +30,9 @@
                 <include>*.sh</include>
                 <include>*.bat</include>
             </includes>
+            <excludes>
+                <exclude>addclp.bat</exclude>
+            </excludes>
         </fileSet>
         <fileSet>
             <directory>${project.basedir}/sensors</directory>
@@ -37,6 +40,27 @@
             <includes>
                 <include>*.xml</include>
                 <include>*.xsd</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>.</directory>
+            <outputDirectory>log</outputDirectory>
+            <excludes>
+                <exclude>*/**</exclude>
+            </excludes>
+        </fileSet>
+        <fileSet>
+            <directory>${project.basedir}/scripts</directory>
+            <outputDirectory>lib</outputDirectory>
+            <includes>
+                <include>addclp.bat</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>${project.basedir}/src/main/resources</directory>
+            <outputDirectory>config</outputDirectory>
+            <includes>
+                <include>*.properties</include>
             </includes>
         </fileSet>
     </fileSets>

@@ -16,7 +16,7 @@ cd ..
 TITLE Mango OpenMaint Client
 
 @ECHO ON
-java -cp src\main\resources;%CLASSPATH1%  it.storelink.openmaintmango.AllineatoreMain 1>> log\mango-openmaint-client.log 2>>&1
+java -cp config;src\main\resources;%CLASSPATH1%  it.storelink.openmaintmango.AllineatoreMain 1>> log\mango-openmaint-client.log 2>>&1
 @ECHO OFF
 
 goto END

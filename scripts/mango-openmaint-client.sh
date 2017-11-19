@@ -42,7 +42,7 @@ buildClassPath() {
 #
 buildGeneralClassPath() {
 	CLASSPATH1=
-	CLASSPATH1=`buildClassPath target/lib`
+	CLASSPATH1=`buildClassPath lib`
 }
 
 
@@ -58,10 +58,11 @@ buildGeneralClassPath() {
 #Building the classpath inside the variable CLASSPATH1 of the application
 #
 #
+cd ..
 buildGeneralClassPath
 
 #echo "java -cp %CLASSPATH1%  it.storelink.openmaintmango.AllineatoreMain "
-nohup java -cp %CLASSPATH1%  it.storelink.openmaintmango.AllineatoreMain 1>> log\mango-openmaint-client.log 2>>&1
+nohup java -cp config:src\main\resources:%CLASSPATH1%  it.storelink.openmaintmango.AllineatoreMain 1>> log\mango-openmaint-client.log 2>>&1
 
 
 			
