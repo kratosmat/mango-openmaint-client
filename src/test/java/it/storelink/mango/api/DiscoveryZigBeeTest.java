@@ -1,4 +1,4 @@
-package it.storelink.mango.client;
+package it.storelink.mango.api;
 
 import it.storelink.mango.ApiException;
 import it.storelink.mango.model.*;

@@ -1,4 +1,4 @@
-package it.storelink.mango.client;
+package it.storelink.mango.api;
 
 import it.storelink.mango.ApiException;
 import it.storelink.mango.api.ws.DefaultConsumer;
@@ -18,7 +18,7 @@ import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.TimeUnit;
 
 @FixMethodOrder(MethodSorters.DEFAULT)
-public class PlasticAtlantaWebSocketTest extends MangoBaseTest{
+public class WebSocketAccentureTest extends  MangoBaseTest {
 
     private PointValueRegistrationModel createPointValueRegistrationModel(String xid) {
         PointValueRegistrationModel registrationModel = new PointValueRegistrationModel();
@@ -48,53 +48,24 @@ public class PlasticAtlantaWebSocketTest extends MangoBaseTest{
         try {
             CountDownLatch downLatch = new CountDownLatch(1);
 
-            //Start manager
-            api.startWSManager();
-
-            PointValueRegistrationModel registrationModel1 = createPointValueRegistrationModel("DP_469112");
-            //create an user queue
+            PointValueRegistrationModel registrationModel1 = createPointValueRegistrationModel("DP_368107");
             BlockingQueue<ResponsePointValueEventModel> queue1 = new LinkedBlockingDeque<ResponsePointValueEventModel>();
-            //register a datapoint to write on user queue
             api.registerDataPoint(registrationModel1, queue1);
             DefaultConsumer c1 = new DefaultConsumer(queue1);
             Thread consumer1 = new Thread(c1);
             consumer1.start();
 
-            downLatch.await(10, TimeUnit.SECONDS);
+            api.startWSManager();
 
-            //register a second datapoint
-            PointValueRegistrationModel registrationModel2 = createPointValueRegistrationModel("DP_099769");
-            BlockingQueue<ResponsePointValueEventModel> queue2 = new LinkedBlockingDeque<ResponsePointValueEventModel>();
-            api.registerDataPoint(registrationModel2, queue2);
-            DefaultConsumer c2 = new DefaultConsumer(queue2);
-            Thread consumer2 = new Thread(c2);
-            consumer2.start();
+            downLatch.await(60, TimeUnit.SECONDS);
 
-            downLatch.await(10, TimeUnit.SECONDS);
-
-            //unregister the first data point
-            api.unRegisterDataPoint("DP_519977");
-            if(consumer1!=null) c1.setRunning(false);
-
-            downLatch.await(10, TimeUnit.SECONDS);
-
-            //register the first one again, but on the same queue of second one
-            //in this way we can register multiple datapoints to write on a single queue
-            api.registerDataPoint(registrationModel1, queue2);
-
-            downLatch.await(10, TimeUnit.SECONDS);
-
-            //shutdown the server, if there are running registration they'll be unregistered
             api.shutdownWSManager();
 
-            downLatch.await(10, TimeUnit.SECONDS);
-
-            if(consumer2!=null) c2.setRunning(false);
+            if(consumer1!=null) c1.setRunning(false);
         }
         catch (Exception e) {
             LOG.error(e.getMessage(), e);
         }
     }
-
 
 }

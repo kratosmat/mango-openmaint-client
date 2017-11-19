@@ -1,7 +1,6 @@
-package it.storelink.mango.client;
+package it.storelink.mango.api;
 
 import it.storelink.mango.ApiException;
-import it.storelink.mango.api.DefaultApiImpl;
 import it.storelink.mango.model.*;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
@@ -19,16 +18,15 @@ import java.util.List;
 import static org.junit.Assert.fail;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class ProvisioningBacnetTest extends MangoBaseTest {
+public class ProvisioningModbusTest extends MangoBaseTest {
 
-
-    private static Logger LOG = LoggerFactory.getLogger(ProvisioningBacnetTest.class);
+    private static Logger LOG = LoggerFactory.getLogger(ProvisioningModbusTest.class);
 
     /*
     private static MangoRestApi api;
     private static Boolean initialized = false;
-    private static String user = "mario";
-    private static String password = "ro$$i";
+    private static String user = "admin";
+    private static String password = "$t0rlinK";
     private static String baseHost = "79.60.49.49";
     private static String basePort = "7778";
     */
@@ -38,12 +36,12 @@ public class ProvisioningBacnetTest extends MangoBaseTest {
     private static String password = "admin";
     private static String baseHost = "localhost";
     private static String basePort = "8080";
-
-    private static String baseUrl = "http://" + baseHost + ":" + basePort + "/rest";
-    private static String wsUrl = "ws://" +  baseHost + ":" + basePort + "/rest/v2/websocket/point-value";
     */
 
     /*
+    private static String baseUrl = "http://" + baseHost + ":" + basePort + "/rest";
+    private static String wsUrl = "ws://" +  baseHost + ":" + basePort + "/rest/v2/websocket/point-value";
+
     @BeforeClass
     public static void init() {
         try {
@@ -60,24 +58,31 @@ public class ProvisioningBacnetTest extends MangoBaseTest {
     }
     */
 
-
     @Test
-    public void _01_testSaveDataSourceVirtual() throws ApiException, InterruptedException {
+    public void _01_testSaveDataSource() throws ApiException, InterruptedException {
         if(!initialized) return;
         Thread.sleep(1000);
         try {
-            DataSourceBacnetIpModel model = new DataSourceBacnetIpModel();
-            model.setModelType("BACnetIP");
+
+            DataSourceModbusIpModel model = new DataSourceModbusIpModel();
             model.setEnabled(false);
-            model.setName("bacnet_from_api");
-            model.setXid("DS_465469");
-            model.setCovSubscriptionTimeoutMinutes(1);
+            model.setName("modbus_from_api");
+            model.setXid("DS_998877");
+            model.setTransportType("TCP");
+            model.setEncapsulated(true);
+            model.setHost("192.168.0.68");
+            model.setPort(502);
+            model.setTimeout(500);
+            model.setMaxReadBitCount(2000);
+            model.setMaxReadRegisterCount(125);
+            model.setMaxWriteRegisterCount(120);
             DataSourceModel dataSourceModel = api.saveDataSource(model);
             Assert.assertNotNull(dataSourceModel);
             LOG.info(dataSourceModel.toString());
         }
         catch (Exception e) {
             LOG.error(e.getMessage(), e);
+            fail(e.getMessage());
         }
     }
 
@@ -85,117 +90,130 @@ public class ProvisioningBacnetTest extends MangoBaseTest {
     public void _02_testGetDataSource() throws ApiException, InterruptedException {
         if(!initialized) return;
         Thread.sleep(1000);
-        DataSourceModel dataSourceModel = api.getDataSource("DS_465469");
+        DataSourceModel dataSourceModel = api.getDataSource("DS_998877");
         Assert.assertNotNull(dataSourceModel);
         LOG.info(dataSourceModel.toString());
     }
 
     @Test
-    public void _03_testSaveDataPointsVirtual() throws ApiException, InterruptedException {
+    public void _03_testGetAllDataPoints() throws ApiException, InterruptedException {
         if(!initialized) return;
         Thread.sleep(1000);
-        List<DataPointModel> dataPointModels = new ArrayList<DataPointModel>();
+        List<DataPointModel> listDataPoints = api.getAllDataPoints(100);
+        Assert.assertNotNull(listDataPoints);
+        LOG.info(listDataPoints.toString());
+        Assert.assertEquals(listDataPoints.size(), 26);
+    }
+
+    private DataPointModel createDataPoint() {
         DataPointModel dp = new DataPointModel();
 
         dp.setDataSourceId(2);
-        dp.setDataSourceXid("DS_465469");
-        dp.setDeviceName("bacnet_from_api1");
-        dp.setDataSourceName("bacnet_from_api1");
+        dp.setDataSourceXid("DS_998877");
+        dp.setDeviceName("modbus_from_api");
+        dp.setDataSourceName("modbus_from_api");
 
-        dp.setTemplateXid("Binary_Default");
+        //dp.setTemplateXid("Binary_Default");
         dp.setEnabled(false);
         dp.setUseIntegralUnit(false);
         dp.setUseRenderedUnit(false);
         dp.setIntegralUnit("s");
-        dp.setTemplateXid("Binary_Default");
         dp.setModelType("DATA_POINT");
         dp.setId(10);
-        dp.setName("bacnet_from_api");
-        dp.setXid("DS_465467");
+        dp.setName("modbus_from_api");
+        dp.setXid("DS_998878");
 
-        PointLocatorBacnetModel pl = new PointLocatorBacnetModel();
-        pl.setDataType(PointLocatorModel.DataTypeEnum.BINARY);
-        //pl.setModelType("PL.VIRTUAL");
-        pl.setSettable(false);
-        pl.setRelinquishable(true);
-        pl.setMac("192.168.178.30:47808");
-        pl.setNetworkNumber(0);
-        pl.setUseCovSubscription(true);
-        pl.setObjectInstanceNumber(202);
-        //pl.setObjectTypeId("BINARY_INPUT");
-        dp.setPointLocator(pl);
+        PointLocatorModbusModel pv = new PointLocatorModbusModel();
+        pv.setDataType(PointLocatorModel.DataTypeEnum.BINARY);
+        pv.setSettable(false);
+        pv.setRelinquishable(false);
+        pv.setSlaveId(10);
+        pv.setRange(PointLocatorModbusModel.RANGE_CODES.getCode(4));
+        pv.setModbusDataType(PointLocatorModbusModel.MODBUS_DATA_TYPE_CODES.getCode(8));
+        pv.setOffset(1);
+        pv.setBit(0);
+        pv.setRegisterCount(0);
+        pv.setAdditive(0.0);
+        pv.setMultiplier(1.0);
+        dp.setPointLocator(pv);
 
-        dataPointModels.add(dp);
+        return dp;
+    }
+
+    @Test
+    public void _04_testSaveDataPoints() throws ApiException, InterruptedException {
+        if(!initialized) return;
+        Thread.sleep(1000);
+        List<DataPointModel> dataPointModels = new ArrayList<DataPointModel>();
+
+        dataPointModels.add(createDataPoint());
+
         List<DataPointModel> dataPointModelsSaved = api.saveDataPoints(dataPointModels);
         Assert.assertNotNull(dataPointModelsSaved);
     }
 
     @Test
-    public void _04_testGetDataPoint() throws ApiException, InterruptedException {
+    public void _05_testGetDataPoint() throws ApiException, InterruptedException {
         if(!initialized) return;
         Thread.sleep(1000);
-        DataPointModel dataPointModel = api.getDataPoint("DP_624444");
+        DataPointModel dataPointModel = api.getDataPoint("DS_998878");
         Assert.assertNotNull(dataPointModel);
         LOG.info(dataPointModel.toString());
     }
 
     @Test
-    public void _05_testUpdateDataSource() throws ApiException, InterruptedException {
+    public void _06_testUpdateDataSource() throws ApiException, InterruptedException {
         if(!initialized) return;
         Thread.sleep(1000);
-        DataSourceBacnetIpModel model = new DataSourceBacnetIpModel();
+        DataSourceModbusIpModel model = new DataSourceModbusIpModel();
         model.setEnabled(true);
-        model.setXid("DS_465469");
-        model.setName("bacnet_from_api");
-        DataSourceModel dataSourceModel = api.updateDataSource("DS_465469", model);
+        model.setName("modbus_from_api");
+        model.setXid("DS_998877");
+        model.setTransportType("TCP");
+        model.setEncapsulated(true);
+        model.setHost("192.168.0.68");
+        model.setPort(502);
+        model.setTimeout(500);
+        model.setMaxReadBitCount(2000);
+        model.setMaxReadRegisterCount(125);
+        model.setMaxWriteRegisterCount(120);
+        DataSourceModel dataSourceModel = api.updateDataSource("DS_998877", model);
         Assert.assertNotNull(dataSourceModel);
         LOG.info(dataSourceModel.toString());
     }
 
     @Test
-    public void _06_testUpdateDataPoint() throws ApiException, InterruptedException {
+    public void _07_testUpdateDataPoint() throws ApiException, InterruptedException {
         if(!initialized) return;
         Thread.sleep(1000);
-        DataPointModel model = new DataPointModel();
+
+        DataPointModel model = createDataPoint();
         model.setEnabled(true);
-        model.setXid("DS_465467");
-        model.setName("bacnet_from_api");
 
-        PointLocatorBacnetModel pl = new PointLocatorBacnetModel();
-        pl.setDataType(PointLocatorModel.DataTypeEnum.BINARY);
-        pl.setSettable(false);
-        pl.setRelinquishable(true);
-        pl.setMac("192.168.178.30:47808");
-        pl.setNetworkNumber(0);
-        pl.setUseCovSubscription(true);
-        pl.setObjectInstanceNumber(202);
-        //pl.setObjectTypeId("BINARY_INPUT");
-        model.setPointLocator(pl);
-
-        DataPointModel model1 = api.updateDataPoint("DS_465467", model);
+        DataPointModel model1 = api.updateDataPoint("DS_998878", model);
         Assert.assertNotNull(model1);
         LOG.info(model1.toString());
     }
 
     @Test
-    public void _07_testGetPointValues() throws ApiException, InterruptedException {
+    public void _08_testGetPointValues() throws ApiException, InterruptedException {
         if(!initialized) return;
-        Thread.sleep(20000);
+        Thread.sleep(1000);
         DateTimeFormatter formatter = DateTimeFormat.forPattern("dd/MM/yyyy HH:mm:ss");
         DateTime from = formatter.parseDateTime("09/01/2016 16:00:00");
         DateTime to = formatter.parseDateTime("31/12/2016 16:00:00");
 
-        List<PointValueModel> pointValueModels = api.getPointValues("DS_465467", false, false, from.toDate(), to.toDate(), "NONE", "", 0);
+        List<PointValueModel> pointValueModels = api.getPointValues("DS_998878", false, false, from.toDate(), to.toDate(), "NONE", "", 0);
         Assert.assertNotNull(pointValueModels);
         Assert.assertTrue(pointValueModels.size()>0);
     }
 
     @Test
-    public void _08_testDeleteDataPoints() throws ApiException, InterruptedException {
+    public void _09_testDeleteDataPoints() throws ApiException, InterruptedException {
         if (!initialized) return;
         Thread.sleep(1000);
         try {
-            DataPointModel dataPointModelDeleted = api.deleteDataPoint("DS_465467");
+            DataPointModel dataPointModelDeleted = api.deleteDataPoint("DS_998878");
             Assert.assertNotNull(dataPointModelDeleted);
         }
         catch (ApiException e) {
@@ -207,12 +225,12 @@ public class ProvisioningBacnetTest extends MangoBaseTest {
     }
 
     @Test
-    public void _09_testGetDataPointAfterDelete() throws ApiException, InterruptedException {
+    public void _10_testGetDataPointAfterDelete() throws ApiException, InterruptedException {
         if(!initialized) return;
         Thread.sleep(1000);
         DataPointModel dataPointModel = null;
         try {
-            dataPointModel = api.getDataPoint("DS_465467");
+            dataPointModel = api.getDataPoint("DS_998878");
         }
         catch (Exception e) {
             LOG.error(e.getMessage(), e);
@@ -221,21 +239,21 @@ public class ProvisioningBacnetTest extends MangoBaseTest {
     }
 
     @Test
-    public void _10_testDeleteDataSource() throws ApiException, InterruptedException {
+    public void _11_testDeleteDataSource() throws ApiException, InterruptedException {
         if(!initialized) return;
         Thread.sleep(1000);
-        DataSourceModel dataSourceModel = api.deleteDataSource("DS_465469");
+        DataSourceModel dataSourceModel = api.deleteDataSource("DS_998877");
         Assert.assertNotNull(dataSourceModel);
         LOG.info(dataSourceModel.toString());
     }
 
     @Test
-    public void _11_testGetDataSourceAfterDelete() throws ApiException, InterruptedException {
+    public void _12_testGetDataSourceAfterDelete() throws ApiException, InterruptedException {
         if(!initialized) return;
         Thread.sleep(1000);
         DataSourceModel dataSourceModel = null;
         try {
-            dataSourceModel = api.getDataSource("DS_465469");
+            dataSourceModel = api.getDataSource("DS_998877");
         }
         catch (Exception e) {
             LOG.error(e.getMessage(), e);

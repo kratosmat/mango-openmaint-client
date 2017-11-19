@@ -1,47 +1,44 @@
-package it.storelink.mango.client;
+package it.storelink.mango.api;
 
 import it.storelink.mango.ApiException;
-import it.storelink.mango.api.DefaultApiImpl;
-import it.storelink.mango.model.*;
-import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
+import it.storelink.mango.model.DataPointModel;
 import org.junit.Assert;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.fail;
-
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class ProvisioningVirtualTest extends MangoBaseTest {
+public class ProvisioningZigBeeTest extends MangoBaseTest {
+
+
+    private static Logger LOG = LoggerFactory.getLogger(ProvisioningZigBeeTest.class);
 
     @Test
-    public void _00_testGetAllDataSources() throws ApiException, InterruptedException {
+    public void _00_testGetDataPoints() throws ApiException, InterruptedException {
         if(!initialized) return;
         Thread.sleep(1000);
-        List<DataSourceModel> allDataSources = api.getAllDataSources();
-        Assert.assertNotNull(allDataSources);
-        LOG.info(allDataSources.toString());
+        List<DataPointModel> dataPointModels = api.getDataPointsForDataSource("DS_375681");
+        Assert.assertNotNull(dataPointModels);
+        LOG.info(dataPointModels.toString());
     }
 
+
+    /*
     @Test
     public void _01_testSaveDataSourceVirtual() throws ApiException, InterruptedException {
         if(!initialized) return;
         Thread.sleep(1000);
         try {
-
-            DataSourceVirtualModel model = new DataSourceVirtualModel();
+            DataSourceBacnetIpModel model = new DataSourceBacnetIpModel();
+            model.setModelType("BACnetIP");
             model.setEnabled(false);
-            model.setName("from_api");
-            model.setXid("DS_465466");
-            TimePeriodModel pollPeriod = new TimePeriodModel();
-            pollPeriod.setPeriods(1);
-            pollPeriod.setType("SECONDS");
-            model.setPollPeriod(pollPeriod);
+            model.setName("bacnet_from_api");
+            model.setXid("DS_465469");
+            model.setCovSubscriptionTimeoutMinutes(1);
             DataSourceModel dataSourceModel = api.saveDataSource(model);
             Assert.assertNotNull(dataSourceModel);
             LOG.info(dataSourceModel.toString());
@@ -55,7 +52,7 @@ public class ProvisioningVirtualTest extends MangoBaseTest {
     public void _02_testGetDataSource() throws ApiException, InterruptedException {
         if(!initialized) return;
         Thread.sleep(1000);
-        DataSourceModel dataSourceModel = api.getDataSource("DS_465466");
+        DataSourceModel dataSourceModel = api.getDataSource("DS_465469");
         Assert.assertNotNull(dataSourceModel);
         LOG.info(dataSourceModel.toString());
     }
@@ -68,9 +65,9 @@ public class ProvisioningVirtualTest extends MangoBaseTest {
         DataPointModel dp = new DataPointModel();
 
         dp.setDataSourceId(2);
-        dp.setDataSourceXid("DS_465466");
-        dp.setDeviceName("virtual1");
-        dp.setDataSourceName("virtual1");
+        dp.setDataSourceXid("DS_465469");
+        dp.setDeviceName("bacnet_from_api1");
+        dp.setDataSourceName("bacnet_from_api1");
 
         dp.setTemplateXid("Binary_Default");
         dp.setEnabled(false);
@@ -80,16 +77,20 @@ public class ProvisioningVirtualTest extends MangoBaseTest {
         dp.setTemplateXid("Binary_Default");
         dp.setModelType("DATA_POINT");
         dp.setId(10);
-        dp.setName("device_from_api");
-        dp.setXid("DP_921288");
+        dp.setName("bacnet_from_api");
+        dp.setXid("DS_465467");
 
-        PointLocatorVirtualModel pv = new PointLocatorVirtualModel();
-        pv.setDataType(PointLocatorModel.DataTypeEnum.BINARY);
-        pv.setModelType("PL.VIRTUAL");
-        pv.setSettable(false);
-        pv.setRelinquishable(false);
-        pv.setStartValue(false);
-        dp.setPointLocator(pv);
+        PointLocatorBacnetModel pl = new PointLocatorBacnetModel();
+        pl.setDataType(PointLocatorModel.DataTypeEnum.BINARY);
+        //pl.setModelType("PL.VIRTUAL");
+        pl.setSettable(false);
+        pl.setRelinquishable(true);
+        pl.setAddress("192.168.178.30:47808");
+        pl.setIoLine(0);
+        pl.setUseCovSubscription(true);
+        pl.setObjectInstanceNumber(202);
+        pl.setNodeIdentifier("BINARY_INPUT");
+        dp.setPointLocator(pl);
 
         dataPointModels.add(dp);
         List<DataPointModel> dataPointModelsSaved = api.saveDataPoints(dataPointModels);
@@ -100,7 +101,7 @@ public class ProvisioningVirtualTest extends MangoBaseTest {
     public void _04_testGetDataPoint() throws ApiException, InterruptedException {
         if(!initialized) return;
         Thread.sleep(1000);
-        DataPointModel dataPointModel = api.getDataPoint("DP_921288");
+        DataPointModel dataPointModel = api.getDataPoint("DP_624444");
         Assert.assertNotNull(dataPointModel);
         LOG.info(dataPointModel.toString());
     }
@@ -109,15 +110,11 @@ public class ProvisioningVirtualTest extends MangoBaseTest {
     public void _05_testUpdateDataSource() throws ApiException, InterruptedException {
         if(!initialized) return;
         Thread.sleep(1000);
-        DataSourceVirtualModel model = new DataSourceVirtualModel();
+        DataSourceBacnetIpModel model = new DataSourceBacnetIpModel();
         model.setEnabled(true);
-        model.setName("from_api");
-        model.setXid("DS_465466");
-        TimePeriodModel pollPeriod = new TimePeriodModel();
-        pollPeriod.setPeriods(1);
-        pollPeriod.setType("SECONDS");
-        model.setPollPeriod(pollPeriod);
-        DataSourceModel dataSourceModel = api.updateDataSource("DS_465466", model);
+        model.setXid("DS_465469");
+        model.setName("bacnet_from_api");
+        DataSourceModel dataSourceModel = api.updateDataSource("DS_465469", model);
         Assert.assertNotNull(dataSourceModel);
         LOG.info(dataSourceModel.toString());
     }
@@ -128,18 +125,21 @@ public class ProvisioningVirtualTest extends MangoBaseTest {
         Thread.sleep(1000);
         DataPointModel model = new DataPointModel();
         model.setEnabled(true);
-        model.setXid("DP_921288");
-        model.setName("device_from_api");
+        model.setXid("DS_465467");
+        model.setName("bacnet_from_api");
 
-        PointLocatorVirtualModel pv = new PointLocatorVirtualModel();
-        pv.setDataType(PointLocatorModel.DataTypeEnum.BINARY);
-        pv.setModelType("PL.VIRTUAL");
-        pv.setSettable(false);
-        pv.setRelinquishable(false);
-        pv.setStartValue(false);
-        model.setPointLocator(pv);
+        PointLocatorBacnetModel pl = new PointLocatorBacnetModel();
+        pl.setDataType(PointLocatorModel.DataTypeEnum.BINARY);
+        pl.setSettable(false);
+        pl.setRelinquishable(true);
+        pl.setAddress("192.168.178.30:47808");
+        pl.setIoLine(0);
+        pl.setUseCovSubscription(true);
+        pl.setObjectInstanceNumber(202);
+        pl.setNodeIdentifier("BINARY_INPUT");
+        model.setPointLocator(pl);
 
-        DataPointModel model1 = api.updateDataPoint("DP_921288", model);
+        DataPointModel model1 = api.updateDataPoint("DS_465467", model);
         Assert.assertNotNull(model1);
         LOG.info(model1.toString());
     }
@@ -147,12 +147,12 @@ public class ProvisioningVirtualTest extends MangoBaseTest {
     @Test
     public void _07_testGetPointValues() throws ApiException, InterruptedException {
         if(!initialized) return;
-        Thread.sleep(10000);
+        Thread.sleep(20000);
         DateTimeFormatter formatter = DateTimeFormat.forPattern("dd/MM/yyyy HH:mm:ss");
         DateTime from = formatter.parseDateTime("09/01/2016 16:00:00");
         DateTime to = formatter.parseDateTime("31/12/2016 16:00:00");
 
-        List<PointValueModel> pointValueModels = api.getPointValues("DP_921288", false, false, from.toDate(), to.toDate(), "NONE", "", 0);
+        List<PointValueModel> pointValueModels = api.getPointValues("DS_465467", false, false, from.toDate(), to.toDate(), "NONE", "", 0);
         Assert.assertNotNull(pointValueModels);
         Assert.assertTrue(pointValueModels.size()>0);
     }
@@ -162,7 +162,7 @@ public class ProvisioningVirtualTest extends MangoBaseTest {
         if (!initialized) return;
         Thread.sleep(1000);
         try {
-            DataPointModel dataPointModelDeleted = api.deleteDataPoint("DP_921288");
+            DataPointModel dataPointModelDeleted = api.deleteDataPoint("DS_465467");
             Assert.assertNotNull(dataPointModelDeleted);
         }
         catch (ApiException e) {
@@ -179,7 +179,7 @@ public class ProvisioningVirtualTest extends MangoBaseTest {
         Thread.sleep(1000);
         DataPointModel dataPointModel = null;
         try {
-            dataPointModel = api.getDataPoint("DP_921288");
+            dataPointModel = api.getDataPoint("DS_465467");
         }
         catch (Exception e) {
             LOG.error(e.getMessage(), e);
@@ -191,7 +191,7 @@ public class ProvisioningVirtualTest extends MangoBaseTest {
     public void _10_testDeleteDataSource() throws ApiException, InterruptedException {
         if(!initialized) return;
         Thread.sleep(1000);
-        DataSourceModel dataSourceModel = api.deleteDataSource("DS_465466");
+        DataSourceModel dataSourceModel = api.deleteDataSource("DS_465469");
         Assert.assertNotNull(dataSourceModel);
         LOG.info(dataSourceModel.toString());
     }
@@ -202,12 +202,13 @@ public class ProvisioningVirtualTest extends MangoBaseTest {
         Thread.sleep(1000);
         DataSourceModel dataSourceModel = null;
         try {
-            dataSourceModel = api.getDataSource("DS_465466");
+            dataSourceModel = api.getDataSource("DS_465469");
         }
         catch (Exception e) {
             LOG.error(e.getMessage(), e);
         }
         Assert.assertNull(dataSourceModel);
     }
+    */
 
 }
