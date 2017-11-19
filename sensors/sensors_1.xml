@@ -8,13 +8,13 @@
    </sensore>
       -->
     <sensore>
-        <mango xid="TD2"></mango>
+        <mango xid="DP_VPM01_Power_Active_Total"></mango>
         <opemaint relativePath="/classes/Building/cards/261257" attributeName="status2" attributeType="STRING"
                   operationType="UPDATE"></opemaint>
     </sensore>
 
    <sensore>
-       <mango xid="TD2"></mango>
+       <mango xid="DP_VPM01_Power_Active_Total"></mango>
        <opemaint relativePath="/classes/MeterReading/cards/" attributeName="Value" attributeType="STRING"
                  operationType="INSERT">
                  <field name="BeginDate" type="TIMESTAMP">2015-11-08T15:26:00</field>
