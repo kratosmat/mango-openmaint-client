@@ -9,6 +9,8 @@ rem
 rem Building the classpath inside the variable CLASSPATH1 of the application
 rem 
 
+cd ..
+
 @for %%i in (lib\*.jar) do call lib\addclp.bat %%i
 
 TITLE Mango OpenMaint Client
