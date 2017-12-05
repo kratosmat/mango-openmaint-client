@@ -47,7 +47,7 @@ public class AllineatoreProcessor {
             mangoInitialized = true;
 
             openMaintAPI = new OpenMaintAPI(ConfigSingleton.getInstance().getSystemParam_OPENMAINT_BASE_URL());
-            Output response = openMaintAPI.login("admin", "pIPP0");
+            Output response = openMaintAPI.login(ConfigSingleton.getInstance().getSystemParam_OPENMAINT_USR(),ConfigSingleton.getInstance().getSystemParam_OPENMAINT_PWD());
 
             openMaintInitialized = true;
             logger.debug(response.toString());

@@ -20,12 +20,15 @@ public class AllineatoreMain {
         File folder = new File(path);
         List<AllineatoreTask> l_task = new ArrayList<AllineatoreTask>();
         File[] listFiles = null;
+        logger.info("Folder : " +folder );
         if (folder.exists()) {
+
             if (folder != null && folder.listFiles().length != 0) {
                 listFiles = folder.listFiles(new XMLFileFilter());
                 Arrays.sort(listFiles);
                 for (int i = 0; i < listFiles.length; i++) {
                     File currentFile = (File) listFiles[i];
+                    logger.info("currentFile : " +currentFile.getName() );
                     AllineatoreTask task = new AllineatoreTask(currentFile);
                     l_task.add(task);
                 }
