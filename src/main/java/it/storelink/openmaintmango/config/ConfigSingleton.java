@@ -34,6 +34,7 @@ public class ConfigSingleton {
 
     /**
      * Create and fill a new instance of the object by reading from props files.
+     *
      */
     private ConfigSingleton() {
         ClassLoader cl = getClass().getClassLoader();
