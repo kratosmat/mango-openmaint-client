@@ -21,7 +21,7 @@ import java.net.URI;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-
+//Test push git
 public class AllineatoreProcessor {
 
     private static Logger logger = Logger.getLogger(AllineatoreProcessor.class);
